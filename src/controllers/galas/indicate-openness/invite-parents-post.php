@@ -22,6 +22,21 @@ $pagetitle = 'Invite parents to enter ' . htmlspecialchars($gala['name']);
 
 include BASE_PATH . 'views/header.php';
 
+$squadString = "";
+$squadIDs = [];
 while ($squad = $squads->fetch(PDO::FETCH_ASSOC)) {
-  $_POST['squad-' . $squad['id']];
+  if (isset($_POST['squad-' . $squad['id']]) && $_POST['squad-' . $squad['id']]) {
+    if ($squads != "") {
+      $squadString .= " AND ";
+    }
+    $squadString .= " members.SquadID = ? ";
+    $squadIDs[] = $squad['id'];
+  }
 }
+
+$date = new DateTime('-' . (int) $_POST['min-age'] . ' years', new DateTimeZone('Europe/London'));
+
+$squadIDs[] = $date->format("Y-m-d");
+
+$db->prepare("SELECT UserID, MForename, MSurname, Forename, Surname FROM members INNER JOIN users ON users.UserID = members.MemberID WHERE " . $squadString . " AND members.DateOfBirth >= ?");
+$db->execute($squadIDs);
