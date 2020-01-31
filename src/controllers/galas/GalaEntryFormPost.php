@@ -139,11 +139,16 @@ if (isset($_POST['is-select-sessions']) && bool($_POST['is-select-sessions'])) {
       $to = $row['Forename'] . " " . $row['Surname'] . "<" . $row['EmailAddress'] . ">";
 
       $subject = $row['MForename'] . "'s Gala Entry to " . $row['GalaName'];
-      $message .= "<p>Here are the swims selected for " . htmlspecialchars($row['MForename'] . " " . $row['MSurname']) . "'s " . htmlspecialchars($row['GalaName']) . " entry.</p>";
+      if (memberUser($_POST['swimmer'])) {
+        $subject = "Your " . $row['GalaName'] . " entry";
+        $message .= "<p>Here are the swims selected for your " . htmlspecialchars($row['GalaName']) . " entry.</p>";
+      } else {
+        $message .= "<p>Here are the swims selected for " . htmlspecialchars($row['MForename'] . " " . $row['MSurname']) . "'s " . htmlspecialchars($row['GalaName']) . " entry.</p>";
+      }
       $message .= "<ul>" . $entryList . "</ul>";
       $message .= "<p>You have entered " . (new NumberFormatter("en", NumberFormatter::SPELLOUT))->format($counter) . " events. The <strong>total fee payable is &pound;" . $fee . "</strong>.</p>";
       if (bool($row['HyTek'])) {
-        $message .= "<p><strong>This is a HyTek gala.</strong> Please remember to add times for this entry.</p>";
+        $message .= "<p><strong>This is a HyTek gala.</strong> Please remember to add times for this entry if required.</p>";
       }
       $message .= '<p>If you have any questions, please contact the ' . htmlspecialchars(env('CLUB_NAME')) . ' gala team as soon as possible.</p>';
       $notify = "INSERT INTO notify (`UserID`, `Status`, `Subject`, `Message`,
