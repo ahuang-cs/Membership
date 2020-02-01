@@ -15,17 +15,21 @@ if ((isset($_POST["squadID"])) && (isset($_POST["search"]))) {
   $search_terms = explode(' ', $search);
   $names = [];
   $sql = "";
+  $sqlUsers = '';
   for ($i = 0; $i < sizeof($search_terms); $i++) {
     if ($i > 0) {
       $sql .= " OR ";
+      $sqlUsers .= " OR ";
     }
     $sql .= " members.MForename COLLATE utf8mb4_general_ci LIKE ? OR members.MSurname COLLATE utf8mb4_general_ci LIKE ? ";
+    $sqlUsers .= " users.Forename COLLATE utf8mb4_general_ci LIKE ? OR users.Surname COLLATE utf8mb4_general_ci LIKE ? ";
     for ($y = 0; $y < 2; $y++) {
       $names[] = "%" . $search_terms[$i] . "%";
     }
   }
   if (sizeof($search_terms) == 1 && $search_terms[0] == null) {
     $sql = " members.MemberID IS NOT NULL ";
+    $sqlUsers = " users.UserID IS NOT NULL ";
     $names = [];
   }
 
@@ -53,14 +57,23 @@ if ((isset($_POST["squadID"])) && (isset($_POST["search"]))) {
       $names = array_merge([$_POST["squadID"]], $names);
 	  }
   } else {
-    if ($squadID == "allSquads") {
+    if ($squadID == "all-squads") {
       $query = $db->prepare("SELECT members.MemberID, members.MForename,
       members.MSurname, members.ASANumber, squads.SquadName,
       members.DateOfBirth, squads.SquadID FROM (members INNER JOIN squads ON
       members.SquadID = squads.SquadID) WHERE (" . $selection . ") ORDER BY
       `members`.`MForename` , `members`.`MSurname` ASC");
-	  }
-	  else {
+	  } else if ($squadID == "user-members") {
+      $query = $db->prepare("SELECT users.UserID, users.Forename AS MForename,
+      users.Surname AS MSurname, users.ASANumber, 'USER' AS SquadName,
+      members.DateOfBirth, 'USER' AS SquadID FROM (users LEFT JOIN members ON
+      users.ASANumber = members.ASANumber) WHERE users.ClubMember AND (" . $selection . ") ORDER BY users.Forename ASC, users.Surname ASC");
+	  } else if ($squadID == "user-asa-members") {
+      $query = $db->prepare("SELECT users.UserID, users.Forename AS MForename,
+      users.Surname AS MSurname, users.ASANumber, 'USER' AS SquadName,
+      members.DateOfBirth, 'USER' AS SquadID FROM (users LEFT JOIN members ON
+      users.ASANumber = members.ASANumber) WHERE users.ASANumber IS NOT NULL AND (" . $selection . ") ORDER BY users.Forename ASC, users.Surname ASC");
+	  } else {
       $query = $db->prepare("SELECT members.MemberID, members.MForename,
       members.MSurname, members.ASANumber, squads.SquadName,
       members.DateOfBirth FROM (members INNER JOIN squads ON members.SquadID =

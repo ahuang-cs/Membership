@@ -36,9 +36,11 @@ if (isset($_POST['squad'])) {
   <div class="d-print-none">
     <div class="form-row">
       <div class="col-md-6 mb-3">
-        <label for="squad">Select a squad</label>
+        <label for="squad">Select a squad or group</label>
         <select class="custom-select" placeholder="Select a Squad" id="squad" name="squad">
-          <option value="allSquads">Show All Squads</option>;
+          <option value="all-squads" <?php if ($_GET['squadID'] == 'all-squads') { ?>selected<?php } ?>>Show All Squads</option>
+          <option value="user-members" <?php if ($_GET['squadID'] == 'user-members') { ?>selected<?php } ?>>Users who are club members</option>
+          <option value="user-asa-members" <?php if ($_GET['squadID'] == 'user-asa-members') { ?>selected<?php } ?>>Users who are ASA members</option>
           <?php while ($squad = $squads->fetch(PDO::FETCH_ASSOC)) { ?>
           <option value="<?=$squad['id']?>" <?php if ($squad['id'] == $squadID) { ?>selected<?php } ?>>
             <?=htmlspecialchars($squad['name'])?> Squad
