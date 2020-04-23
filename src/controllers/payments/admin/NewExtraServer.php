@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $name = $price = $errorMessage = null;
 $errorState = false;

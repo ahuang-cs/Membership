@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $sql = $db->prepare("SELECT * FROM (`sessions` INNER JOIN sessionsVenues ON sessions.VenueID = sessionsVenues.VenueID) WHERE `SessionID` = ?;");
 $sql->execute([$id]);

@@ -6,7 +6,7 @@ use Brick\PhoneNumber\PhoneNumber;
 use Brick\PhoneNumber\PhoneNumberParseException;
 use Brick\PhoneNumber\PhoneNumberFormat;
 
-$db = app()->db;
+global $db;
 
 $userInfo = $db->prepare("SELECT Forename, Surname, EmailAddress, Mobile, ASANumber, ASAMember, ASAPrimary, ASACategory, ASAPaid, ClubMember, ClubPaid, ClubCategory, RR FROM users WHERE UserID = ? AND Active");
 $userInfo->execute([$id]);
@@ -29,7 +29,7 @@ if ($info == null) {
   halt(404);
 }
 
-$userObj = new \User($id);
+$userObj = new \User($id, $db, false);
 
 $par = $coa = $com = $gal = $adm = "";
 

@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $venues = $db->query("SELECT VenueID, VenueName, Location FROM sessionsVenues ORDER BY VenueName ASC");
 

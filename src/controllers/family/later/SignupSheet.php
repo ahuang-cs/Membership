@@ -1,6 +1,6 @@
 <?
 
-$db = app()->db;
+global $db;
 
 $sql = "SELECT * FROM ((members INNER JOIN familyMembers ON
 familyMembers.MemberID = members.MemberID) INNER JOIN familyIdentifiers ON

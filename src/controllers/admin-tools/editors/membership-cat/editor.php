@@ -5,8 +5,8 @@ if (isset($_GET['squad'])) {
   $noSquad = false;
 }
 
-$db = app()->db;
-$systemInfo = app()->system;
+global $db;
+global $systemInfo;
 $leavers = $systemInfo->getSystemOption('LeaversSquad');
 if ($leavers == null) {
   $leavers = 0;

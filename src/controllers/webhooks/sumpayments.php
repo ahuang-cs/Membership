@@ -5,9 +5,9 @@ set_time_limit(0);
 
 use Brick\Math\BigDecimal;
 
-$db = app()->db;
-
-$systemInfo = app()->system;
+global $db;
+global $link;
+global $systemInfo;
 
 $squadFeeMonths = json_decode($systemInfo->getSystemOption('SquadFeeMonths'), true);
 $date = new DateTime('now', new DateTimeZone('Europe/London'));

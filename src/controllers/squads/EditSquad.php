@@ -1,7 +1,7 @@
 <?php
 
 
-$db = app()->db;
+global $db;
 $codesOfConduct = $db->query("SELECT Title, ID FROM posts WHERE `Type` = 'conduct_code' ORDER BY Title ASC");
 
 $sql = $db->prepare("SELECT * FROM `squads` WHERE squads.SquadID = ?");

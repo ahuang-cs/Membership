@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $renewals = $db->query("SELECT * FROM `renewals` WHERE `StartDate` <= CURDATE() AND CURDATE() <= `EndDate`");
 $row = $renewals->fetch(PDO::FETCH_ASSOC);

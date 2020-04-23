@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $access = $_SESSION['AccessLevel'];
 if ($access == "Committee" || $access == "Admin") {

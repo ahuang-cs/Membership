@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $pagetitle = "Database Migrations and Updates";
 

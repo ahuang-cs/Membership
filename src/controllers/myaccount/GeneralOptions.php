@@ -2,8 +2,8 @@
 
 $fluidContainer = true;
 
-$db = app()->db;
-$currentUser = app()->user;
+global $db;
+global $currentUser;
 
 $twofaChecked;
 if ($currentUser->getUserBooleanOption('Is2FA')) {

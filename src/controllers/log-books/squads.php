@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $getSquads = $db->query("SELECT SquadName squad, SquadID id FROM squads ORDER BY SquadFee DESC, squad ASC");
 $squad = $getSquads->fetch(PDO::FETCH_ASSOC);

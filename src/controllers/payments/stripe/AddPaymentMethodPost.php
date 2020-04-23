@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 // See your keys here: https://dashboard.stripe.com/account/apikeys
 \Stripe\Stripe::setApiKey(env('STRIPE'));

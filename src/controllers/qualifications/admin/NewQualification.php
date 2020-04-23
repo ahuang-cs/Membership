@@ -2,7 +2,7 @@
 
 $pagetitle = "New Qualification";
 
-$db = app()->db;
+global $db;
 $getUser = $db->prepare("SELECT COUNT(*) FROM users WHERE UserID = ?");
 $getUser->execute([$person]);
 

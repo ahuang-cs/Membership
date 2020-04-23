@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $query = $db->prepare("SELECT UserID FROM members WHERE MemberID = ?");
 $query->execute([$id]);
 $result = $query->fetchColumn();

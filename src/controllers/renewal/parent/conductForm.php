@@ -1,8 +1,8 @@
 <?php
 
-$db = app()->db;
+global $db;
 
-$systemInfo = app()->system;
+global $systemInfo;
 $parentCode = $systemInfo->getSystemOption('ParentCodeOfConduct');
 
 if (isset($id)) {

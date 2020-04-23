@@ -33,7 +33,7 @@ if (sizeof($form_errors) > 0) {
 } else {
   // Otherwise insert into the database
 
-  $db = app()->db;
+  global $db;
 
   $add = $db->prepare("UPDATE qualifications SET `Name` = ?, Info = ?, `From` = ?, `To` = ?) WHERE ID = ?");
 

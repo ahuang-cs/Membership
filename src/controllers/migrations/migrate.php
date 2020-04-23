@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 try {
   $exists = $db->query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'schemaMigrations'");

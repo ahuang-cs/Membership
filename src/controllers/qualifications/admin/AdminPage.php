@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $qualifications = $db->query("SELECT COUNT(*) FROM qualificationsAvailable");
 $qualificationsCount = $qualifications->fetchColumn();
 $qualifications = $db->query("SELECT ID, `Name` FROM qualificationsAvailable ORDER BY `Name` ASC");

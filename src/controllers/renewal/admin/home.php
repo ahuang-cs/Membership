@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $renewals = $db->query("SELECT ID, `Name`, StartDate, EndDate FROM `renewals` ORDER BY `EndDate` DESC LIMIT 5;");
 

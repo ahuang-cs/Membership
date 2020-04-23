@@ -2,7 +2,7 @@
 
 use GeoIp2\Database\Reader;
 
-$db = app()->db;
+global $db;
 
 $incrementFailedLoginCount = $db->prepare("UPDATE users SET WrongPassCount = WrongPassCount + 1 WHERE UserID = ?");
 $resetFailedLoginCount = $db->prepare("UPDATE users SET WrongPassCount = 0 WHERE UserID = ?");
@@ -90,7 +90,7 @@ if ((!empty($_POST['email-address']) && !empty($_POST['password'])) && ($securit
           if ($_POST['RememberMe']) {
             $login->stayLoggedIn();
           }
-          $currentUser = app()->user;
+          global $currentUser;
           $currentUser = $login->login();
           $resetFailedLoginCount->execute([$userID]);
         } catch (Exception $e) {

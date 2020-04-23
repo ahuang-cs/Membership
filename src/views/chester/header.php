@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 require 'GlobalHead.php';
 
@@ -38,7 +38,7 @@ p.lead {
 </style>
 <?php } ?>
 
-<body class="<?=$bg?> account--body" <?php if (isset($pageHead['body'])) { foreach ($pageHead['body'] as $item) { ?> <?=$item?> <?php } } ?>>
+<body class="<?=$bg?> account--body">
 
   <div class="sr-only sr-only-focusable">
     <a href="#maincontent">Skip to main content</a>

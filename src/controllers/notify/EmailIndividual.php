@@ -5,7 +5,7 @@ if (is_null($user)) {
   halt(400);
 }
 
-$db = app()->db;
+global $db;
 $query = $db->prepare("SELECT Forename, Surname, EmailAddress FROM users WHERE
 UserID = ?");
 $query->execute([$user]);

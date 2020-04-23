@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 if ($_SESSION['TWO_FACTOR_GOOGLE']) {
   $_SESSION['TWO_FACTOR_CODE'] = random_int(100000, 999999);

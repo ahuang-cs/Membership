@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $add = $db->prepare("INSERT INTO sessionsVenues (VenueName, Location) VALUES (?, ?)");
 

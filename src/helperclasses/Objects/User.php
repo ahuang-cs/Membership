@@ -7,33 +7,36 @@
  * @copyright Chester-le-Street ASC https://github.com/Chester-le-Street-ASC
  * @author Chris Heppell https://github.com/clheppell
  */
-class User extends Person {
+class User {
+  private $db;
+  private $id;
+  private $forename;
+  private $surname;
   private $emailAddress;
-  private $mobile;
   private $accessLevel;
   private $userOptions;
   private $userOptionsRetrieved;
   private $setSession;
   private $permissions;
 
-  public function __construct($id, $setSession = false) {
+  public function __construct($id, $db, $setSession = true) {
     $this->id = (int) $id;
+    $this->db = $db;
     $this->userOptionsRetrieved = false;
     $this->setSession = $setSession;
     $this->revalidate();
   }
 
   public function revalidate() {
-    $db = app()->db;
     // Get the user
-    $query = $db->prepare("SELECT Forename, Surname, EmailAddress, Mobile FROM users WHERE UserID = ? AND Active");
+    $query = $this->db->prepare("SELECT Forename, Surname, EmailAddress FROM users WHERE UserID = ? AND Active");
     $query->execute([$this->id]);
     $row = $query->fetch(PDO::FETCH_ASSOC);
 
     $this->permissions = [];
     try {
       // Get access permissions
-      $getPermissions = $db->prepare("SELECT `Permission` FROM `permissions` WHERE `User` = ?");
+      $getPermissions = $this->db->prepare("SELECT `Permission` FROM `permissions` WHERE `User` = ?");
       $getPermissions->execute([
         $this->id
       ]);
@@ -63,7 +66,6 @@ class User extends Person {
       $this->forename = $row['Forename'];
       $this->surname = $row['Surname'];
       $this->emailAddress = $row['EmailAddress'];
-      $this->mobile = $row['Mobile'];
 
       if ($this->setSession) {
         // Set legacy user details
@@ -109,15 +111,9 @@ class User extends Person {
     return $this->getDirtyEmail();
   }
 
-  public function getMobile() {
-    return $this->mobile;
-  }
-
   private function getUserOptions() {
-    $db = app()->db;
-
     try {
-      $getOptions = $db->prepare("SELECT `Option`, `Value` FROM userOptions WHERE User = ? LIMIT 100");
+      $getOptions = $this->db->prepare("SELECT `Option`, `Value` FROM userOptions WHERE User = ? LIMIT 100");
       $getOptions->execute([$this->id]);
       $this->userOptions = $getOptions->fetchAll(PDO::FETCH_KEY_PAIR);
       $this->userOptionsRetrieved = true;
@@ -146,8 +142,6 @@ class User extends Person {
   }
 
   public function setUserOption($option, $value) {
-    $db = app()->db;
-
     if ($value == "") {
       $value = null;
     }
@@ -156,15 +150,15 @@ class User extends Person {
     $this->userOptions[$option] = $value;
 
     // Any PDO exceptions will be propagated
-    $query = $db->prepare("SELECT COUNT(*) FROM userOptions WHERE User = ? AND `Option` = ?");
+    $query = $this->db->prepare("SELECT COUNT(*) FROM userOptions WHERE User = ? AND `Option` = ?");
     $query->execute([$this->id, $option]);
     $result = $query->fetchColumn();
 
     if ($result == 0) {
-      $query = $db->prepare("INSERT INTO userOptions (User, `Option`, `Value`) VALUES (?, ?, ?)");
+      $query = $this->db->prepare("INSERT INTO userOptions (User, `Option`, `Value`) VALUES (?, ?, ?)");
       $query->execute([$this->id, $option, $value]);
     } else {
-      $query = $db->prepare("UPDATE userOptions SET `Value` = ? WHERE User = ? AND `Option` = ?");
+      $query = $this->db->prepare("UPDATE userOptions SET `Value` = ? WHERE User = ? AND `Option` = ?");
       $query->execute([$value, $this->id, $option]);
     }
   }
@@ -194,9 +188,8 @@ class User extends Person {
   }
 
   public function grantPermission($permission) {
-    $db = app()->db;
     try {
-      $setPerm = $db->prepare("INSERT INTO `permissions` (`Permission`, `User`) VALUES (?, ?)");
+      $setPerm = $this->db->prepare("INSERT INTO `permissions` (`Permission`, `User`) VALUES (?, ?)");
       $setPerm->execute([
         $permission,
         $this->id
@@ -208,9 +201,8 @@ class User extends Person {
   }
 
   public function revokePermission($permission) {
-    $db = app()->db;
     try {
-      $deletePerm = $db->prepare("DELETE FROM `permissions` WHERE `Permission` = ? AND `User` = ?");
+      $deletePerm = $this->db->prepare("DELETE FROM `permissions` WHERE `Permission` = ? AND `User` = ?");
       $deletePerm->execute([
         $permission,
         $this->id
@@ -219,16 +211,5 @@ class User extends Person {
     } catch (PDOException $e) {
       return false;
     }
-  }
-
-  /**
-   * Get the user's emergency contacts
-   * 
-   * @return EmergencyContact[] an array of emergency contacts
-   */
-  public function getEmergencyContacts() {
-    $ec = new EmergencyContacts(app()->db);
-    $ec->byParent($this->id);
-    return $ec->getContacts();
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $pagetitle = "My Members";
 $userID = $_SESSION['UserID'];

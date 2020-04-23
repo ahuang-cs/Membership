@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $edit = $db->prepare("UPDATE sessionsVenues SET VenueName = ?, Location = ? WHERE VenueID = ?");
 

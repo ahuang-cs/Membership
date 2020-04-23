@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $getSquadCount = $db->prepare("SELECT COUNT(*) FROM squads INNER JOIN squadReps ON squads.SquadID = squadReps.Squad AND squadReps.User = ?");
 $getSquadCount->execute([
   $_SESSION['UserID']

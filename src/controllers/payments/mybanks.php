@@ -2,7 +2,7 @@
 
 require 'GoCardlessSetup.php';
 
-$db = app()->db;
+global $db;
 
 $user = $_SESSION['UserID'];
 $use_white_background = true;

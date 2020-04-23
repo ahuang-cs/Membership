@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 function generatePaymentResponse($intent) {
   if ($intent->status == 'requires_source_action' &&

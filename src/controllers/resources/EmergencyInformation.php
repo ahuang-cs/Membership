@@ -1,7 +1,7 @@
 <?php
 
-$db = app()->db;
-$currentUser = app()->user;
+global $db;
+global $currentUser;
 
 $squads = $db->query("SELECT SquadID, SquadName FROM squads ORDER BY SquadFee DESC, SquadName ASC");
 

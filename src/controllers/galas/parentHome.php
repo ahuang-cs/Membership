@@ -2,7 +2,7 @@
 
 $userID = $_SESSION['UserID'];
 
-$db = app()->db;
+global $db;
 
 $now = new DateTime('now', new DateTimeZone('Europe/London'));
 $nowDay = $now->format('Y-m-d');

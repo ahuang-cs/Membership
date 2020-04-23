@@ -1,7 +1,7 @@
 <?php
 
 use CLSASC\EquivalentTime\EquivalentTime;
-$db = app()->db;
+global $db;
 
 $access = $_SESSION['AccessLevel'];
 $sex = "";

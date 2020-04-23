@@ -4,7 +4,7 @@
 
 require BASE_PATH . 'controllers/payments/GoCardlessSetup.php';
 
-$db = app()->db;
+global $db;
 
 $deleteMandatePref = $db->prepare("DELETE FROM paymentPreferredMandate WHERE UserID = ? AND MandateID = ?");
 $getUser = $db->prepare("SELECT UserID, MandateID FROM paymentMandates WHERE Mandate = ?");

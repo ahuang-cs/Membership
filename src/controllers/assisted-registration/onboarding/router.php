@@ -10,7 +10,7 @@
 
 $this->get('/go', function() {
   // Go to the latest step
-  $db = app()->db;
+  global $db;
 
   if (!isset($_SESSION['Onboarding'])) {
     $getFirstSwimmer = $db->prepare("SELECT MemberID FROM members WHERE UserID = ? ORDER BY MemberID ASC LIMIT 1");

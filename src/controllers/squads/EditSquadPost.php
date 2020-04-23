@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $getKey = $db->prepare("SELECT SquadKey FROM squads WHERE SquadID = ?");
 $getKey->execute([$id]);

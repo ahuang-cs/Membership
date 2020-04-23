@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 try {
   $count = $db->prepare("SELECT COUNT(*) FROM linkedAccounts WHERE ID = ? AND (`User` = ? OR LinkedUser = ?)");

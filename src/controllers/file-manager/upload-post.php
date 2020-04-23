@@ -16,7 +16,7 @@ if (!\SCDS\CSRF::verify()) {
   halt(404);
 }
 
-$db = app()->db;
+global $db;
 
 pre($_POST);
 pre($_FILES);

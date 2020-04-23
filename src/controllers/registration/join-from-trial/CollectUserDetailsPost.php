@@ -2,7 +2,7 @@
 
 use Respect\Validation\Validator as v;
 
-$db = app()->db;
+global $db;
 
 $_SESSION['UserDetailsPostData'] = $_POST;
 

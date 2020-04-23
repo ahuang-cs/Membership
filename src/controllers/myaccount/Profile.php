@@ -21,7 +21,7 @@ $successInformation = "";
 $emailChecked = "";
 $mobileChecked = "";
 
-$db = app()->db;
+global $db;
 
 $getUser = $db->prepare("SELECT * FROM users WHERE UserID = ?");
 $getUser->execute([$_SESSION['UserID']]);

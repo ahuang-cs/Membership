@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $latestWeek = $db->query("SELECT WeekID, WeekDateBeginning FROM `sessionsWeek` ORDER BY `WeekDateBeginning` DESC LIMIT 1;");
 $latestWeek = $latestWeek->fetch(PDO::FETCH_ASSOC);

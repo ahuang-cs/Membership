@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 if ($_POST['agree'] == 1) {
 	$done_by_renewal = false;

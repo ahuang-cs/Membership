@@ -1,7 +1,7 @@
 <?php
 
 try {
-  $systemInfo = app()->system;
+  global $systemInfo;
 
   if (isset($_POST['TermsAndConditions'])) {
     $systemInfo->setSystemOption('TermsAndConditions', $_POST['TermsAndConditions']);

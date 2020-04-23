@@ -2,7 +2,7 @@
 
 $_SESSION['NotifyPostData'] = $_POST;
 
-$db = app()->db;
+global $db;
 
 $db->beginTransaction();
 
@@ -385,7 +385,7 @@ try {
     "Force" => $force
   ];
 
-  $db = app()->db;
+  global $db;
   $getExtraEmails = $db->prepare("SELECT Name, EmailAddress, ID FROM notifyAdditionalEmails WHERE UserID = ? AND Verified = '1'");
 
   $getPendingGroupMail = $db->prepare("SELECT ID, notifyHistory.Subject, notifyHistory.Message, notifyHistory.ForceSend, notifyHistory.JSONData FROM notifyHistory WHERE ID = ?");

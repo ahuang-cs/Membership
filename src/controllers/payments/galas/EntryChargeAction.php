@@ -8,7 +8,7 @@ if (!SCDS\FormIdempotency::verify()) {
 	halt(404);
 }
 
-$db = app()->db;
+global $db;
 
 $disabled = "";
 

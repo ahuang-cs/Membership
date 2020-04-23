@@ -1,7 +1,7 @@
 <?php
 
 use Respect\Validation\Validator as v;
-$db = app()->db;
+global $db;
 
 // Registration Form Handler
 

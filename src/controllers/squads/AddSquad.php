@@ -1,7 +1,7 @@
 <?php
 $title = $pagetitle = "Add a Squad";
 
-$db = app()->db;
+global $db;
 $codesOfConduct = $db->query("SELECT Title, ID FROM posts WHERE `Type` = 'conduct_code' ORDER BY Title ASC");
 
 include BASE_PATH . "views/header.php";

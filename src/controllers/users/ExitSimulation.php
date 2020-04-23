@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $target = $_SESSION['UserID'];
 
@@ -29,7 +29,7 @@ try {
 	$_SESSION['UserID'] = 			$info['UserID'];
 	$_SESSION['LoggedIn'] = 		1;
 
-	$userObject = new \User($info['UserID'], true);
+	$userObject = new \User($info['UserID'], $db);
 
 	header("Location: " . autoUrl("users/" . $target));
 } catch (Exception $e) {

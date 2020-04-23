@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 if ($_POST['response'] == "getSwimmers") {
   $swimmers = $db->prepare("SELECT * FROM (((`extrasRelations` INNER JOIN `members` ON members.MemberID = extrasRelations.MemberID) INNER JOIN `extras` ON extras.ExtraID = extrasRelations.ExtraID) INNER JOIN `squads` ON members.SquadID = squads.SquadID) WHERE `extrasRelations`.`ExtraID` = ?");

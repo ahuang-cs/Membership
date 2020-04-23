@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $update = $db->prepare("UPDATE galaEntries SET EntryProcessed = ? WHERE EntryID = ?");
 $markPaid = $db->prepare("UPDATE galaEntries SET Charged = ? WHERE EntryID = ?");
 

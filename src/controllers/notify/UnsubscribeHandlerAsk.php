@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $user_id = hexdec($userid);
 $email = str_replace(' ', '+', urldecode($email));

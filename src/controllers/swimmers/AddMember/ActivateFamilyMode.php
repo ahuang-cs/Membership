@@ -1,6 +1,6 @@
 <?
 
-$db = app()->db;
+global $db;
 
 if (isset($_SESSION['Swimmers-FamilyMode'])) {
 	header("Location: " . autoUrl("members/new"));

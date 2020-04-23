@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $moveCount = $db->prepare("SELECT COUNT(*) FROM `moves` WHERE `MemberID` = ?");
 $moveCount->execute([$id]);

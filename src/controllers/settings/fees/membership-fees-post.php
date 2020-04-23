@@ -1,6 +1,6 @@
 <?php
 
-$systemInfo = app()->system;
+global $systemInfo;
 
 $feeType = $systemInfo->getSystemOption('ClubFeesType');
 

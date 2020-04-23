@@ -7,7 +7,7 @@ if (!bool(env('IS_CLS'))) {
 	$emailPrefix = mb_strtolower(trim(env('ASA_CLUB_CODE'))) . '-';
 }
 
-$db = app()->db;
+global $db;
 
 $squads = null;
 if ($_SESSION['AccessLevel'] != 'Parent') {

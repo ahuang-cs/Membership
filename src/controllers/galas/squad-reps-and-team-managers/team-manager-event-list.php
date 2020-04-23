@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $getGalas = null;
 $date = new DateTime('-1 day', new DateTimeZone('Europe/London'));

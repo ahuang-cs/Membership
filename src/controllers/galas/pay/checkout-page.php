@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 \Stripe\Stripe::setApiKey(env('STRIPE'));
 if (env('STRIPE_APPLE_PAY_DOMAIN')) {

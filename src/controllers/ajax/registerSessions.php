@@ -1,7 +1,7 @@
 <?php
 
 use Respect\Validation\Validator as v;
-$db = app()->db;
+global $db;
 
 $getMemberAttendance = $db->prepare("SELECT AttendanceBoolean FROM `sessionsAttendance` WHERE `WeekID` = ? AND `SessionID` = ? AND `MemberID` = ?");
 

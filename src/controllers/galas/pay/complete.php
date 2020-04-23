@@ -1,7 +1,7 @@
 <?php
 
 \Stripe\Stripe::setApiKey(env('STRIPE'));
-$db = app()->db;
+global $db;
 
 if (!isset($_SESSION['GalaPaymentIntent'])) {
   halt(404);

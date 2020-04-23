@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $query = $db->prepare("SELECT COUNT(*) FROM joinParents WHERE Hash = ? AND Invited = ?");
 $query->execute([$_SESSION['AC-Registration']['Hash'], true]);

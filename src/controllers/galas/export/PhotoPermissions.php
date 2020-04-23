@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $user = $_SESSION['UserID'];
 
 canView('TeamManager', $_SESSION['UserID'], $id);

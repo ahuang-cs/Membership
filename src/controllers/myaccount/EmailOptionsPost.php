@@ -1,8 +1,8 @@
 <?php
 
 use Respect\Validation\Validator as v;
-$db = app()->db;
-$currentUser = app()->user;
+global $db;
+global $currentUser;
 
 $sql = "SELECT `EmailAddress`, `EmailComms` FROM `users` WHERE `UserID` = ?";
 try {

@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $query = null;
 
 $exit_edit = true;

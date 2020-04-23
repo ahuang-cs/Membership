@@ -2,7 +2,7 @@
 
 header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
 
-$db = app()->db;
+global $db;
 
 $now = new DateTime('now', new DateTimeZone('Europe/London'));
 

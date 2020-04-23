@@ -1,7 +1,7 @@
 <?php
 http_response_code(403);
 $pagetitle = "Error 403 - Forbidden, GDPR";
-$currentUser = app()->user;
+global $currentUser;
 if ($currentUser == null) {
 	include BASE_PATH . "views/head.php";
 } else {

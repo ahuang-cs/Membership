@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $query = $db->prepare("SELECT COUNT(*) FROM joinParents WHERE Hash = ?");
 $query->execute([$hash]);

@@ -4,7 +4,7 @@ use Brick\PhoneNumber\PhoneNumber;
 use Brick\PhoneNumber\PhoneNumberParseException;
 use Brick\PhoneNumber\PhoneNumberFormat;
 
-$db = app()->db;
+global $db;
 $access = $_SESSION['AccessLevel'];
 
 // Get all countries

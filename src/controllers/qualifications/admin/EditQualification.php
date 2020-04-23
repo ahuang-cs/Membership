@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $getQualification = $db->prepare("SELECT COUNT(*) FROM qualifications WHERE ID = ?");
 $getQualification->execute([$id]);
 

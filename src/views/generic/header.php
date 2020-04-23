@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 require 'GlobalHead.php';
 
@@ -18,7 +18,7 @@ if (isset($customBackground) && $customBackground) {
 }
 ?>
 
-<body class="<?=$bg?> account--body" <?php if (isset($pageHead['body'])) { foreach ($pageHead['body'] as $item) { ?> <?=$item?> <?php } } ?>>
+<body class="<?=$bg?> account--body">
 
   <div class="sr-only sr-only-focusable">
     <a href="#maincontent">Skip to main content</a>
@@ -181,7 +181,7 @@ if (isset($customBackground) && $customBackground) {
         </div>
       </div>
 
-      <?php if (!isset($_SESSION['UserID']) || !user_needs_registration($_SESSION['UserID'])) { ?>
+      <?php if (!user_needs_registration($_SESSION['UserID'])) { ?>
       <div class="<?=$container_class?>">
         <div class="">
           <div class="">
@@ -189,7 +189,7 @@ if (isset($customBackground) && $customBackground) {
         d-print-none justify-content-between px-0" role="navigation">
 
               <a class="navbar-brand d-lg-none" href="<?=htmlspecialchars(autoUrl(""))?>">
-                <?php if (isset($_SESSION['AccessLevel']) && $_SESSION['AccessLevel'] == "Parent") { ?>
+                <?php if ($_SESSION['AccessLevel'] == "Parent") { ?>
                 My Membership
                 <?php } else { ?>
                 Club Membership

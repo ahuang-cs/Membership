@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $user = null;
 

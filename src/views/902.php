@@ -1,7 +1,7 @@
 <?php
 http_response_code(503);
 $pagetitle = "Error 503 - Direct Debit Disabled";
-$currentUser = app()->user;
+global $currentUser;
 if ($currentUser == null) {
 	include BASE_PATH . "views/head.php";
 } else {

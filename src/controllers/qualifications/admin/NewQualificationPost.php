@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $getUser = $db->prepare("SELECT COUNT(*) FROM users WHERE UserID = ?");
 $getUser->execute([$person]);
@@ -42,7 +42,7 @@ if (sizeof($form_errors) > 0) {
 } else {
   // Otherwise insert into the database
 
-  $db = app()->db;
+  global $db;
 
   $add = $db->prepare("INSERT INTO qualifications (UserID, Qualification, Info, `From`, `To`) VALUES (?, ?, ?, ?, ?)");
 

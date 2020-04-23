@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $getInfo = $db->prepare("SELECT MForename, MSurname, SquadName, DateOfBirth, Website, Social, Noticeboard, FilmTraining, ProPhoto FROM ((members INNER JOIN squads ON squads.SquadID = members.SquadID) LEFT JOIN memberPhotography ON members.MemberID = memberPhotography.MemberID) ORDER BY SquadFee DESC, SquadName ASC, MSurname ASC, MSurname ASC;");
 $getInfo->execute([]);

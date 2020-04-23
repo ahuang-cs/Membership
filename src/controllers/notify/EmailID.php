@@ -1,6 +1,6 @@
 <?php
 try {
-$db = app()->db;
+global $db;
 
 $user = $_SESSION['UserID'];
 

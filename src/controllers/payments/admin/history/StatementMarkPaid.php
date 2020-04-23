@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 require BASE_PATH . 'controllers/payments/GoCardlessSetup.php';
 

@@ -2,8 +2,8 @@
 
 $pagetitle = "Privacy Policy";
 
-$db = app()->db;
-$systemInfo = app()->system;
+global $db;
+global $systemInfo;
 $privacy = $systemInfo->getSystemOption('PrivacyPolicy');
 
 $Extra = new ParsedownExtra();

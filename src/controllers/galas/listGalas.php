@@ -5,7 +5,7 @@ $pagetitle = "Galas";
 $now = new DateTime('now', new DateTimeZone('Europe/London'));
 $nowDay = $now->format('Y-m-d');
 
-$db = app()->db;
+global $db;
 
 $galas = $db->prepare("SELECT GalaID, GalaName, ClosingDate, GalaDate, GalaVenue, CourseLength FROM galas WHERE GalaDate >= ?");
 $galas->execute([$nowDay]);

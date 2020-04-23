@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $now = new DateTime('now', new DateTimeZone('Europe/London'));
 $startWeek = new DateTime('monday -1 week', new DateTimeZone('UTC'));

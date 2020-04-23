@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $verify_user = $db->prepare("SELECT UserID FROM members WHERE MemberID = ?");
 $verify_user->execute([$id]);
@@ -15,7 +15,7 @@ $parent_name = getUserName($parent);
 $downloader_name = getUserName($_SESSION['UserID']);
 $swimmer_name = getSwimmerName($id);
 
-$db = app()->db;
+global $db;
 
 $acc_details = $db->prepare("SELECT Forename, Surname, EmailAddress, Mobile, EmailComms, MobileComms FROM users WHERE UserID = ?");
 $acc_details->execute([$parent]);

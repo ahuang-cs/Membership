@@ -2,7 +2,7 @@
 
 require BASE_PATH . 'controllers/payments/GoCardlessSetup.php';
 
-$db = app()->db;
+global $db;
 
 $user = $_SESSION['UserId'];
 $pagetitle = "Extras";

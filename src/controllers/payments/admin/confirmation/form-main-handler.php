@@ -13,7 +13,7 @@
  * Payer
  */
 
-$db = app()->db;
+global $db;
 
 $_POST['payment-ref'];
 $_POST['payment-date'];

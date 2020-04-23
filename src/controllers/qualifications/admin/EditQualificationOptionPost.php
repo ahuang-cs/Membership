@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 // Validate all form data
 
@@ -20,7 +20,7 @@ if (sizeof($form_errors) > 0) {
 } else {
   // Otherwise insert into the database
 
-  $db = app()->db;
+  global $db;
 
   $add = $db->prepare("UPDATE qualificationsAvailable SET `Name` = ? WHERE ID = ?");
 

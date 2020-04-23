@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 
 $id = hexdec($id);
 $hash_test = hash('sha256', $id);

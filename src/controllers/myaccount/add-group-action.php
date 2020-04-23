@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 use Respect\Validation\Validator as v;
 
 $sql = "SELECT * FROM `familyIdentifiers` WHERE `ID` = ? AND `ACS` = ?";

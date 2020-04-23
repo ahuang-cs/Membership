@@ -1,7 +1,7 @@
 <?php
 
-$db = app()->db;
-$systemInfo = app()->system;
+global $db;
+global $systemInfo;
 
 try {
 

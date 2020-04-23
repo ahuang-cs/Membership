@@ -30,7 +30,7 @@ if (isset($_POST['lock-entry']) && $_POST['lock-entry']) {
   $locked = true;
 }
 
-$db = app()->db;
+global $db;
 $galaDetails = $db->prepare("SELECT GalaName `name`, GalaDate `ends`, CoachEnters, GalaFee fee, GalaFeeConstant gfc, HyTek FROM galas WHERE GalaID = ?");
 $galaDetails->execute([$id]);
 $gala = $galaDetails->fetch(PDO::FETCH_ASSOC);

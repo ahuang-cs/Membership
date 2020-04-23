@@ -5,7 +5,7 @@ $getRegister = false;
 $getSessions = false;
 $week_to_get = null;
 
-$db = app()->db;
+global $db;
 
 $getWeeks = $db->query("SELECT * FROM sessionsWeek ORDER BY WeekDateBeginning DESC LIMIT 4");
 $getSquads = $db->query("SELECT DISTINCT squads.SquadID, SquadName FROM squads INNER JOIN sessions ON squads.SquadID = sessions.SquadID ORDER BY SquadFee DESC, SquadName ASC");

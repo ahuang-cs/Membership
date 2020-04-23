@@ -2,7 +2,7 @@
 
 http_response_code(404);
 $pagetitle = "Error 404 - Page not found";
-$currentUser = app()->user;
+global $currentUser;
 if ($currentUser == null) {
 	include BASE_PATH . "views/head.php"; ?>
 <div class="bg-primary py-3 mb-3 text-white">

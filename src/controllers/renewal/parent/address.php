@@ -1,7 +1,7 @@
 <?php
 
-$db = app()->db;
-$currentUser = app()->user;
+global $db;
+global $currentUser;
 
 $addr = [];
 $json = $currentUser->getUserOption('MAIN_ADDRESS');

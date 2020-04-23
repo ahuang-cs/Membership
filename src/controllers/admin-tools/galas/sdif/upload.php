@@ -1,6 +1,6 @@
 <?php
 
-$db = app()->db;
+global $db;
 $getRecentGalas = $db->prepare("SELECT `GalaName`, `GalaID` FROM `galas` WHERE `GalaDate` >= ? AND `GalaDate` <= ?");
 $date = new DateTime('now', new DateTimeZone('Europe/London'));
 $today = $date->format("Y-m-d");

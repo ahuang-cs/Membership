@@ -6,7 +6,7 @@ require 'info.json.php';
 $data = json_decode($output);
 
 $squads = null;
-$systemInfo = app()->system;
+global $systemInfo;
 $leavers = $systemInfo->getSystemOption('LeaversSquad');
 if ($leavers == null) {
   $leavers = 0;

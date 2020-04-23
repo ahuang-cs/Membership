@@ -27,7 +27,7 @@ class EmergencyContact {
 				// strict check relying on up-to-date metadata library
 				throw new Exception('Advanced check invalid');
 			}		
-		} catch (\Brick\PhoneNumber\PhoneNumberParseException $e) {
+		} catch (PhoneNumberParseException $e) {
 			throw new Exception('Parse exception');
 		}
 		$this->user = $user;
@@ -79,7 +79,7 @@ class EmergencyContact {
 		try {
 			$number = \Brick\PhoneNumber\PhoneNumber::parse($this->contactNumber);
 			return $this->contactNumber = $number->format(\Brick\PhoneNumber\PhoneNumberFormat::E164);
-		} catch (\Brick\PhoneNumber\PhoneNumberParseException $e) {
+		} catch (PhoneNumberParseException $e) {
 			return false;
 		}
 	}
@@ -88,7 +88,7 @@ class EmergencyContact {
 		try {
 			$number = \Brick\PhoneNumber\PhoneNumber::parse($this->contactNumber);
 			return $this->contactNumber = $number->format(\Brick\PhoneNumber\PhoneNumberFormat::NATIONAL);
-		} catch (\Brick\PhoneNumber\PhoneNumberParseException $e) {
+		} catch (PhoneNumberParseException $e) {
 			return false;
 		}
 	}
@@ -97,7 +97,7 @@ class EmergencyContact {
 		try {
 			$number = \Brick\PhoneNumber\PhoneNumber::parse($this->contactNumber);
 			return $this->contactNumber = $number->format(\Brick\PhoneNumber\PhoneNumberFormat::INTERNATIONAL);
-		} catch (\Brick\PhoneNumber\PhoneNumberParseException $e) {
+		} catch (PhoneNumberParseException $e) {
 			return false;
 		}
 	}
@@ -106,7 +106,7 @@ class EmergencyContact {
 		try {
 			$number = \Brick\PhoneNumber\PhoneNumber::parse($this->contactNumber);
 			return $this->contactNumber = $number->format(\Brick\PhoneNumber\PhoneNumberFormat::RFC3966);
-		} catch (\Brick\PhoneNumber\PhoneNumberParseException $e) {
+		} catch (PhoneNumberParseException $e) {
 			return false;
 		}
 	}
