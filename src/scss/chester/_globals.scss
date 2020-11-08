@@ -64,13 +64,13 @@
   min-width: 100% !important;
 }
 
-html {
-  background: #333;
-}
+// html {
+//   background: #333;
+// }
 
-body {
-  background: #FFF;
-}
+// body {
+//   background: #FFF;
+// }
 
 .row-flex::before {
   display: -webkit-box;
@@ -576,4 +576,24 @@ footer .focus-highlight a:focus,
   margin: 0px !important;
   width: 100% !important;
   max-width: 100% !important;
+}
+
+@if (variable-exists('darkMode') and $darkMode) {
+  @each $color, $value in $theme-colors {
+    @include bg-variant(".bg-dark-mode-#{$color}", $value, true);
+  }
+
+  @each $color, $value in $theme-colors {
+    @include text-emphasis-variant(".text-dark-mode-#{$color}", $value, true);
+  }
+}
+
+@if (variable-exists('darkMode') and not $darkMode) {
+  @each $color, $value in $theme-colors {
+    @include bg-variant(".bg-light-mode-#{$color}", $value, true);
+  }
+
+  @each $color, $value in $theme-colors {
+    @include text-emphasis-variant(".text-light-mode-#{$color}", $value, true);
+  }
 }

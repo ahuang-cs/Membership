@@ -1,18 +1,21 @@
 <?php
 
-$stylesheet = "";
+$stylesheet = $stylesheetDark = "";
 try {
   $hash = file_get_contents(BASE_PATH . 'cachebuster.json');
   $hash = json_decode($hash);
   $hash = $hash->resourcesHash;
   $stylesheet = autoUrl('compiled/css/scds.' . $hash . '.min.css');
+  $stylesheetDark = autoUrl('compiled/css/scds-dark.' . $hash . '.min.css');
 } catch (Exception $e) {
   $stylesheet = autoUrl('compiled/css/scds.css');
+  $stylesheetDark = autoUrl('compiled/css/scds-dark.css');
 }
 
-$bg = null;
+$bg = '';
 
-header('Link: <' . autoUrl($stylesheet) . '>; rel=preload; as=style');
+header('Link: <' . autoUrl($stylesheet) . '>; rel=preload; as=style', false);
+header('Link: <' . autoUrl($stylesheetDark) . '>; rel=preload; as=style', false);
 
 $container_class;
 if (isset($fluidContainer) && $fluidContainer == true) {
@@ -79,7 +82,10 @@ Chester-le-Street ASC is a non profit unincorporated association.
   </script>
   <script src="https://js.stripe.com/v3/"></script>
   <link rel="stylesheet preload" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700|Roboto+Mono|Merriweather:400,600">
+  <meta name="color-scheme" content="light dark">
   <link rel="stylesheet preload" href="<?= htmlspecialchars($stylesheet) ?>">
+  <link rel="stylesheet preload" href="<?= htmlspecialchars($stylesheet) ?>" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet preload" href="<?= htmlspecialchars($stylesheetDark) ?>" media="(prefers-color-scheme: dark)">
 
   <!-- Generic icon -->
   <link rel="icon" href="<?= htmlspecialchars(autoUrl("img/corporate/scds.png")) ?>">

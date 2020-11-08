@@ -49,23 +49,25 @@
 // Close
 // Code
 
-$chesterRed: #bd0000;
-$blue:    #007bff;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+$darkMode: true;
+
+$chesterRed: darken(#bd0000, 20%);
+$blue:   darken( #007bff, 20%);
+$indigo:  darken(#6610f2, 20%);
+$purple:  darken(#6f42c1, 20%);
+$pink:    darken(#e83e8c, 20%);
+$red:     darken(#dc3545, 20%);
+$orange:  darken(#fd7e14, 10%);
+$yellow:  darken(#ffc107, 10%);
+$green:   darken(#28a745, 20%);
+$teal:    darken(#20c997, 20%);
+$cyan:    darken(#17a2b8, 20%);
 
 $primary: $purple;
 // $primary: #c70106;
 $secondary: #3c236a;
 
-$info: #29dea4;
+$info: darken(#29dea4, 20%);
 
 // stylelint-disable
 $white:    #fff !default;
@@ -83,8 +85,8 @@ $black:    #000 !default;
 $cell-bg: $gray-100;
 $cell-generic: true;
 
-$body-bg: $white;
-$body-color: $gray-900;
+$body-bg: $gray-900;
+$body-color: $white;
 
 $grid-breakpoints: (
   xs: 0,
@@ -125,6 +127,11 @@ $font-family-base:       $font-family-sans-serif;
 $font-size-base: 1rem; // Assumes the browser default, typically `16px`
 
 $enable-responsive-font-sizes: true;
+
+$link-color: $white;
+$link-decoration: underline;
+
+$hr-border-color: rgba($white, .1);
 
 $headings-font-weight:   700;
 
@@ -210,3 +217,30 @@ $navbar-dark-toggler-border-color:  rgba($white,.25);
 // Close
 
 // Code
+
+$input-bg:                              $body-bg;
+$input-disabled-bg:                     $gray-200;
+
+$input-color:                           $white;
+$input-border-color:                    $gray-700;
+$input-box-shadow:                      inset 0 1px 1px rgba($white, .075);
+
+$input-group-addon-color:               $input-color;
+$input-group-addon-bg:                  $gray-800;
+
+$card-bg:                               $body-bg;
+
+$modal-content-bg:                      $body-bg;
+$list-group-bg:                         $gray-800;
+$list-group-color:                      $white;
+
+$list-group-hover-bg:               $gray-700;
+
+$list-group-disabled-color:         $gray-300;
+$list-group-disabled-bg:            $list-group-bg;
+
+$list-group-action-color:           $gray-100;
+$list-group-action-hover-color:     $list-group-action-color;
+
+$list-group-action-active-color:    $body-color;
+$list-group-action-active-bg:       lighten($list-group-bg, 5%);
