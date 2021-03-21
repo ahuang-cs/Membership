@@ -1,42 +1,62 @@
-# Membership
-Membership is a project from [Chester-le-Street ASC](https://www.chesterlestreetasc.co.uk/) and [Swimming Club Data Systems](https://www.myswimmingclub.uk/) which aims to make swimming club
-management simpler for club volunteers, coaches, helpers and members. It is available under the Apache open-source license, so you are free to use our code in any way possible.
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-This software is continuously developed in accordance with the business and operational needs of Chester-le-Street ASC and SCDS customer clubs, with a steady stream of feature requests from all.
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-Chester-le-Street ASC and SCDS accept no liability for any issues, including all legal issues, with this software.
+## About Laravel
 
-The system requires at least PHP 7.4 and for JavaScipt to be enabled on clients.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## Features
-### Automatic Member Management
-The application is built on a database of club members. Members are assigned to squads and parents can link members to their account. This allows us to automatically calculate monthly fees and more.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-### Online Gala Entries
-Galas are added to the system by admins. Parents can enter their children into swims by selecting their name, gala and swims. This cuts down on duplicated data from existing arrangements. Parents recieve emails detailing their entries and can then edit entries up to the closing date or when the entry is processed.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-### Online Attendance Records
-Attendance records are online, facilitating automatic attendance calculation. Squads are managed online and swimmer moves between squads can be scheduled in the system to be carried out automatically.
+## Learning Laravel
 
-### Notify
-Notify is our E-Mail and SMS mailing list solution. Administrators can send emails to selected groups of parents for each squad. The system is GDPR compliant and users can opt in or out of receiving emails at any time.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-### Direct Debit Payments
-This application has been integrated with GoCardless and their APIs to allow customer clubs to bill members by Direct Debit. The GoCardless client library which is included in this software is copyright of GoCardless.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-### Online Membership Renewal and Registration
-We're able to walk parents/members through the annual renewal process, including checking their details, updating details for their swimmers such as medical information and photography permissions as well as agreeing to the club code of conduct and terms and conditions. At the end of the process, we charge users
-their Swim England Fees and any club fees by Direct Debit.
+## Laravel Sponsors
 
-### Credit and Debit Card Payments
-We support credit and debit card payments for gala entries via an integration with Stripe. Refunds for rejections can also be made via the system. We have plans to introduce card payments in more locations soon.
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-## Legal Notices for Third Party Libraries
+### Premium Partners
 
-This application contains third party client libraries. These are managed via Composer. They will come with the application, so we recommend that you do not update them via composer yourself, as this may cause issues.
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/)**
+- **[OP.GG](https://op.gg)**
 
-### Included Packages
+## Contributing
 
-For a list of included packages, view [DEPENDENCIES.md](./DEPENDENCIES.md).
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-This product includes GeoLite2 data created by MaxMind, available from [http://www.maxmind.com](http://www.maxmind.com).
+## Code of Conduct
+
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -1,0 +1,18 @@
+<?php
+
+header("Content-Type: text/css;charset=UTF-8");
+header("Content-Disposition: inline");
+
+if (nezamy_app()->tenant->getKey('SYSTEM_COLOUR')) {
+
+?>
+.membership-header {
+  background-color: <?=nezamy_app()->tenant->getKey('SYSTEM_COLOUR')?>;
+}
+.club-name-header {
+  background-color: <?=nezamy_app()->tenant->getKey('SYSTEM_COLOUR')?>;
+}
+.logo-text-shadow {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+}
+<?php } ?>
