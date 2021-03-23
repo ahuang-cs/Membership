@@ -83,7 +83,7 @@ include BASE_PATH . 'views/header.php';
         </p>
       </div>
       <div class="d-none d-sm-flex col-sm-auto ml-auto">
-        <img style="max-height:50px;" src="<?= htmlspecialchars(autoUrl("public/img/directdebit/directdebit.png")) ?>" srcset="<?= htmlspecialchars(autoUrl("public/img/directdebit/directdebit@2x.png")) ?> 2x, <?= htmlspecialchars(autoUrl("public/img/directdebit/directdebit@3x.png")) ?> 3x" alt="Direct
+        <img style="max-height:50px;" src="<?= htmlspecialchars(url("/img/directdebit/directdebit.png")) ?>" srcset="<?= htmlspecialchars(url("/img/directdebit/directdebit@2x.png")) ?> 2x, <?= htmlspecialchars(url("/img/directdebit/directdebit@3x.png")) ?> 3x" alt="Direct
 				Debit Logo">
       </div>
     </div>

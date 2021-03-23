@@ -115,7 +115,7 @@ $time = new DateTime('now', new DateTimeZone('Europe/London'));
           <div class="row no-gutters">
             <div class="col-auto">
               <a href="https://myswimmingclub.uk" target="_self" title="Swimming Club Data Systems Website">
-                <img src="<?= autoUrl("public/img/corporate/scds.png") ?>" width="100">
+                <img src="<?= url("/img/corporate/scds.png") ?>" width="100">
               </a>
               <div class="d-block d-sm-none mb-3"></div>
             </div>
@@ -156,9 +156,9 @@ try {
   $hash = file_get_contents(BASE_PATH . 'cachebuster.json');
   $hash = json_decode($hash);
   $hash = $hash->resourcesHash;
-  $script = autoUrl('public/compiled/js/main.' . $hash . '.js');
+  $script = url('/compiled/js/main.' . $hash . '.js');
 } catch (Exception $e) {
-  $script = autoUrl('public/compiled/js/main.js');
+  $script = url('/compiled/js/main.js');
 }
 
 
@@ -170,7 +170,7 @@ try {
 <?php if (isset($use_website_menu) && $use_website_menu) { ?>
   <script defer src="https://static.chesterlestreetasc.co.uk/global/headers/MainSiteMenu.js"></script>
 <?php } ?>
-<script src="<?= htmlspecialchars(autoUrl("public/js/app.js")) ?>"></script>
+<script src="<?= htmlspecialchars(url("/js/app.js")) ?>"></script>
 
 <?php if (isset($this->js)) { ?>
   <!-- Load per page JS -->

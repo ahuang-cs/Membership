@@ -23,19 +23,19 @@ var stripeElementStyle = {
 }
 
 function setCardBrandIcon(brand) {
-  var content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/credit-card.svg")?>" aria-hidden="true">';
+  var content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/credit-card.svg")?>" aria-hidden="true">';
   if (brand === 'visa') {
-    content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/visa.svg")?>" aria-hidden="true">';
+    content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/visa.svg")?>" aria-hidden="true">';
   } else if (brand === 'mastercard') {
-    content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/mastercard.svg")?>" aria-hidden="true">';
+    content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/mastercard.svg")?>" aria-hidden="true">';
   } else if (brand === 'amex') {
-    content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/amex.svg")?>" aria-hidden="true">';
+    content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/amex.svg")?>" aria-hidden="true">';
   } else if (brand === 'discover') {
-    content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/discover.svg")?>" aria-hidden="true">';
+    content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/discover.svg")?>" aria-hidden="true">';
   } else if (brand === 'diners') {
-    content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/diners.svg")?>" aria-hidden="true">';
+    content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/diners.svg")?>" aria-hidden="true">';
   } else if (brand === 'jcb') {
-    content = '<img class="fa fa-fw" src="<?=autoUrl("public/img/stripe/network-svgs/jcb.svg")?>" aria-hidden="true">';
+    content = '<img class="fa fa-fw" src="<?=url("/img/stripe/network-svgs/jcb.svg")?>" aria-hidden="true">';
   }
   document.getElementById('card-brand-element').innerHTML = content;
 }

@@ -3,53 +3,53 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/OpenSans-Regular.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/OpenSans-Regular.ttf')?>') format('truetype');
   }
   @font-face {
     font-family: 'Open Sans Bold';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/OpenSans-Bold.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/OpenSans-Bold.ttf')?>') format('truetype');
   }
   @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/LATO-REGULAR.TTF')?>') format('truetype');
+    src: url('<?=url('/fonts/LATO-REGULAR.TTF')?>') format('truetype');
   }
   @font-face {
     font-family: 'Lato Bold';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/LATO-BOLD.TTF')?>') format('truetype');
+    src: url('<?=url('/fonts/LATO-BOLD.TTF')?>') format('truetype');
   }
   @font-face {
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/SourceSansPro-Regular.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/SourceSansPro-Regular.ttf')?>') format('truetype');
   }
   @font-face {
     font-family: 'Source Sans';
     font-style: italic;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/SourceSansPro-Italic.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/SourceSansPro-Italic.ttf')?>') format('truetype');
   }
   @font-face {
     font-family: 'Source Sans Pro Bold';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/SourceSansPro-Bold.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/SourceSansPro-Bold.ttf')?>') format('truetype');
   }
   @font-face {
     font-family: 'Roboto Mono';
     font-style: normal;
     font-weight: 400;
-    src: url('<?=autoUrl('public/fonts/RobotoMono-Regular.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/RobotoMono-Regular.ttf')?>') format('truetype');
   }
   @font-face {
     font-family: 'Noto Emoji';
-    src: url('<?=autoUrl('public/fonts/NotoEmoji-Regular.ttf')?>') format('truetype');
+    src: url('<?=url('/fonts/NotoEmoji-Regular.ttf')?>') format('truetype');
   }
   html {
     font-family: 'Open Sans', 'Noto Emoji', sans-serif;

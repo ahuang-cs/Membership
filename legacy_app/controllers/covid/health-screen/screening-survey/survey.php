@@ -80,7 +80,7 @@ include BASE_PATH . 'views/header.php';
         </p>
       </div>
       <div class="col">
-        <img src="<?= htmlspecialchars(autoUrl('public/img/corporate/se.png')) ?>" class="w-50 ml-auto d-none d-lg-flex" alt="Swim England Logo">
+        <img src="<?= htmlspecialchars(url('/img/corporate/se.png')) ?>" class="w-50 ml-auto d-none d-lg-flex" alt="Swim England Logo">
       </div>
     </div>
   </div>

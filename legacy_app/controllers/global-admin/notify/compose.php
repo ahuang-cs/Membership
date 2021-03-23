@@ -115,7 +115,7 @@ include BASE_PATH . "views/root/header.php";
           <span class="mono">User Name</span>,".
         </em>
       </p>
-      <textarea class="form-control" id="message" name="message" rows="10" data-tinymce-css-location="<?= htmlspecialchars(autoUrl("public/css/tinymce.css")) ?>" data-documentBaseUrl="<?= htmlspecialchars(autoUrl("notify/new/")) ?>" required><?php if (isset($_SESSION['SCDS-Notify']['NotifyPostData']['message'])) { ?><?= htmlspecialchars($_SESSION['SCDS-Notify']['NotifyPostData']['message']) ?><?php } ?></textarea>
+      <textarea class="form-control" id="message" name="message" rows="10" data-tinymce-css-location="<?= htmlspecialchars(url("/css/tinymce.css")) ?>" data-documentBaseUrl="<?= htmlspecialchars(autoUrl("notify/new/")) ?>" required><?php if (isset($_SESSION['SCDS-Notify']['NotifyPostData']['message'])) { ?><?= htmlspecialchars($_SESSION['SCDS-Notify']['NotifyPostData']['message']) ?><?php } ?></textarea>
     </div>
 
     <input type="hidden" name="MAX_FILE_SIZE" value="10485760">

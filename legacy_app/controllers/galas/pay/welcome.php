@@ -67,7 +67,7 @@ include BASE_PATH . "controllers/galas/galaMenu.php";
           We proudly accept all major credit and debit cards!
         </p>
         <p>
-          <img class="apple-pay-row" src="<?=autoUrl("public/img/stripe/apple-pay-mark.svg")?>" aria-hidden="true"><img class="google-pay-row" src="<?=autoUrl("public/img/stripe/google-pay-mark.svg")?>" aria-hidden="true"><img class="visa-row" src="<?=autoUrl("public/img/stripe/visa.svg")?>" aria-hidden="true"><img class="mastercard-row" src="<?=autoUrl("public/img/stripe/mastercard.svg")?>" aria-hidden="true"><img class="amex-row" src="<?=autoUrl("public/img/stripe/amex.svg")?>" aria-hidden="true">
+          <img class="apple-pay-row" src="<?=url("/img/stripe/apple-pay-mark.svg")?>" aria-hidden="true"><img class="google-pay-row" src="<?=url("/img/stripe/google-pay-mark.svg")?>" aria-hidden="true"><img class="visa-row" src="<?=url("/img/stripe/visa.svg")?>" aria-hidden="true"><img class="mastercard-row" src="<?=url("/img/stripe/mastercard.svg")?>" aria-hidden="true"><img class="amex-row" src="<?=url("/img/stripe/amex.svg")?>" aria-hidden="true">
         </p>
       </div>
 

@@ -63,7 +63,7 @@ include BASE_PATH . 'views/header.php';
       </div>
       <div class="col text-right">
         <?php if (mb_strtoupper(nezamy_app()->tenant->getKey('ASA_CLUB_CODE')) != 'UOSZ') { ?>
-          <img src="<?= htmlspecialchars(autoUrl('public/img/corporate/se.png')) ?>" class="w-50 ml-auto d-none d-lg-flex" alt="Swim England Logo">
+          <img src="<?= htmlspecialchars(url('/img/corporate/se.png')) ?>" class="w-50 ml-auto d-none d-lg-flex" alt="Swim England Logo">
         <?php } ?>
       </div>
     </div>

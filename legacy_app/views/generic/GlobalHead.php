@@ -7,9 +7,9 @@ try {
   $hash = file_get_contents(BASE_PATH . 'cachebuster.json');
   $hash = json_decode($hash);
   $hash = $hash->resourcesHash;
-  $stylesheet = autoUrl('public/compiled/css/generic.' . $hash . '.min.css');
+  $stylesheet = autoUrl('compiled/css/generic.' . $hash . '.min.css', false);
 } catch (Exception $e) {
-  $stylesheet = autoUrl('public/compiled/css/generic.css');
+  $stylesheet = autoUrl('compiled/css/generic.css', false);
 }
 
 if (getenv('CUSTOM_CSS_PATH')) {
@@ -17,7 +17,7 @@ if (getenv('CUSTOM_CSS_PATH')) {
 }
 
 header('Link: <' . $stylesheet . '>; rel=preload; as=style', false);
-header('Link: <' . autoUrl("public/css/colour.css") . '>; rel=preload; as=style', false);
+header('Link: <' . autoUrl("css/colour.css") . '>; rel=preload; as=style', false);
 
 $container_class;
 if (isset($fluidContainer) && $fluidContainer == true) {
@@ -67,40 +67,42 @@ Chester-le-Street ASC is a non profit unincorporated association.
   <script src="https://js.stripe.com/v3/"></script>
   <link rel="stylesheet preload" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700|Roboto+Mono|Merriweather:400,600">
   <link rel="stylesheet preload" href="<?= htmlspecialchars($stylesheet) ?>">
-  <link rel="stylesheet preload" href="<?= htmlspecialchars(autoUrl("public/css/colour.css")) ?>">
+  <link rel="stylesheet preload" href="<?= htmlspecialchars(autoUrl("css/colour.css", false)) ?>">
 
+  <?php if (isset($pagetitle)) { ?>
   <meta property="og:title" content="<?= $pagetitle ?>" />
+  <?php } ?>
 
   <!-- Generic icon first -->
   <?php if ($logos = $tenant->getKey('LOGO_DIR')) { ?>
-    <link rel="icon" sizes="196x196" href="<?= htmlspecialchars(autoUrl($logos . 'icon-196x196.png')) ?>">
-    <link rel="icon" sizes="192x192" href="<?= htmlspecialchars(autoUrl($logos . 'icon-192x192.png')) ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?= autoUrl($logos . 'icon-180x180.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="<?= autoUrl($logos . 'icon-167x167.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?= autoUrl($logos . 'icon-152x152.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<?= autoUrl($logos . 'icon-128x128.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= autoUrl($logos . 'icon-114x114.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= autoUrl($logos . 'icon-72x72.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="32x32" href="<?= autoUrl($logos . 'icon-32x32.png') ?>">
-    <link rel="apple-touch-icon-precomposed" sizes="196x196" href="<?= autoUrl($logos . 'icon-196x196.png') ?>">
+    <link rel="icon" sizes="196x196" href="<?= htmlspecialchars(autoUrl($logos . 'icon-196x196.png', false)) ?>">
+    <link rel="icon" sizes="192x192" href="<?= htmlspecialchars(autoUrl($logos . 'icon-192x192.png', false)) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?= autoUrl($logos . 'icon-180x180.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="<?= autoUrl($logos . 'icon-167x167.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?= autoUrl($logos . 'icon-152x152.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="<?= autoUrl($logos . 'icon-128x128.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= autoUrl($logos . 'icon-114x114.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= autoUrl($logos . 'icon-72x72.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="32x32" href="<?= autoUrl($logos . 'icon-32x32.png', false) ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="196x196" href="<?= autoUrl($logos . 'icon-196x196.png', false) ?>">
     <meta property="og:image" content="<?= autoUrl($logos . 'logo-512.png') ?>" />
   <?php } else { ?>
     <!-- For iPhone 6 Plus with @3× display: -->
-    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-180x180.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-180x180.png", false) ?>">
     <!-- For iPad with @2× display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-152x152.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-152x152.png", false) ?>">
     <!-- For iPad with @2× display running iOS ≤ 6: -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-144x144.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-144x144.png", false) ?>">
     <!-- For iPhone with @2× display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-120x120.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-120x120.png", false) ?>">
     <!-- For iPhone with @2× display running iOS ≤ 6: -->
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-114x114.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-114x114.png", false) ?>">
     <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-76x76.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-76x76.png", false) ?>">
     <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon-72x72.png") ?>">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?= autoUrl("img/corporate/icons/apple-touch-icon-72x72.png", false) ?>">
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <link rel="apple-touch-icon-precomposed" href="<?= autoUrl("public/img/corporate/icons/apple-touch-icon.png") ?>"><!-- 57×57px -->
+    <link rel="apple-touch-icon-precomposed" href="<?= autoUrl("img/corporate/icons/apple-touch-icon.png", false) ?>"><!-- 57×57px -->
   <?php } ?>
   <!-- <link rel="mask-icon" href="https://www.chesterlestreetasc.co.uk/wp-content/themes/chester/img/chesterIcon.svg"
     color="#bd0000"> -->

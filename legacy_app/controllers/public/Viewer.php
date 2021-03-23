@@ -5,7 +5,7 @@ $path = null;
 if ($type == 'files') {
   $path = autoUrl("files/" . $filename);
 } else if ($type == 'public') {
-  $path = autoUrl("public/" . $filename);
+  $path = url("/" . $filename);
 }
 
 ?>
@@ -36,6 +36,6 @@ if ($type == 'files') {
     </style>
   </head>
   <body>
-    <iframe src="<?=autoUrl("public/js/pdf-js/web/viewer.html?file=" . urlencode($path))?>" height="100vh" width="100%"></iframe>
+    <iframe src="<?=url("/js/pdf-js/web/viewer.html?file=" . urlencode($path))?>" height="100vh" width="100%"></iframe>
   </body>
 </html>

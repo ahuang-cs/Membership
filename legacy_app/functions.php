@@ -1,5 +1,7 @@
 <?php
 
+use SCDS\RootFooter;
+
 include BASE_PATH . 'includes/regions/countries-iso3166.php';
 
 /**
@@ -281,20 +283,20 @@ function myMonthlyFeeTable($link = null, $userID)
 function autoUrl($relative, $includeClub = true)
 {
   // Returns an absolute URL
-  $rootUrl = getenv('ROOT_URL');
+  $rootUrl = url('/');
 
   if (isset(nezamy_app()->tenant)) {
     $club = nezamy_app()->tenant;
     if ($club && $includeClub) {
       if ($club->getCode()) {
-        $rootUrl .= mb_strtolower($club->getCode()) . '/';
+        $rootUrl = url('/' . mb_strtolower($club->getCode()));
       } else if ($club->getId()) {
-        $rootUrl .= $club->getId() . '/';
+        $rootUrl = url('/' . $club->getId());
       }
     }
   }
 
-  return rtrim($rootUrl . $relative, '/');
+  return rtrim($rootUrl . '/' . $relative, '/');
 }
 
 function monthlyFeeCost($link = null, $user, $format = "decimal")

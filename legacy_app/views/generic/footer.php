@@ -119,7 +119,7 @@ $logos = $tenant->getKey('LOGO_DIR')
           <div class="row no-gutters">
             <div class="col-auto">
               <a href="https://myswimmingclub.uk" target="_self" title="Swimming Club Data Systems Website">
-                <img src="<?= autoUrl("public/img/corporate/scds.png") ?>" width="100">
+                <img src="<?= url("/img/corporate/scds.png") ?>" width="100">
               </a>
               <div class="d-block d-sm-none mb-3"></div>
             </div>
@@ -164,15 +164,15 @@ try {
   $hash = file_get_contents(BASE_PATH . 'cachebuster.json');
   $hash = json_decode($hash);
   $hash = $hash->resourcesHash;
-  $script = autoUrl('public/compiled/js/main.' . $hash . '.js');
+  $script = url('/compiled/js/main.' . $hash . '.js');
 } catch (Exception $e) {
-  $script = autoUrl('public/compiled/js/main.js');
+  $script = url('/compiled/js/main.js');
 }
 
 ?>
 <script rel="preload" src="<?= htmlspecialchars($script) ?>"></script>
 <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['PWA']) || !$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['PWA']) { ?>
-  <script src="<?= htmlspecialchars(autoUrl("public/js/app.js")) ?>"></script>
+  <script src="<?= htmlspecialchars(url("/js/app.js")) ?>"></script>
 <?php } ?>
 
 <?php if (isset($this->js)) { ?>

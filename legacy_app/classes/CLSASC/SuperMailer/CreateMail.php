@@ -121,10 +121,10 @@ class CreateMail
       <table style=\"width:100%;border:0px;text-align:left;padding:10px 0px 10px 0px;background:#e3eef6;\"><tr><td align=\"center\">
         <table style=\"width:100%;max-width:700px;border:0px;text-align:center;background:#ffffff;padding:10px 10px 0px 10px;\"><tr><td>";
     if (isset(nezamy_app()->tenant) && nezamy_app()->tenant->isCLS()) {
-      $head .= "<img src=\"" . autoUrl("public/img/notify/NotifyLogo.png") . "\"
+      $head .= "<img src=\"" . url("/img/notify/NotifyLogo.png") . "\"
         style=\"width:300px;max-width:100%;\" srcset=\"" .
-        autoUrl("public/img/notify/NotifyLogo@2x.png") . " 2x, " .
-        autoUrl("public/img/notify/NotifyLogo@3x.png") . " 3x\" alt=\"" . htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) . " Logo\">";
+        url("/img/notify/NotifyLogo@2x.png") . " 2x, " .
+        url("/img/notify/NotifyLogo@3x.png") . " 3x\" alt=\"" . htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) . " Logo\">";
     } else if (isset(nezamy_app()->tenant) && $logos = nezamy_app()->tenant->getKey('LOGO_DIR')) {
       $head .= "<img src=\"" . autoUrl($logos . 'logo-150.png') . "\" srcset=\"" .
         autoUrl($logos . 'logo-150@2x.png') . " 2x, " .
@@ -132,7 +132,7 @@ class CreateMail
     } else if (isset(nezamy_app()->tenant)) {
       $head .= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME'));
     } else {
-      $head .= "<img src=\"" . autoUrl('public/img/corporate/icons/apple-touch-icon-152x152.png') . "\" alt=\"SCDS Membership Logo\">";
+      $head .= "<img src=\"" . url('/img/corporate/icons/apple-touch-icon-152x152.png') . "\" alt=\"SCDS Membership Logo\">";
     }
     $head .= "</td></tr></table>
         <table style=\"width:100%;max-width:700px;border:0px;text-align:left;background:#ffffff;padding:0px 10px;\"><tr><td>
