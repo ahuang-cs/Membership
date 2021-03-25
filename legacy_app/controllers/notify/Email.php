@@ -353,7 +353,7 @@ include BASE_PATH . "views/notifyMenu.php";
 </div>
 
 <?php $footer = new \SCDS\Footer();
-$footer->addJS("public/js/tinymce/tinymce.min.js");
-$footer->addJS("public/js/notify/TinyMCE.js?v=1");
-$footer->addJS("public/js/notify/FileUpload.js");
+$footer->addJs("js/tinymce/tinymce.min.js");
+$footer->addJs("js/notify/TinyMCE.js?v=1");
+$footer->addJs("js/notify/FileUpload.js");
 $footer->render();

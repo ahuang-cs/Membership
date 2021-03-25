@@ -118,5 +118,5 @@ unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['EditVenueSuccess']);
 unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['NewVenueSuccess']);
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/NeedsValidation.js");
+$footer->addJs("js/NeedsValidation.js");
 $footer->render();

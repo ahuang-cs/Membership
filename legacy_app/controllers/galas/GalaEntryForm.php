@@ -155,6 +155,6 @@ include "galaMenu.php";
 </div>
 
 <?php $footer = new \SCDS\Footer();
-$footer->addJs("public/js/numerical/bignumber.min.js");
-$footer->addJs("public/js/gala-entries/NewEntry.js");
+$footer->addJs("js/numerical/bignumber.min.js");
+$footer->addJs("js/gala-entries/NewEntry.js");
 $footer->render();

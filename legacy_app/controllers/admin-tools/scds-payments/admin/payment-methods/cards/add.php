@@ -166,9 +166,9 @@ include BASE_PATH . "views/root/head.php";
 
 $footer = new \SCDS\RootFooter();
 
-$footer->addJs("public/js/payment-helpers.js");
-$footer->addJs("public/js/add-payment-card.js");
-$footer->addJs("public/js/NeedsValidation.js");
+$footer->addJs("js/payment-helpers.js");
+$footer->addJs("js/add-payment-card.js");
+$footer->addJs("js/NeedsValidation.js");
 
 $footer->render();
 

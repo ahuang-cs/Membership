@@ -355,7 +355,7 @@ include BASE_PATH . "views/renewalTitleBar.php";
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/payment-helpers.js");
-$footer->addJs("public/js/registration-and-renewal/card-checkout.js");
-$footer->addJs("public/js/NeedsValidation.js");
+$footer->addJs("js/payment-helpers.js");
+$footer->addJs("js/registration-and-renewal/card-checkout.js");
+$footer->addJs("js/NeedsValidation.js");
 $footer->render(); ?>

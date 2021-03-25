@@ -186,7 +186,7 @@ include "galaMenu.php"; ?>
 <?php
 $footer = new \SCDS\Footer();
 if (!$locked) {
-  $footer->addJs("public/js/numerical/bignumber.min.js");
-  $footer->addJs("public/js/gala-entries/EditEntry.js");
+  $footer->addJs("js/numerical/bignumber.min.js");
+  $footer->addJs("js/gala-entries/EditEntry.js");
 }
 $footer->render();

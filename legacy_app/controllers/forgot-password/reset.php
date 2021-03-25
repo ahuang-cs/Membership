@@ -60,8 +60,8 @@ if ($user = $getUser->fetchColumn()) {
 
 <?php
 	$footer = new \SCDS\Footer();
-	$footer->addJs("public/js/NeedsValidation.js");
-	$footer->addJs("public/js/ajax-utilities/pwned-password-check.js");
+	$footer->addJs("js/NeedsValidation.js");
+	$footer->addJs("js/ajax-utilities/pwned-password-check.js");
 	$footer->render();
 } else {
 	halt(404);

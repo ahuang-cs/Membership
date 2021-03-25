@@ -152,7 +152,7 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/numerical/bignumber.min.js");
-$footer->addJs("public/js/admin/tier-3.js");
+$footer->addJs("js/numerical/bignumber.min.js");
+$footer->addJs("js/admin/tier-3.js");
 $footer->addJs('public/js/NeedsValidation.js');
 $footer->render();

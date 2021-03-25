@@ -406,9 +406,9 @@ include BASE_PATH . "views/swimmersMenu.php";
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/NeedsValidation.js");
-$footer->addJs("public/js/members/edit.js");
+$footer->addJs("js/NeedsValidation.js");
+$footer->addJs("js/members/edit.js");
 if ($admin) {
-  $footer->addJs("public/js/members/delete.js");
+  $footer->addJs("js/members/delete.js");
 }
 $footer->render();

@@ -153,7 +153,7 @@ $logos = $tenant->getKey('LOGO_DIR')
       </div>
     </div>
   </div><!-- /.container -->
-  <div id="app-js-info" data-root="<?= htmlspecialchars(autoUrl("")) ?>" data-check-login-url="<?= htmlspecialchars(autoUrl("check-login.json")) ?>" data-service-worker-url="<?= htmlspecialchars(autoUrl("sw.js")) ?>"></div>
+  <div id="app-js-info" data-root="<?= htmlspecialchars(autoUrl("")) ?>" data-check-login-url="<?= htmlspecialchars(autoUrl("check-login.json")) ?>" data-service-worker-url="<?= htmlspecialchars(url("sw.js")) ?>"></div>
 </footer>
 
 <!-- Modals and Other Hidden HTML -->

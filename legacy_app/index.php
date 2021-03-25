@@ -178,9 +178,10 @@ if (!isset($_SESSION['Browser'])) {
 // Make db available
 $db = null;
 try {
-  $db = \Illuminate\Support\Facades\DB::getPdo();
+  $db = (\Illuminate\Support\Facades\DB::getPdo());
   // $db = new PDO("mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME') . ";charset=utf8mb4", getenv('DB_USER'), getenv('DB_PASS'));
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 } catch (Exception $e) {
   halt(500);
 }

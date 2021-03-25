@@ -107,5 +107,5 @@ if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['AssRegFormError'
 }
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/NeedsValidation.js");
+$footer->addJs("js/NeedsValidation.js");
 $footer->render();

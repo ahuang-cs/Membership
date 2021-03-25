@@ -132,11 +132,13 @@ if ((!empty($_POST['email-address']) && !empty($_POST['password'])) && ($securit
   if (!$security_status) {
     $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorState'] = true;
     $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorStateLSVMessage'] = "We were unable to verify the integrity of your login attempt. The site you entered your email address and password on may have been attempting to capture your login details. Try reseting your password urgently.";
-    $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['InfoSec'] = [$_POST['LoginSecurityValue'], $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec']];
+    $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['InfoSec'] = [null, $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec']];
   }
 }
-$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['InfoSec'] = [$_POST['LoginSecurityValue'], $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec']];
-unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec']);
+if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec'])) {
+  $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['InfoSec'] = [null, $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec']];
+  unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LoginSec']);
+}
 if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorState']) && $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorState'] && $_POST['target'] == "" || isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorAccountLocked']) && $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorAccountLocked'] && $_POST['target'] == "") {
   // reportError([
   //   '2',

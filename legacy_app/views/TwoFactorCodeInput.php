@@ -109,7 +109,7 @@ include BASE_PATH . "views/header.php";
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/NeedsValidation.js");
+$footer->addJs("js/NeedsValidation.js");
 $footer->render();
 
 unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['ErrorState']);

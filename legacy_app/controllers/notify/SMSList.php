@@ -61,7 +61,7 @@ include BASE_PATH . "views/notifyMenu.php";
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/notify/GetSMS.js");
+$footer->addJs("js/notify/GetSMS.js");
 $footer->render();
 
 ?>

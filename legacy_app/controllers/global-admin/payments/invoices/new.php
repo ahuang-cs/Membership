@@ -187,7 +187,7 @@ include BASE_PATH . "views/root/header.php";
 <?php
 
 $footer = new \SCDS\RootFooter();
-$footer->addJs("public/js/numerical/bignumber.min.js");
-$footer->addJs("public/js/global-admin/payments/invoices/new.js", true);
+$footer->addJs("js/numerical/bignumber.min.js");
+$footer->addJs("js/global-admin/payments/invoices/new.js", true);
 $footer->addJs('js/NeedsValidation.js');
 $footer->render();

@@ -24,7 +24,7 @@ class Footer
   public function addJs($path, $module = false)
   {
     $this->js[] = [
-      'url' => autoUrl($path),
+      'url' => url('/' . $path),
       'module' => $module,
     ];
   }

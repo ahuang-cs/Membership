@@ -287,9 +287,9 @@ include BASE_PATH . 'views/header.php';
 
 $footer = new \SCDS\Footer();
 if ($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['AccessLevel'] != "Parent") {
-  // $footer->addJs("public/js/Chart.min.js");
+  // $footer->addJs("js/Chart.min.js");
   if ($numSwimmers > 0) {
-    $footer->addJs("public/js/squads/squad-charts.js");
+    $footer->addJs("js/squads/squad-charts.js");
   }
 }
 $footer->render();

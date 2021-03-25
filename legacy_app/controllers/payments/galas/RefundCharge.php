@@ -303,6 +303,6 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/numerical/bignumber.min.js");
-$footer->addJs("public/js/payments/galas/refund-charges.js");
+$footer->addJs("js/numerical/bignumber.min.js");
+$footer->addJs("js/payments/galas/refund-charges.js");
 $footer->render();

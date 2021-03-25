@@ -132,5 +132,5 @@ include BASE_PATH . "views/renewalTitleBar.php";
 </div>
 
 <?php $footer = new \SCDS\Footer();
-$footer->addJs("public/js/medical-forms/MedicalForm.js");
+$footer->addJs("js/medical-forms/MedicalForm.js");
 $footer->render();

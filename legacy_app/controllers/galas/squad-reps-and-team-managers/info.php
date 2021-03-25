@@ -248,5 +248,5 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/galas/squad-reps/squad-rep-approval.js");
+$footer->addJs("js/galas/squad-reps/squad-rep-approval.js");
 $footer->render();

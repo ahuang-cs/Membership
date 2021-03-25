@@ -346,7 +346,7 @@ unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['RequestTrial-Errors'
 unset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['RequestTrial-AddAnother']);
 
 $footer = new \SCDS\Footer();
-$footer->addJs("public/js/NeedsValidation.js");
-// $footer->addJs("public/js/request-a-trial/IsItYouOrYourChild.js");
-// $footer->addJs("public/js/request-a-trial/MultiSwimmers.js");
+$footer->addJs("js/NeedsValidation.js");
+// $footer->addJs("js/request-a-trial/IsItYouOrYourChild.js");
+// $footer->addJs("js/request-a-trial/MultiSwimmers.js");
 $footer->render();
