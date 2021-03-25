@@ -136,5 +136,5 @@ include BASE_PATH . "views/root/header.php";
 <?php
 
 $footer = new \SCDS\RootFooter();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();

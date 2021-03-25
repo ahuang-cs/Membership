@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_decode;
+
 
 $db = nezamy_app()->db;
 $tenant = nezamy_app()->tenant;
@@ -203,12 +203,12 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 if (bool(getenv("IS_DEV"))) {
   $footer->addExternalJs('https://apis.tenant-services.membership.myswimmingclub.uk/socket.io/socket.io.js');
 } else {
   $footer->addExternalJs('https://production-apis.tenant-services.membership.myswimmingclub.uk/socket.io/socket.io.js');
 }
 // $footer->addExternalJs(autoUrl('apis/socket.io/socket.io.js', false));
-$footer->addJs('public/js/contact-tracing/sign-out.js');
+$footer->addJs('js/contact-tracing/sign-out.js');
 $footer->render();

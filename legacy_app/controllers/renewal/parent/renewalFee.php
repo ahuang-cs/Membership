@@ -376,5 +376,5 @@ include BASE_PATH . "views/renewalTitleBar.php";
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/registration-and-renewal/renewal-fee.js');
+$footer->addJs('js/registration-and-renewal/renewal-fee.js');
 $footer->render();

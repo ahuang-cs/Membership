@@ -303,7 +303,7 @@ if (isset($id)) {
   </div>
 
 <?php $footer = new \SCDS\Footer();
-  $footer->addJs('public/js/NeedsValidation.js');
+  $footer->addJs('js/NeedsValidation.js');
   $footer->render();
 } else {
   $pagetitle = "Code of	Conduct Acceptance";
@@ -356,6 +356,6 @@ if (isset($id)) {
   </div>
 
 <?php $footer = new \SCDS\Footer();
-  $footer->addJs('public/js/NeedsValidation.js');
+  $footer->addJs('js/NeedsValidation.js');
   $footer->render();
 }

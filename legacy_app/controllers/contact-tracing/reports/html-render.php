@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_decode;
+
 
 $json = json_decode($json);
 
@@ -112,5 +112,5 @@ $toDate->setTimezone(new DateTimeZone('Europe/London'));
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();

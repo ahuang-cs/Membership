@@ -191,5 +191,5 @@ include BASE_PATH . 'views/header.php';
 
 $footer = new Footer();
 $footer->addJs("js/medical-forms/MedicalForm.js");
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();

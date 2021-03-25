@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_decode;
+
 
 $db = nezamy_app()->db;
 $tenant = nezamy_app()->tenant;
@@ -41,7 +41,9 @@ include BASE_PATH . 'views/header.php';
           <?= htmlspecialchars($location['Name']) ?>
         </h1>
         <p class="lead mb-0">
+          <?php if (isset($addr->streetAndNumber)) { ?>
           <?= htmlspecialchars($addr->streetAndNumber) ?>
+          <?php } ?>
         </p>
         <div class="mb-3 d-lg-none"></div>
       </div>
@@ -98,5 +100,5 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();

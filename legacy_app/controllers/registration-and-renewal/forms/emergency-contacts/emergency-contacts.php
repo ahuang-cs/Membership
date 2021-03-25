@@ -109,6 +109,6 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new Footer();
-$footer->addJs('public/js/registration-and-renewal/emergency-contacts.js');
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/registration-and-renewal/emergency-contacts.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();

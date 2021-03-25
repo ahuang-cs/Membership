@@ -83,5 +83,5 @@ include BASE_PATH . "controllers/attendance/attendanceMenu.php"; ?>
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/attendance/history/members.js');
+$footer->addJs('js/attendance/history/members.js');
 $footer->render();

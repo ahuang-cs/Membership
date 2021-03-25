@@ -4,7 +4,7 @@
 
 use Respect\Validation\Rules\TrueVal;
 
-use function GuzzleHttp\json_encode;
+
 
 if (!isset($_POST['password']) || !isset($_POST['csrf'])) halt(401);
 

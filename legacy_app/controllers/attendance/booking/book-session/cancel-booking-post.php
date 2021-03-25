@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_encode;
+
 
 if (!isset($_SERVER['HTTP_ACCEPT']) || $_SERVER['HTTP_ACCEPT'] != 'application/json') {
   halt(404);

@@ -24,7 +24,7 @@ $use_white_background = true;
 
 $dateString = date("F Y", strtotime($year . "-" . $month));
 
-$table_sm;
+$table_sm = "";
 if (nezamy_app('request')->isMobile()) {
   $table_sm = "table-sm";
 }

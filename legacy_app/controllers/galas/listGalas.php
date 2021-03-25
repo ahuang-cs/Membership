@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     data: {
       labels: <?=json_encode(['Free', 'Back', 'Breast', 'Fly', 'IM'])?>,
       datasets: [{
-        label: <?=json_encode(html_entity_decode($gala['GalaName']))?>,
+        label: <?=json_encode(html_entity_decode('L'))?>,
         data: <?=json_encode($strokeCountsData)?>,
         backgroundColor: <?=json_encode($chartColours)?>,
       }],

@@ -79,6 +79,6 @@ if ($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['AccessLevel'] == "Pare
 <?php }
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->useFluidContainer();
 $footer->render(); ?>

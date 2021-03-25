@@ -168,5 +168,5 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/covid-risk-awareness/squad-page.js?v=2');
+$footer->addJs('js/covid-risk-awareness/squad-page.js?v=2');
 $footer->render();

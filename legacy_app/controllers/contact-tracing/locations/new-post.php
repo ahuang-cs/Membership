@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_encode;
+
 use Brick\Postcode\PostcodeFormatter;
 
 $PostcodeFormatter = new PostcodeFormatter();

@@ -123,7 +123,7 @@ include BASE_PATH . "views/squadMenu.php"; ?>
 </div>
 
 <?php $footer = new \SCDS\Footer();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();
 
 ?>

@@ -77,7 +77,7 @@ include BASE_PATH . "views/paymentsMenu.php";
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();
 
 ?>

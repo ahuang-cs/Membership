@@ -445,5 +445,5 @@ if (bool(getenv("IS_DEV"))) {
 } else {
   $footer->addExternalJs('https://production-apis.tenant-services.membership.myswimmingclub.uk/socket.io/socket.io.js');
 }
-$footer->addJs('public/js/attendance/booking/book-session.js');
+$footer->addJs('js/attendance/booking/book-session.js');
 $footer->render();

@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_decode;
+
 
 $db = nezamy_app()->db;
 $tenant = nezamy_app()->tenant;
@@ -154,5 +154,5 @@ include BASE_PATH . 'views/header.php';
 $footer = new \SCDS\Footer();
 $footer->addJs("js/numerical/bignumber.min.js");
 $footer->addJs("js/admin/tier-3.js");
-$footer->addJs('public/js/NeedsValidation.js');
+$footer->addJs('js/NeedsValidation.js');
 $footer->render();

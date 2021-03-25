@@ -1,7 +1,7 @@
 <?php
 
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
+
+
 $db = nezamy_app()->db;
 
 $incrementFailedLoginCount = $db->prepare("UPDATE users SET WrongPassCount = WrongPassCount + 1 WHERE UserID = ?");

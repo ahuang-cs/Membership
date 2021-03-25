@@ -12,22 +12,3 @@ if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Swimmers-FamilyM
   </div>
 </div>
 <?php } ?>
-<!--
-<div class="nav-scroller bg-white shadow mb-3">
-  <div class="<?=$container_class?>">
-    <nav class="nav nav-underline">
-      <a class="nav-link" href="<?php echo autoUrl("swimmers")?>">Swimmer Directory</a>
-      <?php if ($access == "Admin") { ?>
-      <a class="nav-link" href="<?php echo autoUrl("swimmers/addmember")?>">Add Member</a>
-      <?php } ?>
-      <a class="nav-link" href="<?php echo autoUrl("squads")?>">Squads</a>
-  		<a class="nav-link" href="<?php echo autoUrl("squads/moves")?>">Squad Moves</a>
-      <a class="nav-link" href="<?php echo autoUrl("swimmers/accesskeys")?>">Access Keys</a>
-      <?php if ($access == "Admin") { ?>
-      <a class="nav-link" href="<?php echo autoUrl("renewal")?>">Membership Renewal</a>
-      <a class="nav-link" href="<?php echo autoUrl("swimmers/orphaned")?>">Orphan Swimmers</a>
-      <?php } ?>
-    </nav>
-  </div>
-</div>
--->

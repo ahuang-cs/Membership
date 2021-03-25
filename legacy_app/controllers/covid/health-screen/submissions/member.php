@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_decode;
+
 
 $db = nezamy_app()->db;
 $tenant = nezamy_app()->tenant;
@@ -223,36 +223,36 @@ include BASE_PATH . 'views/header.php';
         <nav aria-label="Page navigation">
           <ul class="pagination mb-3">
             <?php if ($numForms <= 10) { ?>
-              <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
+              <li class="page-item active"><a class="page-link" href="<?= htmlspecialchars(autoUrl("covid/health-screening/members/$id?page=$page")) ?><?= htmlspecialchars($page) ?>"><?= htmlspecialchars($page) ?></a></li>
             <?php } else if ($numForms <= 20) { ?>
               <?php if ($page == 1) { ?>
-                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 1 ?>">Next</a></li>
+                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 1 ?>">Next</a></li>
               <?php } else { ?>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page - 1 ?>">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page - 1 ?>"><?php echo $page - 1 ?></a></li>
-                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page - 1 ?>">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page - 1 ?>"><?php echo $page - 1 ?></a></li>
+                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
               <?php } ?>
             <?php } else { ?>
               <?php if ($page == 1) { ?>
-                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 2 ?>"><?php echo $page + 2 ?></a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 1 ?>">Next</a></li>
+                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 2 ?>"><?php echo $page + 2 ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 1 ?>">Next</a></li>
               <?php } else { ?>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page - 1 ?>">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page - 1 ?>">Previous</a></li>
                 <?php if ($page > 2) { ?>
-                  <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page - 2 ?>"><?php echo $page - 2 ?></a></li>
+                  <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page - 2 ?>"><?php echo $page - 2 ?></a></li>
                 <?php } ?>
-                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page - 1 ?>"><?php echo $page - 1 ?></a></li>
-                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page - 1 ?>"><?php echo $page - 1 ?></a></li>
+                <li class="page-item active"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page ?>"><?php echo $page ?></a></li>
                 <?php if ($numForms > $page * 10) { ?>
-                  <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li>
+                  <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 1 ?>"><?php echo $page + 1 ?></a></li>
                   <?php if ($numForms > $page * 10 + 10) { ?>
-                    <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 2 ?>"><?php echo $page + 2 ?></a></li>
+                    <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 2 ?>"><?php echo $page + 2 ?></a></li>
                   <?php } ?>
-                  <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $member . "?page="); ?><?php echo $page + 1 ?>">Next</a></li>
+                  <li class="page-item"><a class="page-link" href="<?php echo autoUrl("covid/health-screening/members/" . $id . "?page="); ?><?php echo $page + 1 ?>">Next</a></li>
                 <?php } ?>
               <?php } ?>
             <?php } ?>

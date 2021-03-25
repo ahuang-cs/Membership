@@ -222,5 +222,5 @@ include BASE_PATH . 'views/header.php';
 <?php
 
 $footer = new \SCDS\Footer();
-$footer->addJs('public/js/covid-health-screen/squad-page.js?v=3');
+$footer->addJs('js/covid-health-screen/squad-page.js?v=3');
 $footer->render();

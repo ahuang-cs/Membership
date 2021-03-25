@@ -1,7 +1,7 @@
 <?php
 
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
+
+
 
 $db = nezamy_app()->db;
 $tenant = nezamy_app()->tenant;
@@ -119,6 +119,6 @@ include BASE_PATH . 'views/header.php';
 
 $footer = new \SCDS\Footer();
 $footer->useFluidContainer();
-$footer->addJs('public/js/NeedsValidation.js');
-$footer->addJs('public/js/settings/club-membership-fees.js');
+$footer->addJs('js/NeedsValidation.js');
+$footer->addJs('js/settings/club-membership-fees.js');
 $footer->render();

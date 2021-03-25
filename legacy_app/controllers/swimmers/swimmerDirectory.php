@@ -10,12 +10,12 @@ $squads->execute([
 
 $fluidContainer = true;
 $squadID = $search = "";
-parse_str($_SERVER['QUERY_STRING'], $queries);
-if (isset($queries['squadID'])) {
-  $squadID = (int) $queries['squadID'];
+
+if (isset($_GET['squadID'])) {
+  $squadID = (int) $_GET['squadID'];
 }
-if (isset($queries['search'])) {
-  $search = $queries['search'];
+if (isset($_GET['search'])) {
+  $search = $_GET['search'];
 }
 
 $pagetitle = "Members";

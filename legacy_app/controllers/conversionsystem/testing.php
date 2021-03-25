@@ -53,7 +53,7 @@ include BASE_PATH . "views/header.php";
         <?php } ?>
         <div class="row">
           <?php if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time'])) { ?>
-            <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Error']) { ?>
+            <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Error'])) { ?>
               <div class="col-lg-4">
                 <table class="table table-sm table-striped">
                   <thead class="thead-light">
@@ -63,7 +63,7 @@ include BASE_PATH . "views/header.php";
                     </tr>
                   </thead>
                   <tbody>
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-20m-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-20m-fail'])) { ?>
                       <tr>
                         <td>20m</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-20m'] ?></td>
@@ -75,7 +75,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-25m-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-25m-fail'])) { ?>
                       <tr>
                         <td>25m</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-25m'] ?></td>
@@ -87,7 +87,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-33m-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-33m-fail'])) { ?>
                       <tr>
                         <td>33 1/3m</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-33m'] ?></td>
@@ -99,7 +99,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-50m-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-50m-fail'])) { ?>
                       <tr>
                         <td>50m</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-50m'] ?></td>
@@ -111,7 +111,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-20y-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-20y-fail'])) { ?>
                       <tr>
                         <td>20y</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-20y'] ?></td>
@@ -123,7 +123,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-25y-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-25y-fail'])) { ?>
                       <tr>
                         <td>25y</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-25y'] ?></td>
@@ -135,7 +135,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-27y-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-27y-fail'])) { ?>
                       <tr>
                         <td>27 1/2y</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-27y'] ?></td>
@@ -147,7 +147,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-33y-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-33y-fail'])) { ?>
                       <tr>
                         <td>33 1/3y</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-33y'] ?></td>
@@ -159,7 +159,7 @@ include BASE_PATH . "views/header.php";
                       </tr>
                     <?php } ?>
 
-                    <?php if (!$_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-36y-fail']) { ?>
+                    <?php if (!isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-36y-fail'])) { ?>
                       <tr>
                         <td>36 2/3y</td>
                         <td class="mono"><?= $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['Time']['Conv-36y'] ?></td>

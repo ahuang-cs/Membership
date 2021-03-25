@@ -100,5 +100,5 @@ include BASE_PATH . 'views/header.php';
 
 $footer = new \SCDS\Footer();
 $footer->useFluidContainer();
-$footer->addJs('public/js/admin/editors/squad-membership.js');
+$footer->addJs('js/admin/editors/squad-membership.js');
 $footer->render();

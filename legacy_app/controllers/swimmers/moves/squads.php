@@ -1,6 +1,6 @@
 <?php
 
-use function GuzzleHttp\json_encode;
+
 
 try {
   $db = nezamy_app()->db;

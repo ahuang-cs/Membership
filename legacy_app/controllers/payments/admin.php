@@ -331,5 +331,5 @@ $month = new DateTime('now', new DateTimeZone('Europe/London'));
     </div>
 
     <?php $footer = new \SCDS\Footer();
-    $footer->addJs('public/js/payments/admin-graph.js');
+    $footer->addJs('js/payments/admin-graph.js');
     $footer->render();
