@@ -27,12 +27,17 @@ if (!function_exists('chesterStandardMenu')) {
     $renewalYear = null;
     if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['AccessLevel']) && $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['AccessLevel'] == 'Parent') {
       $date = new DateTime('now', new DateTimeZone('Europe/London'));
-      $getRenewals = $db->prepare("SELECT COUNT(*) AS `Count`, `Year` FROM renewals WHERE Tenant = :tenant AND StartDate <= :today AND EndDate >= :today;");
-      $getRenewals->execute([
-        'tenant' => nezamy_app()->tenant->getId(),
-        'today' => $date->format('Y-m-d')
-      ]);
-      $renewals = $getRenewals->fetch(PDO::FETCH_ASSOC);
+      // $getRenewals = $db->prepare("SELECT COUNT(*) AS `Count`, `Year` FROM renewals WHERE Tenant = :tenant AND StartDate <= :today AND EndDate >= :today;");
+      // $getRenewals->execute([
+      //   'tenant' => nezamy_app()->tenant->getId(),
+      //   'today' => $date->format('Y-m-d'),
+      //   'today' => $date->format('Y-m-d')
+      // ]);
+      // $renewals = $getRenewals->fetch(PDO::FETCH_ASSOC);
+      $renewals = [
+        'Count' => 0,
+        'Year' => null,
+      ];
       if ($renewals['Count'] == 1) {
         $renewalOpen = true;
         $renewalYear = $renewals['Year'];

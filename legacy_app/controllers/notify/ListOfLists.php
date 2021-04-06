@@ -5,7 +5,7 @@ $tenant = nezamy_app()->tenant;
 
 $user = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID'];
 $pagetitle = "Targeted Lists";
-$use_white_background = true;
+
 
 $lists = $db->prepare("SELECT * FROM `targetedLists` WHERE Tenant = ? ORDER BY `Name` ASC");
 $lists->execute([

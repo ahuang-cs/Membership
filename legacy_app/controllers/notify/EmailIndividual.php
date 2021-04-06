@@ -1,5 +1,5 @@
 <?php
-$use_white_background = true;
+
 
 if (is_null($user)) {
   halt(400);

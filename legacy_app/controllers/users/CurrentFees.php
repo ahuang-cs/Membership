@@ -19,7 +19,7 @@ if ($info == null) {
 }
 
 $pagetitle = "Current Fees";
-$use_white_background = true;
+
 
 include BASE_PATH . "views/header.php";
 

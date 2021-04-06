@@ -30,7 +30,7 @@ $query->execute([
 $swimmers = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $pagetitle = "Trial Requests - " . $parent['First'] . ' ' . $parent['Last'];
-$use_white_background = true;
+
 $use_website_menu = true;
 if ($use_membership_menu) {
   $use_website_menu = false;

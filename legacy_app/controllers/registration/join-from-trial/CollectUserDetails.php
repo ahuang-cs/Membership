@@ -24,7 +24,7 @@ if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserDetailsPostD
 }
 
 $pagetitle = "Your details";
-$use_white_background = true;
+
 
 include BASE_PATH . 'views/header.php';
 

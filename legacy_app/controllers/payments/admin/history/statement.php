@@ -53,7 +53,7 @@ $sql->execute([$id]);
 $payment_info = $sql->fetch(PDO::FETCH_ASSOC);
 $name = getUserName($payment_info['UserID']);
 
-$use_white_background = true;
+
 $PMKey = null;
 if ($payment_info['PMKey'] != null) {
   $PMKey = mb_strtoupper($payment_info['PMKey']);
@@ -262,12 +262,6 @@ include BASE_PATH . "views/paymentsMenu.php";
           Problems are very rare but when they do happen we'll work to resolve them
           as quickly as possible.
         </p>
-        <!--<p>
-          Print off this page and club staff can scan this code to access your
-          statement.
-        </p>
-        <img class="img-fluid d-block mb-3" src="<?=autoUrl("services/qr/0/150")?>" srcset="<?=autoUrl("services/qr/0/300")?> 2x, <?=autoUrl("services/qr/0/450")?> 3x" alt="<?=htmlspecialchars(autoUrl("payments/history/statement/" . strtoupper($PaymentID)))?>">
-      -->
 
         <h2>Questions about Direct Debit</h2>
         <p>

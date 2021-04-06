@@ -6,7 +6,7 @@ if (isset($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LogBooks-SE-ID']
   $username = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['LogBooks-SE-ID'];
 }
 
-$use_white_background = true;
+
 
 include BASE_PATH . "views/header.php";
 

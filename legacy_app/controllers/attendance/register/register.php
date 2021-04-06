@@ -48,7 +48,7 @@ include 'session-register.php';
 $pageHead['body-class'][] = 'user-select-none';
 
 $fluidContainer = true;
-$use_white_background = true;
+
 include BASE_PATH . "views/header.php";
 // include "./attendanceMenu.php";
 

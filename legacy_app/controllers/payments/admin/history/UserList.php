@@ -8,7 +8,7 @@ if (isset($_GET['search'])) {
 	$search = trim($_GET['search']);
 }
 
-$use_white_background = true;
+
 $pagetitle = "Find a Parent's Current Fees";
 
 include BASE_PATH . "views/header.php";

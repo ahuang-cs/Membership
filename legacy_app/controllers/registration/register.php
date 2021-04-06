@@ -29,7 +29,7 @@ $fam_keys = null;
 
 $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['RegistrationMode'] = $mode;
 
-  $use_white_background = true;
+  
   $pagetitle = "Register";
   $preventLoginRedirect = true;
   include BASE_PATH . "views/header.php";

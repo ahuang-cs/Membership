@@ -90,7 +90,7 @@ $content .= "<div class=\"row\"><div class=\"col-md-10 col-lg-8\"><form method=\
 <p>This gala will immediately be available for parents to enter, unless coaches decide entries.</p>
 ";
 
-$use_white_background = true;
+
 include BASE_PATH . "views/header.php";
 include "galaMenu.php"; ?>
 <div class="container">

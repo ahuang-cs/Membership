@@ -58,7 +58,7 @@ if ($row['MIME'] != "text/html") {
 	exit();
 }
 
-$use_white_background = true;
+
 $pagetitle = htmlentities($row['Title']);
 
 $container_classes = "";

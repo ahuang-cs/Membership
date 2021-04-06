@@ -16,7 +16,7 @@ $query->execute([
 ]);
 
 $pagetitle = "Trial Requests";
-$use_white_background = true;
+
 
 include BASE_PATH . 'views/header.php';
 

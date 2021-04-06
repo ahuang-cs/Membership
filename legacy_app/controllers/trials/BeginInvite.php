@@ -30,7 +30,7 @@ $query->execute([
 $swimmers = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $pagetitle = "Join Club - " . htmlspecialchars($parent['First'] . ' ' . $parent['Last']);
-$use_white_background = true;
+
 
 include BASE_PATH . 'views/header.php';
 

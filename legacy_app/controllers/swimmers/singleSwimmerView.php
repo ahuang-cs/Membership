@@ -14,7 +14,7 @@ $countries = getISOAlpha2CountriesWithHomeNations();
 $markdown = new ParsedownExtra();
 $markdown->setSafeMode(true);
 
-$use_white_background = true;
+
 
 $query = $db->prepare("SELECT * FROM members LEFT JOIN users ON members.UserID = users.UserID WHERE MemberID = ? AND members.Tenant = ?");
 $query->execute([

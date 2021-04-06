@@ -5,7 +5,7 @@
 $db = nezamy_app()->db;
 
 $user = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID'];
-$use_white_background = true;
+
 $pagetitle = "Direct Debit Mandate";
 
 include BASE_PATH . "views/header.php";

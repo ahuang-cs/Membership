@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "Notify Composer";
-$use_white_background = true;
+
 
 $db = nezamy_app()->db;
 

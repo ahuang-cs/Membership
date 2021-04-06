@@ -2,7 +2,7 @@
 
 $pagetitle = "Notify";
 
-$use_white_background = true;
+
 
 include BASE_PATH . "views/header.php";
 ?>

@@ -18,7 +18,7 @@ $query->execute([
 ]);
 
 $pagetitle = "Accepted Swimmers";
-$use_white_background = true;
+
 
 include BASE_PATH . 'views/header.php';
 

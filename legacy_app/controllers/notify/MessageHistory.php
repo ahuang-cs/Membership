@@ -3,7 +3,7 @@
 $db = nezamy_app()->db;
 $tenant = nezamy_app()->tenant;
 
-$use_white_background = true;
+
 
 $start = 0;
 

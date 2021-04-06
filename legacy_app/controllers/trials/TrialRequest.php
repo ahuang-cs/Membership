@@ -43,7 +43,7 @@ $swimmer['TrialEnd'] == "" || $swimmer['TrialStart'] == null) {
 }
 
 $pagetitle = "Trial Request - " . htmlspecialchars($swimmer['First'] . ' ' . $swimmer['Last']);
-$use_white_background = true;
+
 
 $value = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['RequestTrial-FC'];
 

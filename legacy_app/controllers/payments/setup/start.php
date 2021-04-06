@@ -2,7 +2,7 @@
 
 $db = nezamy_app()->db;
 
-$use_white_background = true;
+
 
 $url_path = "payments";
 if (isset($renewal_trap) && $renewal_trap) {

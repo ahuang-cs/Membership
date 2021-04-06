@@ -7,7 +7,7 @@ $pagetitle = "Gala Entries";
 $galaID = $surname = null;
 $title = "View Gala Entries by Gala";
 
-$use_white_background = true;
+
 
 $galaIDParam = $search = $sex = "";
 if (isset($_GET['gala'])) {

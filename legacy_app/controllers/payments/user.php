@@ -20,23 +20,11 @@ $mandate = $getMandates->fetch(PDO::FETCH_ASSOC);
 
 $balance = getAccountBalance($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID']);
 
-$use_white_background = true;
+
 include BASE_PATH . "views/header.php";
 include BASE_PATH . "views/paymentsMenu.php";
 
 ?>
-
-<!--
-<div class="bg-warning box-shadow mb-3 py-2" style="margin-top:-1rem;">
- <div class="<?= $container_class ?>">
-   <nav class="nav nav-underline">
-     <strong>
-       Remember to cancel your Standing Order for Monthly Fees
-     </strong>
-   </nav>
- </div>
-</div>
--->
 
 <div class="container">
 

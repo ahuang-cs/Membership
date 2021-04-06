@@ -55,7 +55,7 @@ if (isset($_REQUEST['redirect'])) {
 }
 
 $pagetitle = "Cancel Trial Request";
-$use_white_background = true;
+
 $use_website_menu = true;
 if ($use_membership_menu) {
   $use_website_menu = false;

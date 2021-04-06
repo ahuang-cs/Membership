@@ -1,6 +1,6 @@
 <?php
 
-$use_white_background = true;
+
 $pagetitle = "New Emergency Contact";
 
 include BASE_PATH . 'views/header.php';

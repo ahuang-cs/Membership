@@ -3,7 +3,7 @@
 $db = nezamy_app()->db;
 
 $url_path = "emergency-contacts";
-if ($renewal_trap) {
+if (isset($renewal_trap) && $renewal_trap) {
 	$url_path = "renewal/emergencycontacts";
 }
 
@@ -31,7 +31,7 @@ if ($_POST['name'] != null && $_POST['name'] != "" && $_POST['num'] != null && $
 		</div>
 		';
 
-		if ($renewal_trap) {
+		if (isset($renewal_trap) && $renewal_trap) {
 			header("Location: " . autoUrl("renewal/go"));
 		} else {
 			header("Location: " . autoUrl($url_path));
@@ -62,7 +62,7 @@ if ($_POST['name'] != null && $_POST['name'] != "" && $_POST['num'] != null && $
 	</div>
 	';
 
-	if ($renewal_trap) {
+	if (isset($renewal_trap) && $renewal_trap) {
 		header("Location: " . autoUrl("renewal/go"));
 	} else {
 		header("Location: " . autoUrl($url_path));

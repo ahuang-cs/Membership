@@ -3,7 +3,7 @@
 $user = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID'];
 $pagetitle = "Notify";
 
-$use_white_background = true;
+
 
 include BASE_PATH . "views/header.php";
 include BASE_PATH . "views/notifyMenu.php";

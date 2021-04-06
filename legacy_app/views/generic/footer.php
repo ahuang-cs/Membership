@@ -39,15 +39,15 @@ $logos = $tenant->getKey('LOGO_DIR')
     </div>
   </div> -->
 
-  <div class="bg-secondary text-white py-4 focus-highlight">
+  <div class="cls-global-footer cls-global-footer-inverse cls-global-footer-body d-print-none mt-3 pb-0 focus-highlight">
     <div class="<?php if (isset($this->fluidContainer) && $this->fluidContainer == true) { ?>container-fluid<?php } else { ?>container<?php } ?>">
       <div class="row">
         <div class="col-lg-6">
           <div class="row">
             <div class="col">
               <address>
-                <?php $addr = json_decode(nezamy_app()->tenant->getKey('CLUB_ADDRESS')); ?>
-                <strong><?= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) ?></strong><br>
+                <?php $addr = json_decode($tenant->getKey('CLUB_ADDRESS')); ?>
+                <strong><?= htmlspecialchars($tenant->getKey('CLUB_NAME')) ?></strong><br>
                 <?php if ($addr) {
                   for ($i = 0; $i < sizeof($addr); $i++) { ?>
                     <?= htmlspecialchars($addr[$i]) ?><br>
@@ -55,9 +55,9 @@ $logos = $tenant->getKey('LOGO_DIR')
                 } ?>
               </address>
               <!--<p><i class="fa fa-envelope fa-fw" aria-hidden="true"></i> <a href="mailto:enquiries@chesterlestreetasc.co.uk" target="new">E-Mail Us</a></p>-->
-              <p><i class="fa fa-flag fa-fw" aria-hidden="true"></i> <a class="text-white" href="<?= htmlspecialchars(autoUrl("reportanissue?url=" . urlencode(nezamy_app('request')->curl))) ?>">Report an issue with this page</a>
+              <p><i class="fa fa-flag fa-fw" aria-hidden="true"></i> <a href="<?= htmlspecialchars(autoUrl("reportanissue?url=" . urlencode(app('request')->curl))) ?>">Report an issue with this page</a>
               </p>
-              <p><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i> <a class="text-white" href="<?= htmlspecialchars(autoUrl("about")) ?>">Support information</a>
+              <p><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i> <a href="<?= htmlspecialchars(autoUrl("about")) ?>">Support information</a>
               </p>
             </div>
           </div>
@@ -68,27 +68,27 @@ $logos = $tenant->getKey('LOGO_DIR')
               <ul class="list-unstyled cls-global-footer-link-spacer">
                 <li><strong>Membership System Support</strong></li>
                 <li>
-                  <a class="text-white" href="<?= autoUrl("privacy") ?>" target="_blank" title="<?= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) ?> Privacy Policy">
+                  <a href="<?= autoUrl("privacy") ?>" target="_blank" title="<?= htmlspecialchars($tenant->getKey('CLUB_NAME')) ?> Privacy Policy">
                     Our Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a class="text-white" href="<?= htmlspecialchars(autoUrl('help-and-support', false)) ?>" title="Help and Support">
+                  <a href="<?= htmlspecialchars(autoUrl('help-and-support', false)) ?>" title="Help and Support">
                     Help and Support
                   </a>
                 </li>
                 <li>
-                  <a class="text-white" href="https://membership.git.myswimmingclub.uk/whats-new/" target="_blank" title="New membership system features">
+                  <a href="https://membership.git.myswimmingclub.uk/whats-new/" target="_blank" title="New membership system features">
                     What's new?
                   </a>
                 </li>
                 <li>
-                  <a class="text-white" href="<?= autoUrl("notify") ?>" target="_self" title="About our Notify Email Service">
+                  <a href="<?= autoUrl("notify") ?>" target="_self" title="About our Notify Email Service">
                     Emails from us
                   </a>
                 </li>
                 <li>
-                  <a class="text-white" href="https://github.com/Chester-le-Street-ASC/Membership" target="_blank" title="Membership by CLSASC on GitHub">
+                  <a href="https://github.com/Chester-le-Street-ASC/Membership" target="_blank" title="Membership by CLSASC on GitHub">
                     GitHub
                   </a>
                 </li>
@@ -97,13 +97,13 @@ $logos = $tenant->getKey('LOGO_DIR')
             <div class="col-sm-6 col-lg-6">
               <ul class="list-unstyled cls-global-footer-link-spacer">
                 <li><strong>Related Sites</strong></li>
-                <li><a class="text-white" title="British Swimming" target="_blank" href="https://www.swimming.org/britishswimming/">British
+                <li><a title="British Swimming" target="_blank" href="https://www.swimming.org/britishswimming/">British
                     Swimming</a></li>
-                <li><a class="text-white" title="the Amateur Swimming Association" target="_blank" href="https://www.swimming.org/swimengland/">Swim England</a></li>
-                <li><a class="text-white" title="<?= htmlspecialchars($districts[nezamy_app()->tenant->getKey('ASA_DISTRICT')]['title']) ?>" target="_blank" href="<?= htmlspecialchars($districts[nezamy_app()->tenant->getKey('ASA_DISTRICT')]['website']) ?>"><?= htmlspecialchars($districts[nezamy_app()->tenant->getKey('ASA_DISTRICT')]['name']) ?></a></li>
-                <li><a class="text-white" title="<?= htmlspecialchars($counties[nezamy_app()->tenant->getKey('ASA_COUNTY')]['title']) ?>" target="_blank" href="<?= htmlspecialchars($counties[nezamy_app()->tenant->getKey('ASA_COUNTY')]['website']) ?>"><?= htmlspecialchars($counties[nezamy_app()->tenant->getKey('ASA_COUNTY')]['name']) ?></a></li>
-                <?php if (nezamy_app()->tenant->getKey('CLUB_WEBSITE')) { ?>
-                  <li><a class="text-white" title="<?= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) ?> Website" target="_blank" href="<?= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_WEBSITE')) ?>"><?= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) ?></a></li>
+                <li><a title="the Amateur Swimming Association" target="_blank" href="https://www.swimming.org/swimengland/">Swim England</a></li>
+                <li><a title="<?= htmlspecialchars($districts[$tenant->getKey('ASA_DISTRICT')]['title']) ?>" target="_blank" href="<?= htmlspecialchars($districts[$tenant->getKey('ASA_DISTRICT')]['website']) ?>"><?= htmlspecialchars($districts[$tenant->getKey('ASA_DISTRICT')]['name']) ?></a></li>
+                <li><a title="<?= htmlspecialchars($counties[$tenant->getKey('ASA_COUNTY')]['title']) ?>" target="_blank" href="<?= htmlspecialchars($counties[$tenant->getKey('ASA_COUNTY')]['website']) ?>"><?= htmlspecialchars($counties[$tenant->getKey('ASA_COUNTY')]['name']) ?></a></li>
+                <?php if ($tenant->getKey('CLUB_WEBSITE')) { ?>
+                  <li><a title="<?= htmlspecialchars($tenant->getKey('CLUB_NAME')) ?> Website" target="_blank" href="<?= htmlspecialchars($tenant->getKey('CLUB_WEBSITE')) ?>"><?= htmlspecialchars($tenant->getKey('CLUB_NAME')) ?></a></li>
                 <?php } ?>
               </ul>
 
@@ -111,15 +111,16 @@ $logos = $tenant->getKey('LOGO_DIR')
           </div>
         </div>
       </div>
-
-      <hr class="border border-white mt-1 mb-4 border-5">
-
+    </div>
+  </div>
+  <div class="cls-global-footer-legal">
+    <div class="<?php if (isset($this->fluidContainer) && $this->fluidContainer == true) { ?>container-fluid<?php } else { ?>container<?php } ?>">
       <div class="row align-items-center">
         <div class="col-sm-auto source-org vcard copyright">
           <div class="row no-gutters">
             <div class="col-auto">
-              <a href="https://myswimmingclub.uk" target="_self" title="Swimming Club Data Systems Website">
-                <img src="<?= url("/img/corporate/scds.png") ?>" width="100">
+              <a href="https://myswimmingclub.uk" target="_blank" title="Swimming Club Data Systems Website">
+                <img src="<?= url("img/corporate/scds.png") ?>" width="100">
               </a>
               <div class="d-block d-sm-none mb-3"></div>
             </div>
@@ -136,24 +137,24 @@ $logos = $tenant->getKey('LOGO_DIR')
         <div class="col">
 
           <?php
-          global $time_start;
           $time_end = microtime(true);
 
-          $seconds = $time_end - $time_start;
+          $seconds = $time_end - LARAVEL_START;
           ?>
           <p class="hidden-print mb-1">
-            Membership is designed and built by <a class="text-white" href="https://www.myswimmingclub.uk" target="_blank">Swimming Club Data Systems</a>. Licenced to <?= htmlspecialchars(nezamy_app()->tenant->getKey('CLUB_NAME')) ?>.
+            Membership is designed and built by <a class="text-white" href="https://www.myswimmingclub.uk" target="_blank">Swimming Club Data Systems</a>. Licenced to <?= htmlspecialchars($tenant->getKey('CLUB_NAME')) ?>.
           </p>
           <p class="mb-1">Page rendered in <?= number_format($seconds, 3) ?> seconds. <?php if (defined('SOFTWARE_VERSION')) { ?>Software version <?= mb_substr(SOFTWARE_VERSION, 0, 7); ?>.<?php } ?>
           </p>
           <p class="mb-0">
-            &copy; <?= $time->format('Y') ?> <span class="org fn">Swimming Club Data Systems</span>.
+            &copy; <?= $time->format('Y') ?> <span class="org fn">Swimming Club Data Systems</span>. Swimming Club Data Systems is not responsible
+            for the content of external sites.
           </p>
         </div>
       </div>
     </div>
   </div><!-- /.container -->
-  <div id="app-js-info" data-root="<?= htmlspecialchars(autoUrl("")) ?>" data-check-login-url="<?= htmlspecialchars(autoUrl("check-login.json")) ?>" data-service-worker-url="<?= htmlspecialchars(url("sw.js")) ?>"></div>
+  <div id="app-js-info" data-root="<?= htmlspecialchars(autoUrl("")) ?>" data-check-login-url="<?= htmlspecialchars(autoUrl("check-login.json")) ?>" data-service-worker-url="<?= htmlspecialchars(autoUrl("sw.js")) ?>"></div>
 </footer>
 
 <!-- Modals and Other Hidden HTML -->

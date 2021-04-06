@@ -53,7 +53,7 @@ $sql->execute([$id]);
 $payment_info = $sql->fetch(PDO::FETCH_ASSOC);
 $name = getUserName($payment_info['UserID']);
 
-$use_white_background = true;
+
 $PMKey = null;
 if ($payment_info['PMKey'] != null) {
   $PMKey = mb_strtoupper($payment_info['PMKey']);

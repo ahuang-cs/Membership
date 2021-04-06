@@ -16,7 +16,7 @@ $getRenewals->execute([
 ]);
 $row = $getRenewals->fetch(PDO::FETCH_ASSOC);
 
-$use_white_background = true;
+
 $pagetitle = "Membership Renewal";
 include BASE_PATH . "views/header.php";
 include BASE_PATH . "views/swimmersMenu.php";

@@ -36,7 +36,7 @@ if ($swimmer['XP'] == 2) {
 }
 
 $pagetitle = "Trial Request - " . htmlspecialchars($swimmer['First'] . ' ' . $swimmer['Last']);
-$use_white_background = true;
+
 
 $query = $db->prepare("SELECT SquadID, SquadName FROM squads WHERE Tenant = ? ORDER BY SquadFee DESC, SquadName ASC");
 $query->execute([

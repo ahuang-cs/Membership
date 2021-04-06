@@ -25,7 +25,7 @@ $swimmers = $query->fetchAll();
 $selected = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['AC-TC-Selected'];
 
 $pagetitle = "Membership Terms";
-$use_white_background = true;
+
 
 include BASE_PATH . 'views/header.php';
 

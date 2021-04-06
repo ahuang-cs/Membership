@@ -1,7 +1,7 @@
 <?php
 
 $pagetitle = "Request a Trial Form";
-$use_white_background = true;
+
 $use_website_menu = true;
 
 include BASE_PATH . 'views/header.php';

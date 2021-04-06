@@ -3,7 +3,7 @@
 $db = nezamy_app()->db;
 
 $url_path = "payments";
-if ($renewal_trap) {
+if (isset($renewal_trap) && $renewal_trap) {
 	$url_path = "renewal/payments";
 }
 

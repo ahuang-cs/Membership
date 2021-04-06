@@ -10,7 +10,7 @@ if ($query->fetchColumn() != 1) {
 }
 
 $pagetitle = "Verify your email address";
-$use_white_background = true;
+
 
 include BASE_PATH . 'views/header.php';
 

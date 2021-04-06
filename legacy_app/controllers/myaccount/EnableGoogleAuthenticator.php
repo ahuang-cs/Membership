@@ -11,7 +11,7 @@ if (filter_var(getUserOption($_SESSION['TENANT-' . nezamy_app()->tenant->getId()
   $secretKey = getUserOption($_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID'], "GoogleAuth2FASecret");
 }
 
-$use_white_background = true;
+
 $pagetitle = "Google Authenticator";
 
 include BASE_PATH . 'views/header.php';

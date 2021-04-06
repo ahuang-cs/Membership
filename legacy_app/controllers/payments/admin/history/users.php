@@ -8,7 +8,7 @@ if (!$name) {
 	halt(404);
 }
 
-$use_white_background = true;
+
 $user = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID'];
 $pagetitle = htmlspecialchars($name) . "'s Transaction History";
 

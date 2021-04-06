@@ -32,7 +32,7 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
-            - 'sailmysql:/var/lib/mariadb'
+            - 'sailmariadb:/var/lib/mysql'
         networks:
             - sail
         healthcheck:
@@ -82,7 +82,7 @@ networks:
     sail:
         driver: bridge
 volumes:
-    sailmysql:
+    sailmariadb:
         driver: local
     sailredis:
         driver: local

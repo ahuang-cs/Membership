@@ -14,7 +14,7 @@ $getPayments->execute([
 
 $date = strtotime($year . "-" . $month . "-01");
 
-$use_white_background = true;
+
 
 $user = $_SESSION['TENANT-' . nezamy_app()->tenant->getId()]['UserID'];
 $pagetitle = htmlspecialchars(date("F Y", $date)) . " Payments";

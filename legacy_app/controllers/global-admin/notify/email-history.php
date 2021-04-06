@@ -2,7 +2,7 @@
 
 $db = nezamy_app()->db;
 
-$use_white_background = true;
+
 
 $start = 0;
 

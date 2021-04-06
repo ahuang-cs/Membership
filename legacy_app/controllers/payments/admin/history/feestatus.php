@@ -20,7 +20,7 @@ $name_type = null;
 $title_string = null;
 
 $fluidContainer = true;
-$use_white_background = true;
+
 
 $dateString = date("F Y", strtotime($year . "-" . $month));
 
