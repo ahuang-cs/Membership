@@ -14,7 +14,7 @@ class LegacyAppServiceProvider extends ServiceProvider
 
       // here are the contents of the legacy index.php:
       require_once base_path() . "/legacy_app/index.php";
-      return $app;
+      return $nezamyApp;
     });
   }
 }

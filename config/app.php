@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'en-GB',
 
     /*
     |--------------------------------------------------------------------------
@@ -174,6 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TenancyServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
         App\Providers\LegacyAppServiceProvider::class,
 
     ],
@@ -217,7 +219,7 @@ return [
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        // 'Redis' => Illuminate\Support\Facades\Redis::class,
+        'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,

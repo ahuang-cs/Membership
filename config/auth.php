@@ -67,7 +67,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
+            'driver' => 'scds-t',
             'model' => App\Models\User::class,
         ],
 

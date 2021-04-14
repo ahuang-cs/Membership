@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b9b9479e204175429e49b0777c0135a",
+    "content-hash": "9f5eb4e1dce68d3280ba8d845159ee76",
     "packages": [
         {
             "name": "adoy/oauth2",
@@ -105,6 +105,96 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "aws/aws-sdk-php",
+            "version": "3.178.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "cfeed02f14b0fb3cba8bb75f2ae28cb8c9807369"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cfeed02f14b0fb3cba8bb75f2ae28cb8c9807369",
+                "reference": "cfeed02f14b0fb3cba8bb75f2ae28cb8c9807369",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-simplexml": "*",
+                "guzzlehttp/guzzle": "^5.3.3|^6.2.1|^7.0",
+                "guzzlehttp/promises": "^1.4.0",
+                "guzzlehttp/psr7": "^1.7.0",
+                "mtdowling/jmespath.php": "^2.6",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "andrewsville/php-token-reflection": "^1.4",
+                "aws/aws-php-sns-message-validator": "~1.0",
+                "behat/behat": "~3.0",
+                "doctrine/cache": "~1.4",
+                "ext-dom": "*",
+                "ext-openssl": "*",
+                "ext-pcntl": "*",
+                "ext-sockets": "*",
+                "nette/neon": "^2.3",
+                "paragonie/random_compat": ">= 2",
+                "phpunit/phpunit": "^4.8.35|^5.4.3",
+                "psr/cache": "^1.0",
+                "psr/simple-cache": "^1.0",
+                "sebastian/comparator": "^1.2.3"
+            },
+            "suggest": {
+                "aws/aws-php-sns-message-validator": "To validate incoming SNS notifications",
+                "doctrine/cache": "To use the DoctrineCacheAdapter",
+                "ext-curl": "To send requests using cURL",
+                "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
+                "ext-sockets": "To use client-side monitoring"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aws\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Amazon Web Services",
+                    "homepage": "http://aws.amazon.com"
+                }
+            ],
+            "description": "AWS SDK for PHP - Use Amazon Web Services in your PHP project",
+            "homepage": "http://aws.amazon.com/sdkforphp",
+            "keywords": [
+                "amazon",
+                "aws",
+                "cloud",
+                "dynamodb",
+                "ec2",
+                "glacier",
+                "s3",
+                "sdk"
+            ],
+            "support": {
+                "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
+                "issues": "https://github.com/aws/aws-sdk-php/issues",
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.178.3"
+            },
+            "time": "2021-04-13T18:16:44+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -1182,6 +1272,59 @@
                 "source": "https://github.com/erusev/parsedown-extra/tree/master"
             },
             "time": "2015-11-01T10:19:22+00:00"
+        },
+        {
+            "name": "facade/ignition-contracts",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facade/ignition-contracts.git",
+                "reference": "3c921a1cdba35b68a7f0ccffc6dffc1995b18267"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facade/ignition-contracts/zipball/3c921a1cdba35b68a7f0ccffc6dffc1995b18267",
+                "reference": "3c921a1cdba35b68a7f0ccffc6dffc1995b18267",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^v2.15.8",
+                "phpunit/phpunit": "^9.3.11",
+                "vimeo/psalm": "^3.17.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Facade\\IgnitionContracts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://flareapp.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Solution contracts for Ignition",
+            "homepage": "https://github.com/facade/ignition-contracts",
+            "keywords": [
+                "contracts",
+                "flare",
+                "ignition"
+            ],
+            "support": {
+                "issues": "https://github.com/facade/ignition-contracts/issues",
+                "source": "https://github.com/facade/ignition-contracts/tree/1.0.2"
+            },
+            "time": "2020-10-16T08:27:54+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -2340,6 +2483,64 @@
             "time": "2021-03-02T16:53:12+00:00"
         },
         {
+            "name": "laravel/ui",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "a1f82c6283c8373ea1958b8a27c3d5c98cade351"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/a1f82c6283c8373ea1958b8a27c3d5c98cade351",
+                "reference": "a1f82c6283c8373ea1958b8a27c3d5c98cade351",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.0",
+                "illuminate/filesystem": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/",
+                    "Illuminate\\Foundation\\Auth\\": "auth-backend/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/ui/issues",
+                "source": "https://github.com/laravel/ui/tree/v3.2.0"
+            },
+            "time": "2021-01-06T19:20:22+00:00"
+        },
+        {
             "name": "lcobucci/clock",
             "version": "2.0.0",
             "source": {
@@ -3077,6 +3278,67 @@
                 }
             ],
             "time": "2020-12-14T13:15:25+00:00"
+        },
+        {
+            "name": "mtdowling/jmespath.php",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jmespath/jmespath.php.git",
+                "reference": "42dae2cbd13154083ca6d70099692fef8ca84bfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/42dae2cbd13154083ca6d70099692fef8ca84bfb",
+                "reference": "42dae2cbd13154083ca6d70099692fef8ca84bfb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0 || ^8.0",
+                "symfony/polyfill-mbstring": "^1.17"
+            },
+            "require-dev": {
+                "composer/xdebug-handler": "^1.4",
+                "phpunit/phpunit": "^4.8.36 || ^7.5.15"
+            },
+            "bin": [
+                "bin/jp.php"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JmesPath\\": "src/"
+                },
+                "files": [
+                    "src/JmesPath.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Declaratively specify how to extract elements from a JSON document",
+            "keywords": [
+                "json",
+                "jsonpath"
+            ],
+            "support": {
+                "issues": "https://github.com/jmespath/jmespath.php/issues",
+                "source": "https://github.com/jmespath/jmespath.php/tree/2.6.0"
+            },
+            "time": "2020-07-31T21:01:56+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -4605,6 +4867,178 @@
                 "source": "https://github.com/soundasleep/html2text/tree/master"
             },
             "time": "2019-02-15T01:44:54+00:00"
+        },
+        {
+            "name": "stancl/jobpipeline",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stancl/jobpipeline.git",
+                "reference": "906caa0872dc1b377b449832961598c09a42adb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stancl/jobpipeline/zipball/906caa0872dc1b377b449832961598c09a42adb2",
+                "reference": "906caa0872dc1b377b449832961598c09a42adb2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.11|^8.0"
+            },
+            "require-dev": {
+                "ext-redis": "*",
+                "orchestra/testbench": "^4.0|^5.2|^6.0",
+                "spatie/valuestore": "^1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stancl\\JobPipeline\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Štancl",
+                    "email": "samuel.stancl@gmail.com"
+                }
+            ],
+            "description": "Turn any series of jobs into Laravel listeners.",
+            "support": {
+                "issues": "https://github.com/stancl/jobpipeline/issues",
+                "source": "https://github.com/stancl/jobpipeline/tree/v1.5.0"
+            },
+            "time": "2020-11-15T15:11:12+00:00"
+        },
+        {
+            "name": "stancl/tenancy",
+            "version": "v3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stancl/tenancy.git",
+                "reference": "27e9fb4a692a15ca2fd320799d97fc657cb14b68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stancl/tenancy/zipball/27e9fb4a692a15ca2fd320799d97fc657cb14b68",
+                "reference": "27e9fb4a692a15ca2fd320799d97fc657cb14b68",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "facade/ignition-contracts": "^1.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "ramsey/uuid": "^3.7|^4.0",
+                "stancl/jobpipeline": "^1.0",
+                "stancl/virtualcolumn": "^1.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.10",
+                "laravel/framework": "^6.0|^7.0|^8.0",
+                "league/flysystem-aws-s3-v3": "~1.0",
+                "orchestra/testbench-browser-kit": "^4.0|^5.0|^6.0",
+                "spatie/valuestore": "^1.2.5",
+                "vlucas/phpdotenv": "^3.3|^4.0|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Stancl\\Tenancy\\TenancyServiceProvider"
+                    ],
+                    "aliases": {
+                        "Tenancy": "Stancl\\Tenancy\\Facades\\Tenancy",
+                        "GlobalCache": "Stancl\\Tenancy\\Facades\\GlobalCache"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stancl\\Tenancy\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Štancl",
+                    "email": "samuel.stancl@gmail.com"
+                }
+            ],
+            "description": "Automatic multi-tenancy for your Laravel application.",
+            "keywords": [
+                "laravel",
+                "multi-database",
+                "multi-tenancy",
+                "tenancy"
+            ],
+            "support": {
+                "issues": "https://github.com/stancl/tenancy/issues",
+                "source": "https://github.com/stancl/tenancy/tree/v3.4.2"
+            },
+            "funding": [
+                {
+                    "url": "https://tenancyforlaravel.com/donate",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/stancl",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-03-10T11:08:51+00:00"
+        },
+        {
+            "name": "stancl/virtualcolumn",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stancl/virtualcolumn.git",
+                "reference": "cdec7c6ade3cb3a599e69e407b876d73d115b737"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stancl/virtualcolumn/zipball/cdec7c6ade3cb3a599e69e407b876d73d115b737",
+                "reference": "cdec7c6ade3cb3a599e69e407b876d73d115b737",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0|^7.11|^8.0",
+                "illuminate/support": "^6.0|^7.11|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^5.2|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stancl\\VirtualColumn\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Štancl",
+                    "email": "samuel.stancl@gmail.com"
+                }
+            ],
+            "description": "Eloquent virtual column.",
+            "support": {
+                "issues": "https://github.com/stancl/virtualcolumn/issues",
+                "source": "https://github.com/stancl/virtualcolumn/tree/v1.1.0"
+            },
+            "time": "2020-09-08T16:49:16+00:00"
         },
         {
             "name": "starkbank/ecdsa",
@@ -8232,59 +8666,6 @@
                 "source": "https://github.com/facade/ignition"
             },
             "time": "2021-03-04T08:48:01+00:00"
-        },
-        {
-            "name": "facade/ignition-contracts",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facade/ignition-contracts.git",
-                "reference": "3c921a1cdba35b68a7f0ccffc6dffc1995b18267"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition-contracts/zipball/3c921a1cdba35b68a7f0ccffc6dffc1995b18267",
-                "reference": "3c921a1cdba35b68a7f0ccffc6dffc1995b18267",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v2.15.8",
-                "phpunit/phpunit": "^9.3.11",
-                "vimeo/psalm": "^3.17.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Facade\\IgnitionContracts\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://flareapp.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Solution contracts for Ignition",
-            "homepage": "https://github.com/facade/ignition-contracts",
-            "keywords": [
-                "contracts",
-                "flare",
-                "ignition"
-            ],
-            "support": {
-                "issues": "https://github.com/facade/ignition-contracts/issues",
-                "source": "https://github.com/facade/ignition-contracts/tree/1.0.2"
-            },
-            "time": "2020-10-16T08:27:54+00:00"
         },
         {
             "name": "fakerphp/faker",

@@ -6,10 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, BelongsToTenant;
+
+    protected $primaryKey = 'UserID';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +22,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'Forename',
+        'Surname',
+        'EmailAddress',
+        'Password',
     ];
 
     /**
@@ -28,8 +34,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'Password',
+//        'remember_token',
     ];
 
     /**
@@ -38,6 +44,46 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+//        'email_verified_at' => 'datetime',
     ];
+
+    public function getListFormatName()
+    {
+        return $this->Forename . ' ' . $this->Surname;
+//        return $this->Forename . ' ' . Str::upper($this->Surname);
+//        return Str::upper($this->Surname) . ', ' . $this->Forename;
+//        return $this->Surname . ', ' . $this->Forename;
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return $this->primaryKey;
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->UserID;
+    }
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->Password;
+    }
+
+    public function getRememberToken()
+    {
+    }
+
+    public function setRememberToken($value)
+    {
+    }
+
+    public function getRememberTokenName()
+    {
+    }
 }

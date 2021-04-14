@@ -48,11 +48,13 @@ use Symfony\Component\DomCrawler\Crawler;
 use GeoIp2\Database\Reader;
 
 require "classes/system/function.php";
-$app            = System\App::instance();
-$app->request   = System\Request::instance();
-$app->route     = System\Route::instance($app->request);
+ddd($app);
 
-$route          = $app->route;
+$nezamyApp            = System\App::instance();
+$nezamyApp->request   = System\Request::instance();
+$nezamyApp->route     = System\Route::instance($nezamyApp->request);
+
+$route          = $nezamyApp->route;
 
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
@@ -187,6 +189,8 @@ try {
 }
 
 nezamy_app()->db = $db;
+
+//pre();
 
 if (!isset($_SESSION['SCDS-SuperUser']) && isset($_COOKIE[COOKIE_PREFIX . 'SUPERUSER-AutoLogin']) && $_COOKIE[COOKIE_PREFIX . 'SUPERUSER-AutoLogin'] != "") {
 
