@@ -520,6 +520,10 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
     include BASE_PATH . 'controllers/covid/router.php';
   });
 
+  $this->group('/api', function () {
+    include BASE_PATH . 'controllers/api/api.php';
+  });
+
   $this->group('/squads', function () {
     include BASE_PATH . 'controllers/squads/router.php';
   });
