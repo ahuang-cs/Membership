@@ -90,7 +90,7 @@ class Session
   private function loadMembers()
   {
     $db = app()->db;
-    $getMembers = $db->prepare("SELECT MemberID, MForename, MSurname FROM members INNER JOIN onboardingMembers ON members.MemberID = onboardingMembers.member WHERE `session` = ? AND `UserID` = ? ORDER BY MemberID ASC");
+    $getMembers = $db->prepare("SELECT MemberID, MForename, MSurname FROM members INNER JOIN onboardingMembers ON members.MemberID = onboardingMembers.member WHERE `session` = ? AND `UserID` = ? AND members.Active ORDER BY MemberID ASC");
     $getMembers->execute([
       $this->id,
       $this->user,
