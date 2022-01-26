@@ -88,6 +88,11 @@ $logos = $tenant->getKey('LOGO_DIR')
                   </a>
                 </li>
                 <li>
+                  <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=eUyplshmHU2mMHhet4xottqTRsfDlXxPnyldf9tMT9ZUODZRTFpFRzJWOFpQM1pLQ0hDWUlXRllJVS4u" target="_blank" title="Report email abuse">
+                    Report mail abuse
+                  </a>
+                </li>
+                <li>
                   <a href="https://github.com/Chester-le-Street-ASC/Membership" target="_blank" title="Membership by CLSASC on GitHub">
                     GitHub
                   </a>
@@ -174,6 +179,10 @@ $script = autoUrl(getCompiledAsset('main.js'), false);
   <?php foreach ($this->js as $script) { ?>
     <script <?php if ($script['module']) { ?>type="module" <?php } ?> src="<?= htmlspecialchars($script['url']) ?>"></script>
   <?php } ?>
+<?php } ?>
+
+<?php if (!bool(getenv('IS_DEV'))) { ?>
+  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "579ac2dc2ea54799918144a5e7d894ef"}'></script><!-- End Cloudflare Web Analytics -->
 <?php } ?>
 
 </body>

@@ -162,11 +162,6 @@ $this->post('/check-login.json', function () {
   echo json_encode(['signed_in' => isset($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn']) && bool($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])]);
 });
 
-$this->get('/robots.txt', function () {
-  header("Content-Type: text/plain");
-  echo "User-agent: *\r\nDisallow: /webhooks/\r\nDisallow: /webhooks\r\nDisallow: /css\r\nDisallow: /js\r\nDisallow: /public\r\nDisallow: /files";
-});
-
 $this->get('/public/css/colour.css', function () {
   require BASE_PATH . 'public/css/colour.css';
 });
@@ -388,10 +383,6 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
 
   //   include BASE_PATH . 'controllers/registration/RegAuth.php';
   // });
-
-  $this->group('/assisted-registration', function () {
-    include BASE_PATH . 'controllers/assisted-registration/setup/router.php';
-  });
 
   // Locked Out Password Reset
   $this->get('/resetpassword', function () {
@@ -640,12 +631,11 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
   });
 
   $this->group('/assisted-registration', function () {
-    include BASE_PATH . 'controllers/assisted-registration/router.php';
+    $this->get(['/', '/*'], function () {
+      http_response_code(302);
+      header("location: " . autoUrl("onboarding/new"));
+    });
   });
-
-  // $this->group('/registration-and-renewal', function () {
-  //   include BASE_PATH . 'controllers/registration-and-renewal/router.php';
-  // });
 
   $this->group('/resources', function () {
     include BASE_PATH . 'controllers/resources/router.php';

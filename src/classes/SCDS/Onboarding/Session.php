@@ -90,7 +90,7 @@ class Session
   private function loadMembers()
   {
     $db = app()->db;
-    $getMembers = $db->prepare("SELECT MemberID, MForename, MSurname FROM members INNER JOIN onboardingMembers ON members.MemberID = onboardingMembers.member WHERE `session` = ? AND `UserID` = ? ORDER BY MemberID ASC");
+    $getMembers = $db->prepare("SELECT MemberID, MForename, MSurname FROM members INNER JOIN onboardingMembers ON members.MemberID = onboardingMembers.member WHERE `session` = ? AND `UserID` = ? AND members.Active ORDER BY MemberID ASC");
     $getMembers->execute([
       $this->id,
       $this->user,
@@ -119,12 +119,18 @@ class Session
 
   public function getUser()
   {
-    return new \User($this->user);
+    if ($this->user) {
+      return new \User($this->user);
+    }
+    return null;
   }
 
   public function getCreator()
   {
-    return new \User($this->creator);
+    if ($this->creator) {
+      return new \User($this->creator);
+    }
+    return null;
   }
 
   private function getUrl()
