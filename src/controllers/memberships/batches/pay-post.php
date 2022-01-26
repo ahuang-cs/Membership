@@ -37,7 +37,10 @@ try {
     header("Location: " . $checkoutSession->getUrl());
   } else if ($batchPay->type == 'dd') {
 
-    \SCDS\Memberships\Batch::completeBatch($id, $batchPay);
+    \SCDS\Memberships\Batch::completeBatch($id, json_encode([
+      'type' => 'direct_debit',
+      'data' => []
+    ]));
 
     http_response_code(302);
     header("Location: " . autoUrl('memberships/batches/' . $id));
