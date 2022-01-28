@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
-import Header from '../../components/Header';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import ToRow from '../components/ToRow';
+import Header from "../../components/Header.js";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import ToRow from "../components/ToRow";
 import DropdownRow from "../components/DropdownRow";
 import TextRow from "../components/TextRow";
 import Modal from "react-bootstrap/Modal";
@@ -14,31 +14,32 @@ import Placeholder from "react-bootstrap/Placeholder";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import Dropzone from "../components/Dropzone";
-import Accordion from "react-bootstrap/Accordion"
+import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, Navigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
+import * as tenantFunctions from "../../classes/Tenant";
 // import exports from "enhanced-resolve";
 
 export class Composer extends React.Component {
 
   constructor() {
     super();
-    document.title = 'Notify Composer';
+    document.title = "Notify Composer";
     this.editor = React.createRef();
     this.state = {
       loaded: false,
 
-      from: 'asClub',
-      replyTo: 'toClub',
+      from: "asClub",
+      replyTo: "toClub",
       subject: "",
       attachments: [],
       message: "",
       forceSend: false,
       canForceSend: false,
       sendToCoaches: true,
-      category: 'DEFAULT',
+      category: "DEFAULT",
 
       // Modals
       showTo: false,
@@ -56,10 +57,10 @@ export class Composer extends React.Component {
       documentBaseUrl: null,
       imagesUploadUrl: null,
       tinyMceCssLocation: null,
-      editorValue: '',
+      editorValue: "",
 
       // Tabs
-      tabKey: 'editor',
+      tabKey: "editor",
 
       // Dropzone
       emailUuid: null,
@@ -75,15 +76,15 @@ export class Composer extends React.Component {
       disableSettingsSave: false,
 
       settings: {
-        replyEmailAddress: '',
-        defaultReplyTo: 'toClub',
-        defaultSendAs: 'asClub'
+        replyEmailAddress: "",
+        defaultReplyTo: "toClub",
+        defaultSendAs: "asClub"
       }
-    }
+    };
   }
 
   componentDidMount() {
-    axios.get('/notify/new/react-data')
+    axios.get("/notify/new/react-data")
       .then(response => {
         let data = response.data;
         this.setState({
@@ -101,21 +102,21 @@ export class Composer extends React.Component {
           from: data.settings.defaultSendAs,
           replyTo: data.settings.defaultReplyTo,
           settings: data.settings,
-        })
+        });
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }
 
   handlePillClick = (event, data) => {
     this.handleTosChangeBackend(data.type, data.key, false);
-  }
+  };
 
   handleChange = (event) => {
     // Update state
     const { name, value, type, checked } = event.target;
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       this.setState({
         [name]: checked,
       });
@@ -124,12 +125,12 @@ export class Composer extends React.Component {
         [name]: value,
       });
     }
-  }
+  };
 
   handleSettingsChange = (event) => {
     // Update state
     const { name, value, type, checked } = event.target;
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       this.setState(prevState => ({
         ...prevState,
         settings: {
@@ -148,19 +149,19 @@ export class Composer extends React.Component {
       })
       );
     }
-  }
+  };
 
   handleShowTo = (event) => {
     this.setState({
       showTo: true,
     });
-  }
+  };
 
   handleCloseTo = (event) => {
     this.setState({
       showTo: false,
     });
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -178,12 +179,12 @@ export class Composer extends React.Component {
     this.setState({
       validated: true,
     });
-  }
+  };
 
   handleConfirmSend = (event) => {
     this.setState({
       disableSendConfirm: true,
-    })
+    });
 
     const list = this.getGroupList();
     let recipients = {};
@@ -194,7 +195,7 @@ export class Composer extends React.Component {
       }
     });
 
-    axios.post('/notify/send-email', {
+    axios.post("/notify/send-email", {
       state: this.state,
       recipients,
     })
@@ -210,27 +211,27 @@ export class Composer extends React.Component {
         console.warn(error);
         this.setState({
           disableSendConfirm: false,
-        })
+        });
       });
-  }
+  };
 
   handleConfirmSendClose = (event) => {
     this.setState({
       showConfirmSendDialog: false,
     });
-  }
+  };
 
   setAttachments = (attachments) => {
     this.setState({
       attachments
     });
-  }
+  };
 
   setCanSubmitAttachments = (state) => {
     this.setState({
       canSubmitAttachments: state,
     });
-  }
+  };
 
   handleTosChange = (event, type) => {
     const { name, checked } = event.target;
@@ -258,7 +259,7 @@ export class Composer extends React.Component {
     //   },
     // })
     // )
-  }
+  };
 
   handleTosChangeBackend = (type, name, checked) => {
     const groups = [...this.state.possibleTos[type].groups];
@@ -273,7 +274,7 @@ export class Composer extends React.Component {
               return {
                 ...data,
                 state: checked,
-              }
+              };
             } else {
               return { ...data };
             }
@@ -282,31 +283,31 @@ export class Composer extends React.Component {
       },
     })
     );
-  }
+  };
 
   handleSquadTosChange = (event) => {
-    this.handleTosChange(event, 'squads');
-  }
+    this.handleTosChange(event, "squads");
+  };
 
   handleListTosChange = (event) => {
-    this.handleTosChange(event, 'lists');
-  }
+    this.handleTosChange(event, "lists");
+  };
 
   handleGalaTosChange = (event) => {
-    this.handleTosChange(event, 'galas');
-  }
+    this.handleTosChange(event, "galas");
+  };
 
   handleDemoOpen = (event) => {
     this.setState({
       showDemoSubmission: true
     });
-  }
+  };
 
   handleDemoClose = (event) => {
     this.setState({
       showDemoSubmission: false
     });
-  }
+  };
 
   handleForceSendChange = (event) => {
     if (event.target.checked) {
@@ -318,39 +319,39 @@ export class Composer extends React.Component {
         forceSend: false
       });
     }
-  }
+  };
 
   handleForceSendClose = (event) => {
     this.setState({
       showForceSendWarning: false
     });
-  }
+  };
 
   handleForceSendConfirm = (event) => {
     this.setState({
       showForceSendWarning: false,
       forceSend: true,
     });
-  }
+  };
 
   handleSettingsOpen = (event) => {
     this.setState({
       showUserSettingsDialog: true
     });
-  }
+  };
 
   handleSettingsClose = (event) => {
     this.setState({
       showUserSettingsDialog: false
     });
-  }
+  };
 
   handleSettingsSave = (event) => {
     this.setState({
       disableSettingsSave: true,
     });
 
-    axios.post('/notify/save-user-settings', {
+    axios.post("/notify/save-user-settings", {
       ...this.state.settings
     })
       .then(response => {
@@ -367,12 +368,12 @@ export class Composer extends React.Component {
         this.setState({
           disableSettingsSave: false,
         });
-      })
-  }
+      });
+  };
 
   getGroupList = () => {
     return [...this.state.possibleTos.squads.groups, ...this.state.possibleTos.lists.groups, ...this.state.possibleTos.galas.groups];
-  }
+  };
 
   getToListCount = () => {
     let count = 0;
@@ -383,14 +384,16 @@ export class Composer extends React.Component {
       }
     }
     return count;
-  }
+  };
 
   renderPreview = () => {
+    tenantFunctions.setTitle("Notify Composer");
+
     const attachments = this.state.attachments.map((data, idx) => {
       return (
-        <li key={data.s3_key}><a href={'/files/' + data.url} target="_blank">{data.filename}</a></li>
-      )
-    })
+        <li key={data.s3_key}><a href={"/files/" + data.url} target="_blank" rel="noreferrer">{data.filename}</a></li>
+      );
+    });
 
     return (
       <>
@@ -420,8 +423,8 @@ export class Composer extends React.Component {
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   render() {
     const breadcrumbs = (
@@ -445,7 +448,7 @@ export class Composer extends React.Component {
               name={data.key}
             />
           </Col>
-        )
+        );
       });
 
       targetedLists = this.state.possibleTos.lists.groups.map(data => {
@@ -460,7 +463,7 @@ export class Composer extends React.Component {
               name={data.key}
             />
           </Col>
-        )
+        );
       });
 
       galaEntrants = this.state.possibleTos.galas.groups.map(data => {
@@ -475,7 +478,7 @@ export class Composer extends React.Component {
               name={data.key}
             />
           </Col>
-        )
+        );
       });
     }
 
@@ -515,68 +518,68 @@ export class Composer extends React.Component {
                     <Editor
                       tinymceScriptSrc="/js/tinymce/5/tinymce.min.js"
                       onInit={(evt, editor) => this.editor.current = editor}
-                      onEditorChange={(value, editor) => { this.setState({ editorValue: value }) }}
+                      onEditorChange={(value, editor) => { this.setState({ editorValue: value }); }}
                       // initialValue={this.state.editorValue}
                       init={{
                         skin: (window.matchMedia("(prefers-color-scheme: dark)").matches ? "oxide-dark" : ""),
                         relative_urls: false,
                         remove_script_host: false,
                         document_base_url: document.documentURI,
-                        selector: '#message',
-                        images_upload_url: '/notify/new/image-upload',
+                        selector: "#message",
+                        images_upload_url: "/notify/new/image-upload",
                         automatic_uploads: true,
                         images_upload_credentials: true,
                         branding: false,
                         plugins: [
-                          'autolink lists link image charmap print preview anchor',
-                          'searchreplace visualblocks code autoresize insertdatetime media table',
-                          'paste help wordcount'
+                          "autolink lists link image charmap print preview anchor",
+                          "searchreplace visualblocks code autoresize insertdatetime media table",
+                          "paste help wordcount"
                         ],
                         statusbar: false,
                         paste_as_text: true,
-                        toolbar: 'insert | undo redo |  formatselect | bold italic underline | bullist numlist outdent indent | removeformat | help',
-                        content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
-                        fontsize_formats: '12pt',
-                        font_formats: 'Default=system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";',
+                        toolbar: "insert | undo redo |  formatselect | bold italic underline | bullist numlist outdent indent | removeformat | help",
+                        content_css: (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default"),
+                        fontsize_formats: "12pt",
+                        font_formats: "Default=system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\";",
                         style_formats: [
                           {
-                            title: 'Headings', items: [
-                              { title: 'Heading 1', format: 'h1' },
-                              { title: 'Heading 2', format: 'h2' },
-                              { title: 'Heading 3', format: 'h3' },
-                              { title: 'Heading 4', format: 'h4' },
-                              { title: 'Heading 5', format: 'h5' },
-                              { title: 'Heading 6', format: 'h6' }
+                            title: "Headings", items: [
+                              { title: "Heading 1", format: "h1" },
+                              { title: "Heading 2", format: "h2" },
+                              { title: "Heading 3", format: "h3" },
+                              { title: "Heading 4", format: "h4" },
+                              { title: "Heading 5", format: "h5" },
+                              { title: "Heading 6", format: "h6" }
                             ]
                           },
                           {
-                            title: 'Inline', items: [
-                              { title: 'Bold', format: 'bold' },
-                              { title: 'Italic', format: 'italic' },
-                              { title: 'Underline', format: 'underline' },
-                              { title: 'Strikethrough', format: 'strikethrough' },
-                              { title: 'Superscript', format: 'superscript' },
-                              { title: 'Subscript', format: 'subscript' },
-                              { title: 'Code', format: 'code' }
+                            title: "Inline", items: [
+                              { title: "Bold", format: "bold" },
+                              { title: "Italic", format: "italic" },
+                              { title: "Underline", format: "underline" },
+                              { title: "Strikethrough", format: "strikethrough" },
+                              { title: "Superscript", format: "superscript" },
+                              { title: "Subscript", format: "subscript" },
+                              { title: "Code", format: "code" }
                             ]
                           },
                           {
-                            title: 'Blocks', items: [
-                              { title: 'Paragraph', format: 'p' },
-                              { title: 'Blockquote', format: 'blockquote' },
-                              { title: 'Div', format: 'div' },
-                              { title: 'Pre', format: 'pre' }
+                            title: "Blocks", items: [
+                              { title: "Paragraph", format: "p" },
+                              { title: "Blockquote", format: "blockquote" },
+                              { title: "Div", format: "div" },
+                              { title: "Pre", format: "pre" }
                             ]
                           }
                         ],
                         menu: {
-                          edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
-                          view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
-                          insert: { title: 'Insert', items: 'image link template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime' },
-                          format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats | removeformat' },
-                          tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | code wordcount' },
-                          table: { title: 'Table', items: 'inserttable | cell row column | tableprops deletetable' },
-                          help: { title: 'Help', items: 'help' }
+                          edit: { title: "Edit", items: "undo redo | cut copy paste | selectall | searchreplace" },
+                          view: { title: "View", items: "code | visualaid visualchars visualblocks | spellchecker | preview fullscreen" },
+                          insert: { title: "Insert", items: "image link template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor toc | insertdatetime" },
+                          format: { title: "Format", items: "bold italic underline strikethrough superscript subscript codeformat | formats blockformats | removeformat" },
+                          tools: { title: "Tools", items: "spellchecker spellcheckerlanguage | code wordcount" },
+                          table: { title: "Table", items: "inserttable | cell row column | tableprops deletetable" },
+                          help: { title: "Help", items: "help" }
                         },
 
                         //toolbar: "link",
@@ -585,7 +588,7 @@ export class Composer extends React.Component {
                   </div>
 
                   <p>
-                    <Button type="submit" variant="success" onSubmit={this.handleSubmit}>Send the email</Button> <Button variant="dark" onClick={() => { this.setState({ tabKey: 'preview' }) }}>Preview message</Button>
+                    <Button type="submit" variant="success" onSubmit={this.handleSubmit}>Send the email</Button> <Button variant="dark" onClick={() => { this.setState({ tabKey: "preview" }); }}>Preview message</Button>
                   </p>
                 </Tab>
                 <Tab eventKey="attachments" title="Attachments">
@@ -622,7 +625,7 @@ export class Composer extends React.Component {
                   <p>
                     <Button type="button" variant="primary" onClick={this.handleSettingsOpen}>
                       <i className="fa fa-cog" aria-hidden="true"></i> Change Settings
-                    </Button>{' '}
+                    </Button>{" "}
                     <Button type="button" variant="info" onClick={this.handleDemoOpen}>
                       Developer Info
                     </Button>
@@ -779,7 +782,7 @@ export class Composer extends React.Component {
           </>
         }
       </div>
-    )
+    );
   }
 }
 

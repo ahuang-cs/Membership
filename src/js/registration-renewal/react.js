@@ -1,1 +1,1 @@
-import '../../react-out/test';
+import "../../react-out/test";

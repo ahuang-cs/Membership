@@ -9,9 +9,9 @@ class ToRow extends React.Component {
       if (data.state) {
         return (
           <Pill key={data.key} data={data} handleClick={this.props.handleClick} />
-        )
+        );
       }
-    })
+    });
 
     let classes = ["form-control", "h-100"];
     if (this.props.validated && this.props.numTos === 0) {
@@ -37,7 +37,7 @@ class ToRow extends React.Component {
         </div>
         <label>Recipients</label>
       </div>
-    )
+    );
   }
 }
 

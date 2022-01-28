@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
-import Header from '../../components/Header';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Header from "../../components/Header";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Tabs from "react-bootstrap/Tabs";
@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import Placeholder from "react-bootstrap/Placeholder";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
-import Accordion from "react-bootstrap/Accordion"
+import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";

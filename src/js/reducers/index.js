@@ -1,8 +1,6 @@
-import { combineReducers } from 'redux'
-import GlobalSettings from './GlobalSettings'
+import { combineReducers } from "redux";
+import GlobalSettings from "./GlobalSettings";
 
-const allReducers = combineReducers({
+export default combineReducers({
   "SKIPCLEAR/GlobalSettings": GlobalSettings
 });
-
-export default allReducers;

@@ -8,8 +8,8 @@ export class NotFound extends React.Component {
   }
 
   componentDidMount = () => {
-    document.title = 'Error 404';
-  }
+    document.title = "Error 404";
+  };
 
   render = () => {
     return (
@@ -41,6 +41,6 @@ export class NotFound extends React.Component {
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 }

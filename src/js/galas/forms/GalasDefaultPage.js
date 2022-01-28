@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import ReactDOM from "react-dom";
-import Header from '../../components/Header';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Header from "../../components/Header.js";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Tabs from "react-bootstrap/Tabs";
