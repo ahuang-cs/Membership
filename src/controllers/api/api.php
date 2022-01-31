@@ -12,6 +12,10 @@ $this->group('/settings', function() {
   $this->get('/tenant', function() {
     include 'settings/tenant.php';
   });
+
+  $this->get('/user', function() {
+    include 'settings/user.php';
+  });
 });
 
 $this->group('/galas', function() {

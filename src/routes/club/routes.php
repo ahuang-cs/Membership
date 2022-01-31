@@ -263,10 +263,6 @@ $this->group('/views', function () {
   include BASE_PATH . 'views/routes/router.php';
 });
 
-$this->group('/about', function () {
-  include BASE_PATH . 'controllers/about/router.php';
-});
-
 $this->group('/ajax-utilities', function () {
   include BASE_PATH . 'controllers/ajax/router.php';
 });
@@ -363,6 +359,10 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
 
   $this->get('/login', function () {
     include BASE_PATH . 'views/Login.php';
+  });
+
+  $this->group('/about', function () {
+    include BASE_PATH . 'controllers/about/router.php';
   });
 
   // // Register

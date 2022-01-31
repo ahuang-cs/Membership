@@ -1,16 +1,16 @@
-const GlobalSettings = (state = {}, action) => {
+const Tenant = (state = {}, action) => {
   switch (action.type) {
-  case "ADD_TENANT_KEY":
+  case "ADD_TENANT_DETAIL":
     return {
       ...state,
       [action.key]: action.value
     };
-  case "ADD_TENANT_KEYS":
+  case "ADD_TENANT_DETAILS":
     return {
       ...state,
       ...action.payload,
     };
-  case "UPDATE_TENANT_KEY":
+  case "UPDATE_TENANT_DETAILS":
     return {
       ...state,
       [action.key]: action.value
@@ -20,4 +20,4 @@ const GlobalSettings = (state = {}, action) => {
   }
 };
 
-export default GlobalSettings;
+export default Tenant;

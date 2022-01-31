@@ -346,4 +346,13 @@ class User extends Person
 
     return $customer;
   }
+
+  public function getKey($key) {
+    return $this->getUserOption($key);
+  }
+
+  public function getBooleanKey($key) {
+    return $this->getUserBooleanOption($key);
+  }
+
 }

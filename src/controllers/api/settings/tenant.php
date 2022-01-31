@@ -11,6 +11,7 @@ $output = [];
 
 try {
 
+  $tenantKeyData = [];
   $keys = [
     'CLUB_NAME' => 'string',
     'CLUB_SHORT_NAME' => 'string',
@@ -39,8 +40,23 @@ try {
   foreach ($keys as $key => $type) {
     $var = $tenant->getkey($key);
     settype($var, $type);
-    $output[mb_strtolower($key)] = $var;
+    $tenantKeyData[mb_strtolower($key)] = $var;
   }
+
+  $output = [
+    'success' => true,
+    'keys' => $tenantKeyData,
+    'tenant' => [
+      'id' => $tenant->getId(),
+      'uuid' => $tenant->getUuid(),
+      'name' => $tenant->getName(),
+      'is_verified' => (boolean) $tenant->isVerified(),
+      'website' => $tenant->getWebsite(),
+      'hostname' => $tenant->getDomain(),
+      'name' => $tenant->getName(),
+      'swim_england_code' => $tenant->getCode(),
+    ]
+  ];
 
 } catch (Exception $e) {
   $output = [

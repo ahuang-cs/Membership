@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import * as tenantFunctions from "../classes/Tenant";
+import * as userFunctions from "../classes/User";
 import Card from "react-bootstrap/Card";
 
 const AboutReactApp = () => {
@@ -29,7 +30,7 @@ const AboutReactApp = () => {
             </p>
 
             <p>
-              This application is licensed to {tenantFunctions.getKey("club_name")} by SCDS.
+              This application is licensed to {tenantFunctions.getKey("club_name")} by SCDS. <a href="https://myswimmingclub.uk">Find out about using this application at your club.</a>
             </p>
 
             <h2>
@@ -43,7 +44,7 @@ const AboutReactApp = () => {
                   Email
                 </dt>
                 <dd className="col-sm-9 mb-0">
-                  <a href={"mailto:" + tenantFunctions.getKey("club_email")}>{tenantFunctions.getKey("club_email")}</a>
+                  <a href={"mailto:" + tenantFunctions.getName()}>{tenantFunctions.getName()}</a>
                 </dd>
               </dl>
             </Card>
@@ -62,7 +63,7 @@ const AboutReactApp = () => {
 
             <h2>Support information</h2>
             <p className="lead">
-              If we've asked for your tenant details so that we can solve a problem, please send us the following:
+              If we&apos;ve asked for your tenant details so that we can solve a problem, please send us the following:
             </p>
 
             <Card body className="mb-3">
@@ -71,35 +72,35 @@ const AboutReactApp = () => {
                   Tenant
                 </dt>
                 <dd className="col-sm-9">
-                  {tenantFunctions.getKey("")}
+                  {tenantFunctions.getUuid()}
                 </dd>
 
                 <dt className="col-sm-3">
                   Tenant ID
                 </dt>
                 <dd className="col-sm-9">
-                  {tenantFunctions.getKey("")}
+                  {tenantFunctions.getId()}
                 </dd>
 
                 <dt className="col-sm-3">
                   Tenant Name
                 </dt>
                 <dd className="col-sm-9">
-                  {tenantFunctions.getKey("club_name")}
+                  {tenantFunctions.getName()}
                 </dd>
 
                 <dt className="col-sm-3">
                   Tenant Code
                 </dt>
                 <dd className="col-sm-9">
-                  {tenantFunctions.getKey("asa_club_code")}
+                  {tenantFunctions.getCode()}
                 </dd>
 
                 <dt className="col-sm-3">
                   User
                 </dt>
                 <dd className="col-sm-9 mb-0">
-                  {tenantFunctions.getKey("")}
+                  {userFunctions.getId()}
                 </dd>
               </dl>
             </Card>

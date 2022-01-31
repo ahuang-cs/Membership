@@ -6,6 +6,7 @@ import SuspenseFallback from "./views/SuspenseFallback";
 import axios from "axios";
 import store from "./reducers/store";
 
+const NotifyHome = React.lazy(() => import("./notify/pages/Home"));
 const NotifyComposer = React.lazy(() => import("./notify/forms/Composer"));
 const NotifySuccess = React.lazy(() => import("./notify/forms/Composer"));
 const GalasDefaultPage = React.lazy(() => import("./galas/forms/GalasDefaultPage"));
@@ -13,19 +14,36 @@ const GalaHomePage = React.lazy(() => import("./galas/forms/GalaHome"));
 const NotFound = React.lazy(() => import("./views/NotFound"));
 const AboutReactApp = React.lazy(() => import("./pages/AboutReactApp"));
 
-// store.dispatch({
-//   type: 'ADD_KEY',
-//   key: 'TEST_KEY',
-//   value: 'HEY!',
-// });
-
 axios.get("/api/settings/tenant")
   .then(response => {
     let data = response.data;
 
     store.dispatch({
-      type: "ADD_KEYS",
-      payload: data,
+      type: "ADD_TENANT_KEYS",
+      payload: data.keys,
+    });
+
+    store.dispatch({
+      type: "ADD_TENANT_DETAILS",
+      payload: data.tenant,
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+axios.get("/api/settings/user")
+  .then(response => {
+    let data = response.data;
+
+    store.dispatch({
+      type: "ADD_USER_KEYS",
+      payload: data.keys,
+    });
+
+    store.dispatch({
+      type: "ADD_USER_DETAILS",
+      payload: data.user,
     });
   })
   .catch(function (error) {
@@ -43,11 +61,10 @@ render(
             <Route path=":galaId/events" element={<GalasDefaultPage />} />
             <Route path="enter-gala" element={<GalasDefaultPage />} />
           </Route>
+          <Route path="/notify" element={<NotifyHome />} />
           <Route path="/notify/new" element={<NotifyComposer />} />
-          {/* <Route path="expenses" element={<Expenses />} />
-        <Route path="invoices" element={<Invoices />} /> */}
           <Route path="/notify/new/success" element={<NotifySuccess />} />
-          <Route path="/about-react" element={<AboutReactApp />} />
+          <Route path="/about" element={<AboutReactApp />} />
           <Route
             path="*"
             element={<NotFound />}
