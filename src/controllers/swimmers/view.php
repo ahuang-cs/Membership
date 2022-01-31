@@ -705,7 +705,7 @@ include BASE_PATH . 'views/header.php';
           </div>
         <?php } while ($membership = $getMemberships->fetch(PDO::FETCH_OBJ)); ?>
 
-        <?php if (app()->user->hasPermission('Admin')) { ?>
+        <?php if ($user && app()->user->hasPermission('Admin')) { ?>
           <a href="<?= htmlspecialchars(autoUrl('users/' . $user->getId() . '/new-membership-batch')) ?>">Create a membership batch</a> to add more memberships.
         <?php } ?>
 
