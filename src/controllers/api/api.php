@@ -28,6 +28,12 @@ $this->group('/galas', function() {
   });
 });
 
+$this->group('/react', function() {
+  $this->get('/header-footer', function() {
+    include 'react/header-footer.php';
+  });
+});
+
 $this->get('/test', function() {
   echo json_encode('Yo');
 });
