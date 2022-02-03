@@ -20,14 +20,17 @@ try {
   $date = date("Y-m") . "-01";
   $day = date("d");
 
+  $today = new DateTime('now', new DateTimeZone('Europe/London'));
+
   $updatePayments = $db->prepare("UPDATE `payments` SET `Status` = ?, `stripeMandate` = ?, `stripePaymentIntent` = ? WHERE `PaymentID` = ?");
   $updatePaymentsPending = $db->prepare("UPDATE `paymentsPending` SET `Status` = ? WHERE Payment = ?");
 
   try {
-    $getPayments = $db->prepare("SELECT payments.UserID, Amount, Currency, `Name`, PaymentID FROM ((payments INNER JOIN users ON payments.UserID = users.UserID) LEFT JOIN paymentSchedule ON payments.UserID = paymentSchedule.UserID) WHERE users.Tenant = ? AND ((Status = 'pending_api_request' AND `Day` <= ? AND Type = 'Payment') OR (Status = 'pending_api_request' AND `Day` IS NULL AND `Type` = 'Payment')) LIMIT 4");
+    $getPayments = $db->prepare("SELECT payments.UserID, Amount, Currency, `Name`, PaymentID FROM ((payments INNER JOIN users ON payments.UserID = users.UserID) LEFT JOIN paymentSchedule ON payments.UserID = paymentSchedule.UserID) WHERE users.Tenant = ? AND payments.Date <= ? AND ((Status = 'pending_api_request' AND `Day` <= ? AND Type = 'Payment') OR (Status = 'pending_api_request' AND `Day` IS NULL AND `Type` = 'Payment')) LIMIT 4");
     $getPayments->execute([
       $tenant->getId(),
-      $day
+      $today->format('Y-m-d'),
+      $day,
     ]);
     while ($row = $getPayments->fetch(PDO::FETCH_ASSOC)) {
       $userid = $row['UserID'];
