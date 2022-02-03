@@ -14,65 +14,68 @@ const AppWrapper = (props) => {
   const [hasTenantInfo, setHasTenantInfo] = useState(false);
   const [hasUserInfo, setHasUserInfo] = useState(false);
 
-  useEffect(() => {
-    axios.get("/api/react/header-footer")
-      .then(response => {
-        let data = response.data;
-        setHeader(data.header);
-        setFooter(data.footer);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  },
+  useEffect(
+    () => {
+      axios.get("/api/react/header-footer")
+        .then(response => {
+          let data = response.data;
+          setHeader(data.header);
+          setFooter(data.footer);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     []
   );
 
-  useEffect(() => {
-    axios.get("/api/settings/tenant")
-      .then(response => {
-        let data = response.data;
+  useEffect(
+    () => {
+      axios.get("/api/settings/tenant")
+        .then(response => {
+          let data = response.data;
 
-        store.dispatch({
-          type: "ADD_TENANT_KEYS",
-          payload: data.keys,
+          store.dispatch({
+            type: "ADD_TENANT_KEYS",
+            payload: data.keys,
+          });
+
+          store.dispatch({
+            type: "ADD_TENANT_DETAILS",
+            payload: data.tenant,
+          });
+
+          setHasTenantInfo(true);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-
-        store.dispatch({
-          type: "ADD_TENANT_DETAILS",
-          payload: data.tenant,
-        });
-
-        setHasTenantInfo(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  },
+    },
     []
   );
 
-  useEffect(() => {
-    axios.get("/api/settings/user")
-      .then(response => {
-        let data = response.data;
+  useEffect(
+    () => {
+      axios.get("/api/settings/user")
+        .then(response => {
+          let data = response.data;
 
-        store.dispatch({
-          type: "ADD_USER_KEYS",
-          payload: data.keys,
+          store.dispatch({
+            type: "ADD_USER_KEYS",
+            payload: data.keys,
+          });
+
+          store.dispatch({
+            type: "ADD_USER_DETAILS",
+            payload: data.user,
+          });
+
+          setHasUserInfo(true);
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-
-        store.dispatch({
-          type: "ADD_USER_DETAILS",
-          payload: data.user,
-        });
-
-        setHasUserInfo(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  },
+    },
     []
   );
 

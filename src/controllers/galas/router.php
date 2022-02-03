@@ -89,11 +89,11 @@ $this->get('/{id}:int/finance-info.csv', function ($id) {
 
 if ($access == "Parent") {
 	// Gala Home
-	// $this->get('/', function () {
-	// 	// Check docs for route - this is a GET
+	$this->get('/', function () {
+		// Check docs for route - this is a GET
 
-	// 	include 'parentHome.php';
-	// });
+		include 'parentHome.php';
+	});
 
 	// View a gala
 	$this->get('/{id}:int', function ($id) {
@@ -193,10 +193,10 @@ if ($access == "Parent") {
 	}
 } else if ($access == "Galas" || $access == "Committee" || $access == "Admin" || $access == "Coach") {
 	// Gala Home
-	// $this->get(['/', '/competitions'], function () {
+	$this->get(['/', '/competitions'], function () {
 
-	// 	include 'listGalas.php';
-	// });
+		include 'listGalas.php';
+	});
 
 	// Add a gala
 	$this->get(['/addgala', '/new'], function () {
