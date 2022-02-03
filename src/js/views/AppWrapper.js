@@ -24,7 +24,11 @@ const AppWrapper = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+  },
+    []
+  );
 
+  useEffect(() => {
     axios.get("/api/settings/tenant")
       .then(response => {
         let data = response.data;
@@ -44,7 +48,11 @@ const AppWrapper = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+  },
+    []
+  );
 
+  useEffect(() => {
     axios.get("/api/settings/user")
       .then(response => {
         let data = response.data;
@@ -64,7 +72,9 @@ const AppWrapper = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  });
+  },
+    []
+  );
 
   return (
 
