@@ -1,24 +1,7 @@
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
-import Header from '../components/Header';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import ToRow from '../components/ToRow';
-import DropdownRow from "../components/DropdownRow";
-import TextRow from "../components/TextRow";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import Form from "react-bootstrap/Form";
-import Placeholder from "react-bootstrap/Placeholder";
-import { Editor } from "@tinymce/tinymce-react";
-import axios from "axios";
-import Dropzone from "../components/Dropzone";
-import Accordion from "react-bootstrap/Accordion"
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
-// import exports from "enhanced-resolve";
+import React from "react";
+import Header from "../../components/Header";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import * as tenantFunctions from "../../classes/Tenant";
 
 export class Success extends React.Component {
 
@@ -27,6 +10,8 @@ export class Success extends React.Component {
   }
 
   render() {
+    tenantFunctions.setTitle("Success - Notify Composer");
+
     const breadcrumbs = (
       <Breadcrumb>
         <Breadcrumb.Item href="/notify">Notify</Breadcrumb.Item>

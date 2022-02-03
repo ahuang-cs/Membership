@@ -8,8 +8,8 @@ class Dropdown extends React.Component {
     const options = this.props.options.map((data, idx) => {
       return (
         <option key={idx} value={data.value}>{data.name}</option>
-      )
-    })
+      );
+    });
 
     return (
       <Form.Group className="mb-3" controlId={this.props.name}>
@@ -18,7 +18,7 @@ class Dropdown extends React.Component {
           {options}
         </Form.Select>
       </Form.Group>
-    )
+    );
   }
 }
 

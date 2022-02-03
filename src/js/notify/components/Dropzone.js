@@ -9,14 +9,14 @@ class Dropzone extends React.Component {
     this.dropzone = null;
     this.state = {
       warningMessage: null,
-    }
+    };
   }
 
   componentDidMount = () => {
     this.dropzone = new DropzoneLib(this.dropzoneRef.current, {
       url: this.props.action,
       method: "post",
-      previewsContainer: '#upload-previews',
+      previewsContainer: "#upload-previews",
       // addRemoveLinks: true,
       filesizeBase: 1024,
       maxFilesize: this.props.maxFileSize,
@@ -42,26 +42,26 @@ class Dropzone extends React.Component {
   </div>
 </div>\
 `,
-    })
+    });
 
     this.dropzone.on("dragenter", (event) => {
-      this.dropzoneRef.current.classList.add('bg-light');
+      this.dropzoneRef.current.classList.add("bg-light");
     });
 
     this.dropzone.on("dragend", (event) => {
-      this.dropzoneRef.current.classList.remove('bg-light');
+      this.dropzoneRef.current.classList.remove("bg-light");
     });
 
     this.dropzone.on("dragleave", (event) => {
-      this.dropzoneRef.current.classList.remove('bg-light');
+      this.dropzoneRef.current.classList.remove("bg-light");
     });
 
     this.dropzone.on("dragover", (event) => {
-      this.dropzoneRef.current.classList.add('bg-light');
+      this.dropzoneRef.current.classList.add("bg-light");
     });
 
     this.dropzone.on("drop", (event) => {
-      this.dropzoneRef.current.classList.remove('bg-light');
+      this.dropzoneRef.current.classList.remove("bg-light");
     });
 
     this.dropzone.on("success", (file, response) => {
@@ -95,7 +95,7 @@ class Dropzone extends React.Component {
       this.props.setAttachments(attachments);
       this.printFileDetails();
     });
-  }
+  };
 
   /**
        * Print file details on change
@@ -127,8 +127,8 @@ class Dropzone extends React.Component {
 
       if (!maxFileSizeOK) {
         tooLarge.push({
-          'name': attachments[i].filename,
-          'size': attachments[i].size,
+          "name": attachments[i].filename,
+          "size": attachments[i].size,
         });
       }
     }
@@ -140,35 +140,35 @@ class Dropzone extends React.Component {
       this.props.setCanSubmitAttachments(true);
     } else {
       this.props.setCanSubmitAttachments(false);
-      let warning = 'Files too large';
-      var errorMessage = 'Files are too large or non-compliant';
+      let warning = "Files too large";
+      var errorMessage = "Files are too large or non-compliant";
 
       // Custom error messages
       if (tooLarge.length > 0) {
         var needsComma = false;
-        errorMessage = 'The following files are too large:';
+        errorMessage = "The following files are too large:";
         tooLarge.forEach(file => {
           if (needsComma) {
-            errorMessage += ', '
+            errorMessage += ", ";
           }
           needsComma = true;
           errorMessage += file.name;
         });
-        errorMessage += '.';
+        errorMessage += ".";
 
         if (!maxTotalFileSizeOK) {
-          errorMessage += ' The files also collectively exceed the maximum size for attachments.';
+          errorMessage += " The files also collectively exceed the maximum size for attachments.";
         }
 
       } else {
-        errorMessage = 'The files you are trying to upload are collectively bigger than the maximum size allowed. Please remove some files.'
+        errorMessage = "The files you are trying to upload are collectively bigger than the maximum size allowed. Please remove some files.";
       }
 
       warning = errorMessage;
 
       this.setState({ warningMessage: warning });
     }
-  }
+  };
 
   render() {
     return (
@@ -186,7 +186,7 @@ class Dropzone extends React.Component {
           <p className="text-danger mt-n2">{this.state.warningMessage}</p>
         }
       </>
-    )
+    );
   }
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 export class NotFound extends React.Component {
 
@@ -8,8 +7,8 @@ export class NotFound extends React.Component {
   }
 
   componentDidMount = () => {
-    document.title = 'Error 404';
-  }
+    document.title = "Error 404";
+  };
 
   render = () => {
     return (
@@ -41,6 +40,6 @@ export class NotFound extends React.Component {
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 }

@@ -9,11 +9,13 @@ class Footer
 {
   private $js;
   private $fluidContainer;
+  private $showContent;
 
   public function __construct()
   {
     // new footer
     $this->js = [];
+    $this->showContent = true;
   }
 
   public function render()
@@ -40,5 +42,10 @@ class Footer
   public function useFluidContainer($bool = true)
   {
     $this->fluidContainer = $bool;
+  }
+
+  public function showContent($bool = true)
+  {
+    $this->showContent = $bool;
   }
 }

@@ -58,17 +58,17 @@ $this->post('/save-user-settings', function () {
 	include 'save-user-settings.php';
 });
 
-if ($access != "Admin" && $access != "Coach" && $access != "Galas" && !$rep) {
-	$this->get('/', function () {
+// if ($access != "Admin" && $access != "Coach" && $access != "Galas" && !$rep) {
+// 	$this->get('/', function () {
 
-		include 'Help.php';
-	});
-}
+// 		include 'Help.php';
+// 	});
+// }
 
 if ($access == "Admin" || $access == "Coach" || $access == "Galas" || $rep) {
-	$this->get('/', function () {
-		include 'Home.php';
-	});
+	// $this->get('/', function () {
+	// 	include 'Home.php';
+	// });
 
 	$this->post('/file-uploads', function () {
 		include 'FileUploads.php';
