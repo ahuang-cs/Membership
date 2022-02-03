@@ -6,13 +6,13 @@ import SuspenseFallback from "./views/SuspenseFallback";
 import ScrollToTop from "./components/global/ScrollToTop";
 import store from "./reducers/store";
 import AppWrapper from "./views/AppWrapper";
+import { NotFound } from "./views/NotFound";
 
 const NotifyHome = React.lazy(() => import("./notify/pages/Home"));
 const NotifyComposer = React.lazy(() => import("./notify/forms/Composer"));
 const NotifySuccess = React.lazy(() => import("./notify/forms/Composer"));
 // const GalasDefaultPage = React.lazy(() => import("./galas/forms/GalasDefaultPage"));
 // const GalaHomePage = React.lazy(() => import("./galas/forms/GalaHome"));
-const NotFound = React.lazy(() => import("./views/NotFound"));
 const AboutReactApp = React.lazy(() => import("./pages/AboutReactApp"));
 
 const rootElement = document.getElementById("root");

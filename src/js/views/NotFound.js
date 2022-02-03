@@ -10,6 +10,10 @@ export class NotFound extends React.Component {
     document.title = "Error 404";
   };
 
+  goBack = () => {
+    history.back(1);
+  };
+
   render = () => {
     return (
       <div className="container-xl">
@@ -28,7 +32,7 @@ export class NotFound extends React.Component {
                 correctly.</li>
               <li>If you reached this page by clicking a link, contact the Web site administrator to alert them that the link
                 is incorrectly formatted.</li>
-              <li>Click the <a href="javascript:history.back(1)">Back</a> button to try another link.</li>
+              <li>Click the <a onClick={ this.goBack } href="#">Back</a> button to try another link.</li>
             </ul>
             <p>HTTP Error 404 - File or directory not found.</p>
             <hr />
