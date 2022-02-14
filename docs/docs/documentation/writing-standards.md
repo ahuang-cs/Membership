@@ -1,3 +1,8 @@
+---
+sidebar_label: Writing standards
+sidebar_position: 2
+---
+
 # Writing standards
 
 Content authors are advised to follow the spirit of [the GOV.UK style guide](https://www.gov.uk/guidance/content-design/writing-for-gov-uk), where appropriate.

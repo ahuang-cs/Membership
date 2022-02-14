@@ -1,3 +1,8 @@
+---
+sidebar_label: Tenant billing
+sidebar_position: 2
+---
+
 # Tenant Billing
 
 Clubs (tenants) pay a monthly subscription for the membership system. Payment is now taken automatically on the first day of each month.

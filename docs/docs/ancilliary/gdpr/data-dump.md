@@ -1,3 +1,8 @@
+---
+sidebar_label: Download your data
+sidebar_position: 2
+---
+
 # Downloading a copy of your personal data
 
 Under the General Data Protection Regulation (GDPR), you may request a copy of your personal data at no cost.

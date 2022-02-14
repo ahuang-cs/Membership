@@ -1,3 +1,8 @@
+---
+sidebar_label: Editing an entry
+sidebar_position: 4
+---
+
 # Editing a log entry
 
 The process for editing a log entry is the same no matter what type of account you hold.

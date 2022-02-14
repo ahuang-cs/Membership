@@ -1,3 +1,8 @@
+---
+sidebar_label: Pay for a competition
+sidebar_position: 2
+---
+
 # Paying for an entry
 
 There are several ways to pay for gala entries and all are designed to make paying for galas as easy as possible. Simply pay the way which is easiest for you.

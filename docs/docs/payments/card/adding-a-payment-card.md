@@ -1,3 +1,8 @@
+---
+sidebar_label: Adding a payment card
+sidebar_position: 1
+---
+
 # Adding a payment card
 
 ## Adding a card

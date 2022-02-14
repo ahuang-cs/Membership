@@ -1,3 +1,8 @@
+---
+sidebar_label: Privacy policy
+sidebar_position: 1
+---
+
 # SCDS Privacy Policy
 
 ## Who we are

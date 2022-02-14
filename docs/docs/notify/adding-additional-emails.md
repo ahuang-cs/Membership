@@ -1,3 +1,7 @@
+---
+sidebar_label: Adding an additional email address
+---
+
 # Adding an additional email address
 
 You can add additional email addresses to your account so that other parents/guardians of your swimmer(s) can also receive the group emails that we send to parents.

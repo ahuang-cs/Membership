@@ -1,3 +1,8 @@
+---
+sidebar_label: Enter a competition
+sidebar_position: 1
+---
+
 # Entering a competition
 
 Please be aware that the system does not support open water events or galas where 25m events are being competed. For these competitions, please continue to use a paper gala entry form, which will be supplied by your club, or follow local instructions.

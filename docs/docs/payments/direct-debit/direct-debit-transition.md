@@ -1,3 +1,8 @@
+---
+sidebar_label: Direct Debit transition
+sidebar_position: 1
+---
+
 # Direct Debit Transition
 
 ## What's happening?

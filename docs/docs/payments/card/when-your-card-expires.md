@@ -1,3 +1,8 @@
+---
+sidebar_label: Expiring cards
+sidebar_position: 2
+---
+
 # What happens when my card expires?
 
 ## Visa and MasterCard Cards

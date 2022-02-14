@@ -1,3 +1,8 @@
+---
+sidebar_label: Emergency Contacts
+sidebar_position: 7
+---
+
 # Adding Emergency Contact Details to your Club Account
 
 Adding Emergency Contact details to your club account could not be simpler – and it’s essential that you do.

@@ -1,3 +1,8 @@
+---
+sidebar_label: Paying by Direct Debit
+sidebar_position: 3
+---
+
 # Paying for gala entries as part of your direct debit
 
 ## What will happen

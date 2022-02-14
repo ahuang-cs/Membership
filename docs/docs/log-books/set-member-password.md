@@ -1,3 +1,8 @@
+---
+sidebar_label: Set member password
+sidebar_position: 5
+---
+
 # Setting a password for one of your members
 
 To give your members access to their own log books, you'll need to create a password for each of them.

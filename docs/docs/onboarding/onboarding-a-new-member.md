@@ -1,3 +1,8 @@
+---
+sidebar_label: Onboard a new member
+sidebar_position: 2
+---
+
 # Onboarding a new member
 
 ## About

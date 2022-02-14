@@ -1,3 +1,8 @@
+---
+sidebar_label: Custom hostnames
+sidebar_position: 1
+---
+
 # Custom Hostnames
 
 You can use your own domain name with the membership system. This costs an additional £2 per month, which will be billed automatically with your monthly invoice.

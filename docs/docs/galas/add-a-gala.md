@@ -1,4 +1,9 @@
-# Adding a gala to the Membership System.
+---
+sidebar_label: Add a new gala
+sidebar_position: 1
+---
+
+# Adding a gala to the Membership System
 
 It's really easy to add a gala to the Membership System.
 

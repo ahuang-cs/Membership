@@ -1,3 +1,8 @@
+---
+sidebar_label: Email suppression lists
+sidebar_position: 3
+---
+
 # Email Suppression Lists
 
 In order to comply with the General Data Protection Regulation, Data Protection Act and other laws, SCDS operates email suppression lists. These prevent users from receiving spam and protects the email sending reputation of SCDS and its domain names.

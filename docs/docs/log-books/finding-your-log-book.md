@@ -1,3 +1,8 @@
+---
+sidebar_label: Finding your log book
+sidebar_position: 2
+---
+
 # Finding your log book
 
 ## If you have a parent/user account

@@ -1,3 +1,8 @@
+---
+sidebar_label: Membership Years
+sidebar_position: 1
+---
+
 # Membership Years
 
 ## What is a membership year?

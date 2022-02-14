@@ -1,3 +1,8 @@
+---
+sidebar_label: How to contribute
+sidebar_position: 1
+---
+
 # Contributing
 
 This guide assumes you already know how to use *Git* and *GitHub.com*. It also assumes you know what a git *branch* is and what a *Pull Request*/*Merge Request* is in services like GitHub and GitLab. If you don't know these, please read up on them before you continue.

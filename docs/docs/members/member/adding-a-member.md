@@ -1,3 +1,8 @@
+---
+sidebar_label: Adding a member
+sidebar_position: 1
+---
+
 # Adding members to your account
 
 To add a swimmer, you’ll need an account and your swimmers access details – these will have been emailed to you or given to you on a sheet of paper. Creating an account is easy to do – You only need to fill out one form and then verify your email address.

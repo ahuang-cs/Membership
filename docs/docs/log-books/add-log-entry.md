@@ -1,3 +1,8 @@
+---
+sidebar_label: Adding an entry
+sidebar_position: 3
+---
+
 # Adding a log entry
 
 The process for adding a log entry is the same no matter what type of account you hold.

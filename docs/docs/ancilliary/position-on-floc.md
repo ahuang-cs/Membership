@@ -1,3 +1,8 @@
+---
+sidebar_label: Position on Google FLoC
+sidebar_position: 2
+---
+
 # Position of Swimming Club Data Systems on Google's proposed "Federated Learning of Cohorts (FLoC)" surveillance technology
 
 Swimming Club Data Systems (SCDS) takes the view that FLoC represents a danger to user privacy and will (from 18 April 2020) emit HTTP headers with all responses to instruct the Google Chrome browser not to track visitors to sites run by SCDS.

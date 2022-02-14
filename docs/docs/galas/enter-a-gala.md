@@ -1,3 +1,8 @@
+---
+sidebar_label: Enter a gala
+sidebar_position: 2
+---
+
 # Entering a gala (competition)
 
 We’re happy to be able to let you enter competitions online. The system asks you the important information which we need to know in order to make an entry and then submits it for you.
