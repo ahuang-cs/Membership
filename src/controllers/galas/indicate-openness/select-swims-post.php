@@ -128,7 +128,7 @@ try {
 
       $insert->bindValue('gala', $entering['gala'], PDO::PARAM_INT);
       $insert->bindValue('member', $member, PDO::PARAM_INT);
-      $insert->bindValue('fee', $entering['fee'], PDO::PARAM_INT);
+      $insert->bindValue('fee', $entering['fee'], PDO::PARAM_STR);
       $insert->bindValue('processFee', $gala['ProcessingFee'], PDO::PARAM_INT);
       $insert->bindValue('processed', false, PDO::PARAM_BOOL);
       $insert->bindValue('charged', $entering['charged'], PDO::PARAM_BOOL);
