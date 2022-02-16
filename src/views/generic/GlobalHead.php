@@ -5,8 +5,6 @@ $tenant = app()->tenant;
 $stylesheet = autoUrl(getCompiledAsset('generic.css'), false);
 $stylesheetDarkMode = autoUrl(getCompiledAsset('generic-dark-mode.css'), false);
 
-global $pagetitle;
-
 header('Link: <' . $stylesheet . '>; rel=preload; as=style', false);
 header('Link: <' . $stylesheetDarkMode . '>; rel=preload; as=style', false);
 // header('Link: <' . autoUrl("public/css/colour.css") . '>; rel=preload; as=style', false);

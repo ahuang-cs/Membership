@@ -5,7 +5,7 @@ $tenant = app()->tenant;
 
 $disabled = "";
 
-$getGala = $db->prepare("SELECT GalaName `name`, GalaFee fee, GalaVenue venue, GalaFeeConstant fixed FROM galas WHERE GalaID = ? AND Tenant = ?");
+$getGala = $db->prepare("SELECT GalaName `name`, GalaFee fee, GalaVenue venue, GalaFeeConstant fixed, ProcessingFee FROM galas WHERE GalaID = ? AND Tenant = ?");
 $getGala->execute([
 	$id,
 	$tenant->getId()
