@@ -103,6 +103,17 @@ if ($tenant->getBooleanKey('ENABLE_BILLING_SYSTEM')) {
       $sql->execute([
         $tenant->getId()
       ]);
+
+      $cumulativeTotalCharged = 0;
+      $currentTotalCharged = 0;
+      $maxWeeklyThreshold = PHP_INT_MAX;
+
+      $max = (int) $tenant->getKey('STRIPE_MAX_WEEKLY_BACS_THRESHOLD');
+
+      if ($max > 0) {
+        $maxWeeklyThreshold = $max;
+      }
+
       while ($user = $sql->fetchColumn()) {
 
         if ($squadFeeRequired) {
@@ -311,6 +322,21 @@ if ($tenant->getBooleanKey('ENABLE_BILLING_SYSTEM')) {
         $getCountPending->execute([$user]);
 
         $dateString = date("F Y", strtotime("first day of this month")) . " DD";
+
+        // Check date
+        $cumulativeTotalCharged += $amount;
+        $currentTotalCharged += $amount;
+
+        if ($currentTotalCharged > $maxWeeklyThreshold) {
+          // Advance date forward 7 days and reset currentTotalCharged
+
+          $dateObj = new DateTime($date, new DateTimeZone('Europe/London'));
+          $dateObj->add(new DateInterval('P1W'));
+          $date = $dateObj->format('Y-m-d');
+
+          $currentTotalCharged = $amount;
+        }
+
         // If amount is too low, it will wait for the next payment round
         if ($amount > 100) {
           $addPaymentForCharge->execute([
