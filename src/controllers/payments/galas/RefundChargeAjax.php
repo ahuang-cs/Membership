@@ -233,7 +233,7 @@ try {
       $message .= '<p>Please note that this brings the total amount refunded for this gala to &pound;' . $totalString . '</p>';
     }
 
-    if ($entryData['MandateID'] != null && !getUserOption($entryData['user'], 'GalaDirectDebitOptOut') && ($entryData['Intent'] == null || !bool($entryData['StripePaid']))) {
+    if (!$hasNoDD && !getUserOption($entryData['user'], 'GalaDirectDebitOptOut') && ($entryData['Intent'] == null || !bool($entryData['StripePaid']))) {
       $message .= '<p>This refund has been applied as a credit to your club account. This means you will either;</p>';
       $message .= '<ul><li>If you have not paid the bill by direct debit for this gala yet, you will automatically be charged the correct amount for ' . htmlspecialchars($gala['name']) . ' on your next bill as refunds will be applied automatically</li><li>If you have already paid the bill by direct debit for this gala, the credit applied to your account will give you a discount on next month\'s bill</li></ul>';
     } else if ($entryData['Intent'] != null && bool($entryData['StripePaid'])) {
