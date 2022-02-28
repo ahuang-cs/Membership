@@ -80,7 +80,7 @@ if (!$result->success) { ?>
 
     if (notifySend(null, $subject, $sContent, $row['Forename'] . " " .
       $row['Surname'], $row['EmailAddress'], ["Email" =>
-    "noreply@transactional." . getenv('EMAIL_DOMAIN'), "Name" => app()->tenant->getKey('CLUB_NAME') . " Account Help"])) {
+    "noreply@" . getenv('EMAIL_DOMAIN'), "Name" => app()->tenant->getKey('CLUB_NAME') . " Account Help"])) {
   ?>
       <div class="container-fluid">
         <div class="row justify-content-center">

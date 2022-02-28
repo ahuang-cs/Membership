@@ -46,7 +46,7 @@ try {
   $userEmail = $userInfo['EmailAddress'];
   $myName = $curUserInfo['Forename'] . ' ' . $curUserInfo['Surname'];
 
-  $from = "noreply@transactional." . getenv('EMAIL_DOMAIN');
+  $from = "noreply@" . getenv('EMAIL_DOMAIN');
   $fromName = app()->tenant->getKey('CLUB_NAME');
   if ($_POST['from'] == "current-user") {
     $fromName = $myName;

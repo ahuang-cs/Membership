@@ -275,7 +275,7 @@ try {
     $senderNames = explode(' ', $userSending);
 
     $recipientGroups["NamedSender"] = [
-      "Email" => "noreply@notify." . getenv('EMAIL_DOMAIN'),
+      "Email" => "noreply@" . getenv('EMAIL_DOMAIN'),
       "Name" => $userSending
     ];
   }
@@ -362,12 +362,12 @@ try {
     }
 
     $from = [
-      "email" => "noreply@notify." . getenv('EMAIL_DOMAIN'),
+      "email" => "noreply@" . getenv('EMAIL_DOMAIN'),
       "name" => app()->tenant->getKey('CLUB_NAME')
     ];
     if (isset($jsonData->NamedSender->Email) && isset($jsonData->NamedSender->Name)) {
       $from = [
-        "email" => "noreply@notify." . getenv('EMAIL_DOMAIN'),
+        "email" => "noreply@" . getenv('EMAIL_DOMAIN'),
         "name" => $jsonData->NamedSender->Name
       ];
     }

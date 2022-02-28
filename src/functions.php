@@ -73,7 +73,7 @@ function notifySend($to, $subject, $emailMessage, $name = null, $emailaddress = 
   //echo $mailObject->getFormattedPlain();
 
   if (!isset($from['Email'])) {
-    $from['Email'] = "noreply@transactional." . getenv('EMAIL_DOMAIN');
+    $from['Email'] = "noreply@" . getenv('EMAIL_DOMAIN');
   }
   if (!isset($from['Name']) && isset(app()->tenant)) {
     $from['Name'] = app()->tenant->getKey('CLUB_NAME');
@@ -1851,7 +1851,7 @@ function handleCompletedGalaPayments($paymentIntent, $onSession = false)
         $email = $user['EmailAddress'];
         $name = $user['Forename'] . ' ' . $user['Surname'];
       }
-      $sendingEmail = "noreply@transactional." . getenv('EMAIL_DOMAIN');
+      $sendingEmail = "noreply@" . getenv('EMAIL_DOMAIN');
       notifySend(null, 'Payment Receipt', $message, $name, $email, [
         "Email" => $sendingEmail,
         "Name" => app()->tenant->getKey('CLUB_NAME'),
