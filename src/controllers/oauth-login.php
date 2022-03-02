@@ -108,6 +108,7 @@ if (!isset($_GET['code'])) {
         throw $e;
       }
     } catch (Exception $e) {
+      reportError($e);
       halt(403);
     }
 
