@@ -454,6 +454,15 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
   //   header("Location: " . autoUrl("login?club=" . mb_strtolower(app()->tenant->getCodeId() . '&target=' . urlencode(app('request')->path)), false));
   // });
 
+  $this->group('/api', function () {
+    include BASE_PATH . 'controllers/api/public-api.php';
+  });
+
+  // Global Catch All 404
+  $this->get('/*', function () {
+    include BASE_PATH . 'views/react-public-base.php';
+  });
+
   $this->any(['/', '/*'], function () {
     http_response_code(303);
     header("Location: " . autoUrl('login?target=' . urlencode(app('request')->path)));

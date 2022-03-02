@@ -55,6 +55,7 @@ module.exports = (env, options) => {
     entry: {
       'main': './js/javascript.js',
       'main-react-router': './js/javascript-react-router.js',
+      'public-react-router': './js/public-javascript-react-router.js',
       // 'clse': './scss/clse.scss',
       'generic': './scss/generic.scss',
       'generic-dark-mode': './scss/generic-dark-mode.scss',
