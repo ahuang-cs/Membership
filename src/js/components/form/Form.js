@@ -20,7 +20,7 @@ const Form = (props) => {
             <div>
               <Button variant="secondary" type="reset" disabled={isSubmitting}>
                 Clear
-              </Button>
+              </Button>{" "}
 
               <Button variant="primary" type="submit" disabled={isSubmitting}>
                 Submit

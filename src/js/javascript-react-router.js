@@ -14,6 +14,7 @@ const NotifySuccess = React.lazy(() => import("./notify/forms/Composer"));
 // const GalasDefaultPage = React.lazy(() => import("./galas/forms/GalasDefaultPage"));
 // const GalaHomePage = React.lazy(() => import("./galas/forms/GalaHome"));
 const AboutReactApp = React.lazy(() => import("./pages/AboutReactApp"));
+const LeagueMembers = React.lazy(() => import("./admin/reports/LeagueMembers"));
 
 const rootElement = document.getElementById("root");
 render(
@@ -32,6 +33,7 @@ render(
             <Route path="/notify/new" element={<NotifyComposer />} />
             <Route path="/notify/new/success" element={<NotifySuccess />} />
             <Route path="/about" element={<AboutReactApp />} />
+            <Route path="/admin/reports/league-members" element={<LeagueMembers />} />
             <Route
               path="*"
               element={<NotFound />}
