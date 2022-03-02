@@ -361,6 +361,10 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
     include BASE_PATH . 'views/Login.php';
   });
 
+  $this->get('/login/oauth', function () {
+    include BASE_PATH . 'controllers/oauth-login.php';
+  });
+
   $this->group('/about', function () {
     include BASE_PATH . 'controllers/about/router.php';
   });
@@ -611,9 +615,11 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
   });
 
   $this->group(['/emergency-contacts', '/emergencycontacts'], function () {
-
-
     include BASE_PATH . 'controllers/emergencycontacts/router.php';
+  });
+
+  $this->any('/login/oauth', function () {
+    header('Location: ' . autoUrl(''));
   });
 
   $this->group('/payments', function () {
