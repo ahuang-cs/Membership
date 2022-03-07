@@ -10,6 +10,7 @@ import { PublicNotFound } from "./views/PublicNotFound";
 import { NotFound } from "./views/NotFound";
 import PublicAppFooter from "./views/PublicAppFooter";
 
+const Welcome = React.lazy(() => import("./pages/public/Welcome"));
 const LoginPage = React.lazy(() => import("./login/LoginPage"));
 
 const rootElement = document.getElementById("root");
@@ -23,7 +24,7 @@ render(
             <Route index element={<LoginPage />} />
           </Route>
           <Route path="/" element={<PublicAppWrapper />}>
-            <Route index element={<NotFound />} />
+            <Route index element={<Welcome />} />
             <Route path="404" element={<NotFound />} />
           </Route>
           <Route

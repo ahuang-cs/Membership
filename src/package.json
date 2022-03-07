@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@tinymce/tinymce-react": "^3.13.0",

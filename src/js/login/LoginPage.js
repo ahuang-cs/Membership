@@ -1,11 +1,35 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import * as tenantFunctions from "../classes/Tenant";
 import Login from "./Login";
+import TwoFactor from "./TwoFactor";
+import { connect } from "react-redux";
+import Logo from "../components/Logo";
+import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
+import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const titles = {
+  login: {
+    heading: "Login",
+    subheading: "Sign in to " + tenantFunctions.getName(),
+  },
+  twoFactor: {
+    heading: "Confirm it's you",
+    subheading: "Enter your two-factor authentication code",
+  },
+};
+
+const LoginPage = (props) => {
 
   tenantFunctions.setTitle("Login");
+
+  useEffect(() => {
+    props.setType("login");
+
+    return () => {
+      // props.dispatch
+    };
+  }, []);
 
   return (
 
@@ -16,28 +40,29 @@ const LoginPage = () => {
           <div className="col-lg-8 col-md-10">
 
             <p className="mb-5">
-              <a href="/" className="btn btn-outline-primary btn-outline-light-d">Quit</a>
+              <Link to="/" className="btn btn-outline-primary btn-outline-light-d">Quit</Link>
             </p>
 
             <div className="row align-items-center">
               <div className="col order-2 order-md-1">
-                <h1 className="">Login</h1>
-                <p className="">Sign in to {tenantFunctions.getName()}</p>
+                <h1 className="">{titles[props.loginPageType].heading}</h1>
+                <p className="">{titles[props.loginPageType].subheading}</p>
               </div>
               <div className="col-12 col-md-auto order-1 order-md-2">
-                {(tenantFunctions.getKey("logo_dir")) ? (
-                  <img src={tenantFunctions.getLogoUrl("logo-75.png")} srcSet={`${tenantFunctions.getLogoUrl("logo-75@2x.png")} 2x, ${tenantFunctions.getLogoUrl("logo-75@3x.png")} 3x`} alt="" className="img-fluid" />
-                )
-                  : (
-                    <img src="/img/corporate/scds.png" height="75" width="75" alt="" className="img-fluid" />
-                  )}
+                <Logo />
                 <div className="mb-4 d-md-none"></div>
               </div>
             </div>
             <div className="mb-4 d-md-none"></div>
             <div className="mb-5 d-none d-md-block"></div>
 
-            <Login />
+            {props.loginPageType === "login" &&
+              <Login />
+            }
+
+            {props.loginPageType === "twoFactor" &&
+              <TwoFactor />
+            }
 
             <p>
               Need help? <a href="/about">Get support from {tenantFunctions.getName()}</a>.
@@ -51,4 +76,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
