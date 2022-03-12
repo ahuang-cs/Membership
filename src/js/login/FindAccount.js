@@ -1,25 +1,23 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as tenantFunctions from "../classes/Tenant";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
 
 const schema = yup.object().shape({
   emailAddress: yup.string().email("Your email address must be valid").required("You must provide an email address"),
-  password: yup.string().required("You must provide a password"),
-  rememberMe: yup.bool(),
 });
 
-const Login = (props) => {
+const FindAccount = (props) => {
 
   useEffect(() => {
-    tenantFunctions.setTitle("Login");
+    tenantFunctions.setTitle("Get back into your account");
+    props.setType("resetPassword");
   }, []);
 
   const [error, setError] = useState(null);
@@ -29,14 +27,13 @@ const Login = (props) => {
 
     try {
 
-      const response = await axios.post("/api/auth/login/login", {
+      const response = await axios.post("/api/auth/request-password-reset", {
         email_address: values.emailAddress,
-        password: values.password,
       });
 
       if (response.data.success) {
-        props.setType("twoFactor");
-        props.setLoginDetails(response.data);
+        // props.setType("twoFactor");
+        // props.setLoginDetails(response.data);
       } else {
         // There was an error
         setError({
@@ -102,51 +99,9 @@ const Login = (props) => {
               </Form.Group>
             </div>
 
-            <div className="mb-3">
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  isValid={touched.password && !errors.password}
-                  isInvalid={touched.password && errors.password}
-                  size="lg"
-                />
-                {errors.password &&
-                  <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-                }
-              </Form.Group>
-            </div>
-
-            <Form.Group className="mb-3">
-              <Form.Check
-                name="rememberMe"
-                label="Keep me logged in"
-                onChange={handleChange}
-                checked={values.rememberMe}
-                isInvalid={!!errors.rememberMe}
-                feedback={errors.rememberMe}
-                feedbackType="invalid"
-                id="rememberMe"
-              />
-            </Form.Group>
-
             <p className="mb-5">
-              <Button size="lg" type="submit" disabled={!isValid || isSubmitting}>Login</Button>
+              <Button size="lg" type="submit" disabled={!isValid || isSubmitting}>Reset password</Button>
             </p>
-
-            <div className="mb-5">
-              <p>
-                New member? Your club will create an account for you and send you a link to get started.
-              </p>
-              <span>
-                <Link to="/login/forgot-password" className="btn btn-dark">
-                  Forgot password?
-                </Link>
-              </span>
-            </div>
           </Form>
         )}
       </Formik>
@@ -155,4 +110,4 @@ const Login = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(FindAccount);

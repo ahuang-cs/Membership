@@ -1,12 +1,13 @@
 
-import React from "react";
+import React, { useState } from "react";
 import * as tenantFunctions from "../classes/Tenant";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Form } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
+import axios from "axios";
 
 const schema = yup.object().shape({
   authCode: yup.string().length(6, "Authentiction codes are 6 digits").required("You must enter an authentication code"),
@@ -17,13 +18,40 @@ const onSubmit = (ev) => {
   console.log(ev);
 };
 
-const handleResend = (ev) => {
-  console.log(ev);
-};
+const TwoFactor = (props) => {
 
-const TwoFactor = () => {
+  const [enableResend, setEnableResend] = useState(true);
+  const [resent, setResent] = useState(false);
+
+  const handleResend = async () => {
+    setEnableResend(false);
+
+    // Make API request
+    const response = await axios.post("/api/auth/login/resend-two-factor", {
+    });
+
+    if (response.data.success) {
+      setResent(true);
+      props.setLoginDetail("two_factor_method", "email");
+    } else {
+      // Show error
+    }
+
+    new Promise(function () {
+      setTimeout(function () {
+        setEnableResend(true);
+      }, 5000);
+    });
+  };
 
   tenantFunctions.setTitle("Confirm Login");
+
+  let helpString = "We've sent a confirmation code to your registered email address";
+  let helpResendString = "Resend email";
+  if (props.two_factor_method === "totp") {
+    helpString = "We've sent a confirmation code to your registered email address";
+    helpResendString = "Resend email";
+  }
 
   return (
 
@@ -74,7 +102,7 @@ const TwoFactor = () => {
               </Form.Group>
             </div>
 
-            {true &&
+            {!props.has_totp &&
               <Form.Group className="mb-3">
                 <Form.Check
                   name="setUpTwoFactor"
@@ -93,15 +121,22 @@ const TwoFactor = () => {
 
             <div className="mb-5">
               <p>
-                New member? Your club will create an account for you and send you a link to get started.
+                {helpString}
               </p>
               <span>
                 <Button
                   variant="dark"
                   onClick={handleResend}
+                  disabled={!enableResend}
                 >
-                  Send/Resend
+                  {helpResendString}
                 </Button>
+                {
+                  resent &&
+                  <Alert variant="info" className="mt-2">
+                    We&apos;ve resent your authentication code.
+                  </Alert>
+                }
               </span>
             </div>
           </Form>

@@ -5,6 +5,11 @@ const Login = (state = {}, action) => {
       ...state,
       [action.key]: action.value
     };
+  case "WRITE_LOGIN_STATE":
+    return {
+      ...state,
+      ...action.data
+    };
   default:
     return state;
   }
@@ -12,7 +17,10 @@ const Login = (state = {}, action) => {
 
 export const mapStateToProps = (state) => {
   const { Login } = state;
-  return { loginPageType: Login.login_page_type || "login" };
+  return {
+    ...Login,
+    login_page_type: Login.login_page_type || "login",
+  };
 };
 
 export const mapDispatchToProps = (dispatch) => {
@@ -22,7 +30,18 @@ export const mapDispatchToProps = (dispatch) => {
         type: "SET_LOGIN_STATE",
         key: "login_page_type",
         value: type,
-      })
+      }),
+    setLoginDetail: (key, value) => dispatch(
+      {
+        type: "SET_LOGIN_STATE",
+        key: key,
+        value: value,
+      }),
+    setLoginDetails: (object) => dispatch(
+      {
+        type: "WRITE_LOGIN_STATE",
+        data: object,
+      }),
   };
 };
 

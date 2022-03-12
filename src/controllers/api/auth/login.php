@@ -36,8 +36,11 @@ try {
     $verified = password_verify($json->password, $hash);
 
     if ($verified) {
+
+      $hasTotp = bool(getUserOption($userID, "hasGoogleAuth2FA"));
+
       // Do 2FA
-      if (bool(getUserOption($userID, "hasGoogleAuth2FA"))) {
+      if ($hasTotp) {
         $_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_GOOGLE'] = true;
 
         $output = [
@@ -73,7 +76,9 @@ try {
       $output = [
         'success' => true,
         'email' => $email,
-        'message' => 'We have sent a two-factor authentication code to your email address'
+        'message' => 'We have sent a two-factor authentication code to your email address',
+        'has_totp' => $hasTotp,
+        'two_factor_method' => $hasTotp ? 'totp' : 'email',
       ];
 
     } else {

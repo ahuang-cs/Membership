@@ -34,6 +34,24 @@ $this->group('/auth', function() {
       include 'auth/resend-two-factor.php';
     });
   });
+
+  $this->post('/request-password-reset', function() {
+    include 'auth/request-password-reset.php';
+  });
+
+  $this->post('/can-password-reset', function() {
+    include 'auth/can-password-reset.php';
+  });
+
+  $this->post('/complete-password-reset', function() {
+    include 'auth/complete-password-reset.php';
+  });
+});
+
+$this->group('/utilities', function() {
+  $this->post('/pwned-password-check', function() {
+    include 'utilities/pwned-password-check.php';
+  });
 });
 
 $this->any(['/', '/*'], function() {

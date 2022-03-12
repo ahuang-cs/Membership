@@ -343,9 +343,9 @@ $this->group('/oauth2', function () {
 });
 
 if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
-  $this->post('/login', function () {
-    include BASE_PATH . 'controllers/login-go.php';
-  });
+  // $this->post('/login', function () {
+  //   include BASE_PATH . 'controllers/login-go.php';
+  // });
 
   // Home
   // $this->get('/', function () {
@@ -365,9 +365,9 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
     include BASE_PATH . 'controllers/oauth-login.php';
   });
 
-  $this->group('/about', function () {
-    include BASE_PATH . 'controllers/about/router.php';
-  });
+  // $this->group('/about', function () {
+  //   include BASE_PATH . 'controllers/about/router.php';
+  // });
 
   // // Register
   // $this->get(['/register', '/register/family', '/register/family/{fam}:int/{acs}:key'], function ($fam = null, $acs = null) {
@@ -400,15 +400,15 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
   // });
 
   // Password Reset via Link
-  $this->get('/resetpassword/auth/{token}', function ($token) {
+  // $this->get('/resetpassword/auth/{token}', function ($token) {
 
-    include BASE_PATH . 'controllers/forgot-password/reset.php';
-  });
+  //   include BASE_PATH . 'controllers/forgot-password/reset.php';
+  // });
 
-  $this->post('/resetpassword/auth/{token}', function ($token) {
+  // $this->post('/resetpassword/auth/{token}', function ($token) {
 
-    include BASE_PATH . 'controllers/forgot-password/reset-action.php';
-  });
+  //   include BASE_PATH . 'controllers/forgot-password/reset-action.php';
+  // });
 
   $this->group('/payments/webhooks', function () {
 
@@ -420,12 +420,10 @@ if (empty($_SESSION['TENANT-' . app()->tenant->getId()]['LoggedIn'])) {
   });
 
   $this->group('/webhooks', function () {
-
     include BASE_PATH . 'controllers/webhooks/router.php';
   });
 
   $this->get('/notify', function () {
-
     include BASE_PATH . 'controllers/notify/Help.php';
   });
 
