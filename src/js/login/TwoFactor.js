@@ -14,8 +14,25 @@ const schema = yup.object().shape({
   setUpTwoFactor: yup.bool(),
 });
 
-const onSubmit = (ev) => {
-  console.log(ev);
+const onSubmit = async (values, { setSubmitting }) => {
+  setSubmitting(true);
+
+  try {
+    const response = await axios.post("/api/auth/login/two-factor", {
+      auth_code: values.authCode,
+    });
+
+    if (response.data.success) {
+      // Redirect for cookies
+      window.location.replace(response.data.redirect_url);
+    } else {
+      // Oops
+      setSubmitting(false);
+    }
+  } catch (error) {
+    window.alert(error);
+    setSubmitting(false);
+  }
 };
 
 const TwoFactor = (props) => {
@@ -85,7 +102,7 @@ const TwoFactor = (props) => {
                 <Form.Label>Authentication code</Form.Label>
                 <Form.Control
                   name="authCode"
-                  autofocus
+                  autoFocus
                   value={values.authCode}
                   onChange={handleChange}
                   isValid={touched.authCode && !errors.authCode}

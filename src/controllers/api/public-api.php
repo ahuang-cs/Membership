@@ -33,6 +33,10 @@ $this->group('/auth', function() {
     $this->post('/resend-two-factor', function() {
       include 'auth/resend-two-factor.php';
     });
+
+    $this->get('/success-redirect-flow', function() {
+      include 'auth/success-redirect-flow.php';
+    });
   });
 
   $this->post('/request-password-reset', function() {

@@ -27,12 +27,12 @@ try {
 
   $auth_via_google_authenticator = false;
   try {
-    $auth_via_google_authenticator = $_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_GOOGLE'] && $ga2fa->verifyKey($secret, $json->auth_code);
+    $auth_via_google_authenticator = isset($_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_GOOGLE']) && $_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_GOOGLE'] && $ga2fa->verifyKey($secret, $json->auth_code);
   } catch (Exception $e) {
     $auth_via_google_authenticator = false;
   }
 
-  if (($json->auth_code == $_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_CODE']) || $auth_via_google_authenticator) {
+  if ((((isset($_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_CODE'])) && $json->auth_code == $_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_CODE'])) || $auth_via_google_authenticator) {
     unset($_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR']);
     unset($_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_CODE']);
     unset($_SESSION['TENANT-' . app()->tenant->getId()]['TWO_FACTOR_GOOGLE']);
@@ -54,11 +54,19 @@ try {
     $target = autoUrl("my-account/googleauthenticator/setup");
   }
 
-  $url = autoUrl("/api/auth/success-redirect-flow?target=" . urlencode($json->target));
+  $url = autoUrl("api/auth/login/success-redirect-flow?target=" . urlencode($target));
+
+  $_SESSION['TENANT-' . app()->tenant->getId()]['REACT_LOGIN_USER_CONFIRMED'] = $user;
+
+  $event = 'UserLogin-2FA-Email';
+  if ($auth_via_google_authenticator) {
+    $event = 'UserLogin-2FA-App';
+  }
+  AuditLog::new($event, 'Signed in from ' . getUserIp(), $user);
 
   $output = [
     'success' => true,
-    'redirectUrl' => $url
+    'redirect_url' => $url
   ];
 } catch (Exception $e) {
   $output = [
