@@ -35,12 +35,12 @@ const LoginPageWrapper = (props) => {
               <Link to="/" className="btn btn-outline-primary btn-outline-light-d">Quit</Link>
             </p>
 
-            <div className="row align-items-center">
+            <div className="row align-items-center justify-content-between">
               <div className="col order-2 order-md-1">
-                <h1 className="">{titles[props.login_page_type].heading}</h1>
-                <p className="">{titles[props.login_page_type].subheading}</p>
+                <h1>{titles[props.login_page_type].heading}</h1>
+                <p className="lead mb-0">{titles[props.login_page_type].subheading}</p>
               </div>
-              <div className="col-12 col-md-auto order-1 order-md-2">
+              <div className="col-12 col-md-6 order-1 order-md-2 text-md-end">
                 <Logo />
                 <div className="mb-4 d-md-none"></div>
               </div>

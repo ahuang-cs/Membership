@@ -35,7 +35,7 @@ try {
     'message' => "You are logged in",
   ];
 
-  header("location: " . autoUrl(""));
+  header("location: " . $location);
 } catch (Exception $e) {
   echo json_encode($output);
 }

@@ -41,3 +41,5 @@ try {
     'message' => $e->getMessage()
   ];
 }
+
+echo json_encode($output);

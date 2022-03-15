@@ -48,9 +48,9 @@ try {
 
   $target = autoUrl("");
   if (isset($json->target) && $json->target) {
-    $target = $json->target;
+    $target = autoUrl(trim($json->target, "/"));
   }
-  if ($secret && isset($json->setup_two_factor) && $json->setup_two_factor) {
+  if (!$secret && isset($json->setup_two_factor) && $json->setup_two_factor) {
     $target = autoUrl("my-account/googleauthenticator/setup");
   }
 

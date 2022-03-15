@@ -10,35 +10,18 @@ import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
 
 const schema = yup.object().shape({
-  authCode: yup.string().length(6, "Authentiction codes are 6 digits").required("You must enter an authentication code"),
+  authCode: yup.string().length(6, "Authentication codes are 6 digits").required("You must enter an authentication code").matches(/[0-9]{6,6}/, "Authentication codes are 6 digits"),
   setUpTwoFactor: yup.bool(),
 });
-
-const onSubmit = async (values, { setSubmitting }) => {
-  setSubmitting(true);
-
-  try {
-    const response = await axios.post("/api/auth/login/two-factor", {
-      auth_code: values.authCode,
-    });
-
-    if (response.data.success) {
-      // Redirect for cookies
-      window.location.replace(response.data.redirect_url);
-    } else {
-      // Oops
-      setSubmitting(false);
-    }
-  } catch (error) {
-    window.alert(error);
-    setSubmitting(false);
-  }
-};
 
 const TwoFactor = (props) => {
 
   const [enableResend, setEnableResend] = useState(true);
   const [resent, setResent] = useState(false);
+  const [error, setError] = useState({
+    show: false,
+    message: null,
+  });
 
   const handleResend = async () => {
     setEnableResend(false);
@@ -52,6 +35,10 @@ const TwoFactor = (props) => {
       props.setLoginDetail("two_factor_method", "email");
     } else {
       // Show error
+      setError({
+        show: true,
+        message: response.data.message,
+      });
     }
 
     new Promise(function () {
@@ -59,6 +46,40 @@ const TwoFactor = (props) => {
         setEnableResend(true);
       }, 5000);
     });
+  };
+
+  const onSubmit = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+
+    try {
+      const response = await axios.post("/api/auth/login/two-factor", {
+        auth_code: values.authCode,
+        target: props.target,
+        setup_two_factor: values.setUpTwoFactor,
+      });
+
+      if (response.data.success) {
+        // Redirect for cookies
+        setError({
+          show: false,
+          message: null,
+        });
+        window.location.replace(response.data.redirect_url);
+      } else {
+        // Oops
+        setSubmitting(false);
+        setError({
+          show: true,
+          message: response.data.message,
+        });
+      }
+    } catch (error) {
+      setError({
+        show: true,
+        message: "A network error occurred",
+      });
+      setSubmitting(false);
+    }
   };
 
   tenantFunctions.setTitle("Confirm Login");
@@ -74,9 +95,16 @@ const TwoFactor = (props) => {
 
     <>
 
-      {/* ERRORS GO HERE */}
-
-      {/* ACCOUNT LOCKED */}
+      {error.show && (
+        <Alert variant="danger">
+          <p className="mb-0">
+            <strong>Oops</strong>
+          </p>
+          <p className="mb-0">
+            {error.message}
+          </p>
+        </Alert>
+      )}
 
       <Formik
         validationSchema={schema}
@@ -128,6 +156,7 @@ const TwoFactor = (props) => {
                   isInvalid={!!errors.setUpTwoFactor}
                   feedback={errors.setUpTwoFactor}
                   id="setUpTwoFactor"
+                  checked={values.setUpTwoFactor}
                 />
               </Form.Group>
             }

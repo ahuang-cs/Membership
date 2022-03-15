@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
@@ -18,8 +18,15 @@ const schema = yup.object().shape({
 
 const Login = (props) => {
 
+  let location = useLocation();
+
   useEffect(() => {
     tenantFunctions.setTitle("Login");
+    if (location.state && location.state.location) {
+      props.setLoginDetails({
+        target: location.state.location.pathname,
+      });
+    }
   }, []);
 
   const [error, setError] = useState(null);
