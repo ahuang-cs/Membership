@@ -46,6 +46,10 @@ try {
     throw new Exception("Invalid");
   }
 
+  if (isset($json->remember_me) && $json->remember_me) {
+    $_SESSION['TENANT-' . app()->tenant->getId()]['REACT_LOGIN_REMEMBER_ME'] = true;
+  }
+
   $target = autoUrl("");
   if (isset($json->target) && $json->target) {
     $target = autoUrl(trim($json->target, "/"));

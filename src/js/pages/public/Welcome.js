@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Welcome = () => {
 
-  tenantFunctions.setTitle("About this software");
+  tenantFunctions.setTitle("Home");
 
   return (
 
@@ -17,8 +17,6 @@ const Welcome = () => {
 
         <div className="row">
           <div className="col-lg-8">
-
-
 
             <h2>Already registered?</h2>
             <p className="lead">

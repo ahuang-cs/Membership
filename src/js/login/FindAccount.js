@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as tenantFunctions from "../classes/Tenant";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Form } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
@@ -21,6 +21,7 @@ const FindAccount = (props) => {
   }, []);
 
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
@@ -32,8 +33,7 @@ const FindAccount = (props) => {
       });
 
       if (response.data.success) {
-        // props.setType("twoFactor");
-        // props.setLoginDetails(response.data);
+        setSuccess(true);
       } else {
         // There was an error
         setError({
@@ -55,57 +55,73 @@ const FindAccount = (props) => {
   return (
 
     <>
-
-      {
-        error &&
-        <div className="alert alert-danger">{error.message}</div>
+      {success &&
+        <>
+          <Alert variant="success">
+            <p className="mb-0">
+              <strong>We&apos;ve found your account</strong>
+            </p>
+            <p className="mb-0">
+              We&apos;re sending you an email with instructions detailing how to reset your password.
+            </p>
+          </Alert>
+        </>
       }
 
-      <Formik
-        validationSchema={schema}
-        onSubmit={onSubmit}
-        initialValues={{
-          emailAddress: props.emailAddress || "",
-          password: "",
-          rememberMe: props.rememberMe || true,
-        }}
-      >
-        {({
-          handleSubmit,
-          handleChange,
-          handleBlur,
-          values,
-          touched,
-          isValid,
-          errors,
-          isSubmitting,
-        }) => (
-          <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
-            <div className="mb-3">
-              <Form.Group controlId="emailAddress">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="emailAddress"
-                  value={values.emailAddress}
-                  onChange={handleChange}
-                  isValid={touched.emailAddress && !errors.emailAddress}
-                  isInvalid={touched.emailAddress && errors.emailAddress}
-                  size="lg"
-                />
-                {errors.emailAddress &&
-                  <Form.Control.Feedback type="invalid">{errors.emailAddress}</Form.Control.Feedback>
-                }
-              </Form.Group>
-            </div>
+      {!success &&
+        <>
+          {
+            error &&
+            <div className="alert alert-danger">{error.message}</div>
+          }
 
-            <p className="mb-5">
-              <Button size="lg" type="submit" disabled={!isValid || isSubmitting}>Reset password</Button>
-            </p>
-          </Form>
-        )}
-      </Formik>
+          <Formik
+            validationSchema={schema}
+            onSubmit={onSubmit}
+            initialValues={{
+              emailAddress: props.emailAddress || "",
+              password: "",
+              rememberMe: props.rememberMe || true,
+            }}
+          >
+            {({
+              handleSubmit,
+              handleChange,
+              handleBlur,
+              values,
+              touched,
+              isValid,
+              errors,
+              isSubmitting,
+              dirty,
+            }) => (
+              <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
+                <div className="mb-3">
+                  <Form.Group controlId="emailAddress">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="emailAddress"
+                      value={values.emailAddress}
+                      onChange={handleChange}
+                      isValid={touched.emailAddress && !errors.emailAddress}
+                      isInvalid={touched.emailAddress && errors.emailAddress}
+                      size="lg"
+                    />
+                    {errors.emailAddress &&
+                      <Form.Control.Feedback type="invalid">{errors.emailAddress}</Form.Control.Feedback>
+                    }
+                  </Form.Group>
+                </div>
 
+                <p className="mb-5">
+                  <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Reset password</Button>
+                </p>
+              </Form>
+            )}
+          </Formik>
+        </>
+      }
     </>
   );
 };

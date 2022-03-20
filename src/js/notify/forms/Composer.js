@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import Header from "../../components/Header.js";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import ToRow from "../components/ToRow";
@@ -10,16 +9,16 @@ import Button from "react-bootstrap/Button";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Form from "react-bootstrap/Form";
-import Placeholder from "react-bootstrap/Placeholder";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import Dropzone from "../components/Dropzone";
 import Accordion from "react-bootstrap/Accordion";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import * as tenantFunctions from "../../classes/Tenant";
+import Loader from "../../components/Loader.js";
 // import exports from "enhanced-resolve";
 
 export class Composer extends React.Component {
@@ -493,16 +492,7 @@ export class Composer extends React.Component {
 
         <Header title="Send a new email" subtitle="Send emails to targeted groups" breadcrumbs={breadcrumbs} />
 
-        {
-          !this.state.loaded &&
-          <>
-            <Placeholder xs={6} animation="glow" />
-            <Placeholder className="w-75" animation="glow" /> <Placeholder className="w-25" animation="glow" />
-          </>
-        }
-
-        {
-          this.state.loaded &&
+        <Loader loaded={this.state.loaded}>
 
           <>
 
@@ -780,7 +770,7 @@ export class Composer extends React.Component {
               </Modal.Footer>
             </Modal>
           </>
-        }
+        </Loader>
       </div>
     );
   }

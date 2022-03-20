@@ -56,6 +56,7 @@ const TwoFactor = (props) => {
         auth_code: values.authCode,
         target: props.target,
         setup_two_factor: values.setUpTwoFactor,
+        remember_me: props.remember_me || false,
       });
 
       if (response.data.success) {
@@ -123,6 +124,7 @@ const TwoFactor = (props) => {
           isValid,
           errors,
           isSubmitting,
+          dirty,
         }) => (
           <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
             <div className="mb-3">
@@ -162,7 +164,7 @@ const TwoFactor = (props) => {
             }
 
             <p className="mb-5">
-              <Button size="lg" type="submit" disabled={!isValid || isSubmitting}>Confirm login</Button>
+              <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Confirm login</Button>
             </p>
 
             <div className="mb-5">

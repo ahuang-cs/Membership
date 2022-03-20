@@ -9,47 +9,62 @@ import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
 import { isPwned } from "../classes/Passwords";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const schema = yup.object().shape({
-  password: yup.string().min(8, "Your password must be at least 8 characters").required("You must provide a password").test(
+  password: yup.string().required("You must provide a password").min(8, "Your password must be at least 8 characters").matches(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/, "Your password must contain at least one lower case letter, one upper case letter and one number").test(
     "is-pwned",
     "Your password is insecure",
     async (value) => await isPwned(value),
   ),
+  confirmPassword: yup.string().required("You must confirm your password").oneOf([yup.ref("password"), null], "Passwords do not match"),
 });
 
 const ResetPassword = (props) => {
 
-  useEffect(async () => {
-    tenantFunctions.setTitle("Get back into your account");
-    props.setType("resetPassword");
-
-    // Check token
-    const response = await axios.post("/api/auth/can-password-reset", {
-      token: searchParams.get("auth-code"),
-    });
-    setIsValid(response.data.success);
-
-  }, []);
-
   const [error, setError] = useState(null);
   const [isValid, setIsValid] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getData = async () => {
+      tenantFunctions.setTitle("Get back into your account");
+      props.setType("resetPassword");
+
+      // Check token
+      const response = await axios.post("/api/auth/can-password-reset", {
+        token: searchParams.get("auth-code"),
+      });
+      setIsValid(response.data.success);
+
+      setLoaded(true);
+
+    };
+
+    getData();
+
+  }, []);
 
   const onSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
 
     try {
 
-      const response = await axios.post("/api/auth/login/login", {
-        email_address: values.emailAddress,
+      const response = await axios.post("/api/auth/complete-password-reset", {
+        token: searchParams.get("auth-code"),
         password: values.password,
       });
 
       if (response.data.success) {
-        props.setType("twoFactor");
-        props.setLoginDetails(response.data);
+        // Redirect to login with state
+        navigate("/login", {
+          state: {
+            successfulReset: true,
+          }
+        });
       } else {
         // There was an error
         setError({
@@ -70,7 +85,7 @@ const ResetPassword = (props) => {
 
   return (
 
-    <>
+    <Loader loaded={loaded}>
 
       {!isValid &&
         <>
@@ -92,9 +107,8 @@ const ResetPassword = (props) => {
             validationSchema={schema}
             onSubmit={onSubmit}
             initialValues={{
-              emailAddress: props.emailAddress || "",
               password: "",
-              rememberMe: props.rememberMe || true,
+              confirmPassword: "",
             }}
           >
             {({
@@ -106,11 +120,12 @@ const ResetPassword = (props) => {
               isValid,
               errors,
               isSubmitting,
+              dirty,
             }) => (
               <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
                 <div className="mb-3">
-                  <Form.Group controlId="emailAddress">
-                    <Form.Label>Email address</Form.Label>
+                  <Form.Group controlId="password">
+                    <Form.Label>New password</Form.Label>
                     <Form.Control
                       type="password"
                       name="password"
@@ -119,6 +134,7 @@ const ResetPassword = (props) => {
                       isValid={touched.password && !errors.password}
                       isInvalid={touched.password && errors.password}
                       size="lg"
+                      autoComplete="new-password"
                     />
                     {errors.password &&
                       <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
@@ -126,8 +142,27 @@ const ResetPassword = (props) => {
                   </Form.Group>
                 </div>
 
+                <div className="mb-3">
+                  <Form.Group controlId="confirmPassword">
+                    <Form.Label>Confirm password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="confirmPassword"
+                      value={values.confirmPassword}
+                      onChange={handleChange}
+                      isValid={touched.confirmPassword && !errors.confirmPassword}
+                      isInvalid={touched.confirmPassword && errors.confirmPassword}
+                      size="lg"
+                      autoComplete="new-password"
+                    />
+                    {errors.confirmPassword &&
+                      <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
+                    }
+                  </Form.Group>
+                </div>
+
                 <p className="mb-5">
-                  <Button size="lg" type="submit" disabled={!isValid || isSubmitting}>Change password</Button>
+                  <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Change password</Button>
                 </p>
               </Form>
             )}
@@ -135,7 +170,7 @@ const ResetPassword = (props) => {
         </>
       }
 
-    </>
+    </Loader>
   );
 };
 

@@ -5,7 +5,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Alert } from "react-bootstrap";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
@@ -18,7 +19,8 @@ const schema = yup.object().shape({
 
 const Login = (props) => {
 
-  let location = useLocation();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     tenantFunctions.setTitle("Login");
@@ -43,7 +45,10 @@ const Login = (props) => {
 
       if (response.data.success) {
         props.setType("twoFactor");
-        props.setLoginDetails(response.data);
+        props.setLoginDetails({
+          ...response.data,
+          remember_me: values.rememberMe
+        });
       } else {
         // There was an error
         setError({
@@ -71,11 +76,20 @@ const Login = (props) => {
         <div className="alert alert-danger">{error.message}</div>
       }
 
+      {
+        location.state && location.state.successfulReset &&
+        <Alert variant="success">
+          <p className="mb-0">
+            <strong>Your password was reset successfully</strong>
+          </p>
+        </Alert>
+      }
+
       <Formik
         validationSchema={schema}
         onSubmit={onSubmit}
         initialValues={{
-          emailAddress: props.emailAddress || "",
+          emailAddress: props.emailAddress || searchParams.get("email") || "",
           password: "",
           rememberMe: props.rememberMe || true,
         }}
@@ -89,6 +103,7 @@ const Login = (props) => {
           isValid,
           errors,
           isSubmitting,
+          dirty,
         }) => (
           <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
             <div className="mb-3">
@@ -102,6 +117,7 @@ const Login = (props) => {
                   isValid={touched.emailAddress && !errors.emailAddress}
                   isInvalid={touched.emailAddress && errors.emailAddress}
                   size="lg"
+                  autoComplete="email"
                 />
                 {errors.emailAddress &&
                   <Form.Control.Feedback type="invalid">{errors.emailAddress}</Form.Control.Feedback>
@@ -120,6 +136,7 @@ const Login = (props) => {
                   isValid={touched.password && !errors.password}
                   isInvalid={touched.password && errors.password}
                   size="lg"
+                  autoComplete="current-password"
                 />
                 {errors.password &&
                   <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
@@ -141,7 +158,7 @@ const Login = (props) => {
             </Form.Group>
 
             <p className="mb-5">
-              <Button size="lg" type="submit" disabled={!isValid || isSubmitting}>Login</Button>
+              <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
             </p>
 
             <div className="mb-5">

@@ -33,12 +33,12 @@ try {
     $newHash = password_hash($password, PASSWORD_ARGON2ID);
 
     // Update the password in db
-    $updatePass = $db->prepare("UPDATE users SET Password = ? WHERE UserID = ?");
-    $updatePass->execute([$newHash, $user]);
+    $updatePass = $db->prepare("UPDATE `users` SET `Password` = ? WHERE `UserID` = ?");
+    $updatePass->execute([$newHash, $user['UserID']]);
 
     // Remove token from db
-    $deleteToken = $db->prepare("DELETE FROM passwordTokens WHERE UserID = ?");
-    $deleteToken->execute([$user]);
+    $deleteToken = $db->prepare("DELETE FROM `passwordTokens` WHERE `UserID` = ?");
+    $deleteToken->execute([$user['UserID']]);
   } else {
     // Invalid
     throw new Exception("Invalid password");
