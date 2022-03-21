@@ -3,8 +3,6 @@ import Placeholder from "react-bootstrap/Placeholder";
 
 const Loader = (props) => {
 
-  console.log(props);
-
   return (
     <>
       {

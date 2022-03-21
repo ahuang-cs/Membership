@@ -90,8 +90,8 @@ const ResetPassword = (props) => {
       {!isValid &&
         <>
           <Alert variant="danger">
-            <p className="mb-0"><strong>We couldn&apos;t find a valid token</strong></p>
-            <p className="mb-0">Please try checking the reset email we sent you.</p>
+            <p className="mb-0"><strong>We couldn&apos;t find a matching password reset request</strong></p>
+            <p className="mb-0">Please try checking the link in the password reset email we sent you. Reset links expire after two days.</p>
           </Alert>
         </>
       }
