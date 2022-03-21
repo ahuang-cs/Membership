@@ -292,7 +292,7 @@ try {
 
       $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
-      $mail->setFrom("noreply@transactional." . getenv('EMAIL_DOMAIN'), app()->tenant->getKey('CLUB_NAME'));
+      $mail->setFrom("noreply@" . getenv('EMAIL_DOMAIN'), app()->tenant->getKey('CLUB_NAME'));
       $mail->addReplyTo(app()->tenant->getKey('CLUB_EMAIL'), app()->tenant->getKey('CLUB_NAME')  . ' Enquiries');
       $mail->Subject = $subject;
       $mail->addAddress($emailAddress, $username);

@@ -202,7 +202,7 @@ if ($access == "Admin" || $access == "Coach" || $access == "Galas" || $rep) {
 		});
 	}
 
-	if ($_SESSION['TENANT-' . app()->tenant->getId()]['AccessLevel'] == "Admin") {
+	if (app()->user->hasPermissions(['Admin', 'Coach'])) {
 		$this->get('/sms', function () {
 			$db = app()->db;
 			include 'SMSList.php';
