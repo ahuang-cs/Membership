@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@tinymce/tinymce-react": "^3.13.0",
@@ -53,6 +57,8 @@
   },
   "scripts": {
     "build": "webpack --mode development",
+    "build-js": "webpack --mode development --env buildType='js'",
+    "build-css": "webpack --mode development --env buildType='css'",
     "build-production": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint js/*",

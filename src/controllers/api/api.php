@@ -34,6 +34,12 @@ $this->group('/react', function() {
   });
 });
 
+$this->group('/utilities', function() {
+  $this->post('/pwned-password-check', function() {
+    include 'utilities/pwned-password-check.php';
+  });
+});
+
 $this->get('/test', function() {
   echo json_encode('Yo');
 });
