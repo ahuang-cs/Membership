@@ -1,0 +1,86 @@
+<?php
+
+$db = app()->db;
+
+$output = [
+  "success" => true,
+];
+
+try {
+  if (!app()->user->hasPermission("Admin")) {
+    http_response_code(403);
+    throw new Exception("Unauthorised");
+  }
+
+  if (!isset($_GET['min_age']) || !isset($_GET['max_age']) || !isset($_GET['age_on_day'])) {
+    throw new Exception("Missing arguments");
+  }
+
+  $minAge = (int) $_GET['min_age'];
+  $maxAge = (int) $_GET['max_age'];
+
+  if ($minAge < 0 || $minAge > 120) {
+    throw new Exception("Minimum age is out of range");
+  }
+
+  if ($maxAge < 0 || $maxAge > 120) {
+    throw new Exception("Maximum age is out of range");
+  }
+
+  if ($maxAge - $minAge > 20) {
+    throw new Exception("Age range is greater than 20");
+  }
+
+  $today = new DateTime("now", new DateTimeZone("Europe/London"));
+  $ageOnDay = new DateTime($_GET['age_on_day'], new DateTimeZone("Europe/London"));
+
+  $startDate = clone $ageOnDay;
+  $endDate = clone $ageOnDay;
+
+  // Start getting members
+  // Sort by age
+  // Then split into M/F based on competition sex
+
+  $startDate->sub(new DateInterval("P" . $maxAge . "Y"));
+  $endDate->sub(new DateInterval("P" . $minAge . "Y"));
+
+  $getMembers = $db->prepare("SELECT MForename, MSurname, DateOfBirth, Gender FROM members WHERE Tenant = ? AND DateOfBirth >= ? AND DateOfBirth <= ? ORDER BY MForename ASC, MSurname ASC");
+  $getMembers->execute([
+    app()->tenant->getId(),
+    $startDate->format("Y-m-d"),
+    $endDate->format("Y-m-d"),
+  ]);
+
+  $members = [];
+  while ($member = $getMembers->fetch(PDO::FETCH_ASSOC)) {
+    // Calculate age on day
+    $dob = new DateTime($member['DateOfBirth'], new DateTimeZone("Europe/London"));
+    $diff = $dob->diff($ageOnDay);
+    $memberAgeOnDay = $diff->format("%y");
+    $diff = $dob->diff($today);
+    $memberAgeToday = $diff->format("%y");
+
+    $members[$memberAgeOnDay][$member['Gender']][] = [
+      "first_name" => $member['MForename'],
+      "last_name" => $member['MSurname'],
+      "date_of_birth" => $member['DateOfBirth'],
+      "competition_sex" => $member['Gender'],
+      "age_on_day" => $memberAgeOnDay,
+      "age_today" => $memberAgeToday,
+    ];
+  }
+
+  $output['members'] = $members;
+  $output['start_date'] = $startDate->format("Y-m-d");
+  $output['end_date'] = $endDate->format("Y-m-d");
+  $output['min_age'] = $minAge;
+  $output['max_age'] = $maxAge;
+} catch (Exception $e) {
+
+  $output = [
+    "success" => false,
+    "message" => $e->getMessage(),
+  ];
+}
+
+echo json_encode($output);
