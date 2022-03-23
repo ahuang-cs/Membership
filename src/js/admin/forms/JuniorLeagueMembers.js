@@ -1,5 +1,5 @@
 // import { Formik, Form as FormikForm } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 // import { Button } from "react-bootstrap";
 import Form from "../../components/form/Form";
@@ -7,13 +7,130 @@ import * as tenantFunctions from "../../classes/Tenant";
 import DateInput from "../../components/form/DateInput";
 import TextInput from "../../components/form/TextInput";
 import Header from "../../components/Header";
-import { Card } from "react-bootstrap";
+import { Alert, Card, ListGroup } from "react-bootstrap";
+import axios from "axios";
+import moment from "moment";
+
+const renderMembers = (members) => {
+  return (
+    <>
+      {
+        members &&
+        <ul className="list-unstyled">
+          {
+            members.map((member, idx) => (
+              <li key={idx}>
+                <h4>
+                  {`${member.first_name} ${member.last_name}`}
+                </h4>
+
+                <dl className="row">
+                  <dt className="col-6">
+                    Date of birth
+                  </dt>
+                  <dd className="col-6">
+                    {moment(member.date_of_birth).format("DD/MM/YYYY")}
+                  </dd>
+
+                  <dt className="col-6">
+                    Age today
+                  </dt>
+                  <dd className="col-6">
+                    {member.age_today}
+                  </dd>
+
+                  <dt className="col-6">
+                    Age on day
+                  </dt>
+                  <dd className="col-6">
+                    {member.age_on_day}
+                  </dd>
+
+                  <dt className="col-6">
+                    ASA Number
+                  </dt>
+                  <dd className="col-6">
+                    {member.ngb_id}
+                  </dd>
+
+                  <dt className="col-6">
+                    ASA Type
+                  </dt>
+                  <dd className="col-6">
+                    {member.ngb_category_name}
+                  </dd>
+
+                  {
+                    member.gender_identity &&
+                    <>
+                      <dt className="col-6">
+                        Gender Identity
+                      </dt>
+                      <dd className="col-6">
+                        {member.gender_identity}
+                      </dd>
+                    </>
+                  }
+                </dl>
+              </li>
+            ))
+          }
+        </ul>
+      }
+
+      {
+        !members &&
+        <Alert variant="warning">
+          No matches
+        </Alert>
+      }
+    </>
+  );
+};
 
 const JuniorLeagueMembers = () => {
+
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     tenantFunctions.setTitle("Junior and Arena League Members Report");
   }, []);
+
+  const onClear = () => {
+    setData(null);
+  };
+
+  const submit = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+
+    try {
+
+      const response = await axios.get("/api/admin/reports/league-members-report", {
+        params: {
+          min_age: values.minAge,
+          max_age: values.maxAge,
+          age_on_day: values.ageOn,
+        }
+      });
+
+      if (response.data.success) {
+        setSubmitting(false);
+        setError(null);
+        setData(response.data.members);
+      } else {
+        // There was an error
+        setSubmitting(false);
+        setError(response.data.message);
+        setData(null);
+      }
+
+    } catch (error) {
+      setSubmitting(false);
+      setError("An unknown error has occurred");
+      setData(null);
+    }
+  };
 
   return (
     <>
@@ -23,13 +140,20 @@ const JuniorLeagueMembers = () => {
         <div className="row">
           <div className="col-lg-8">
 
-            <Card>
+            <Card className="mb-3">
               <Card.Body>
+
+                {error &&
+                  <Alert variant="danger">
+                    {error}
+                  </Alert>
+                }
+
                 <Form
                   initialValues={{
                     minAge: "",
                     maxAge: "",
-                    ageOn: "",
+                    ageOn: moment().format("YYYY-MM-DD"),
                   }}
                   validationSchema={yup.object({
                     minAge: yup.number("You must enter a minimum age").required("You must enter a minimum age").integer("You must enter a whole number").min(0, "You must enter a value greater than zero").max(120, "You must enter a value less than 120"),
@@ -52,13 +176,9 @@ const JuniorLeagueMembers = () => {
                     }),
                     ageOn: yup.date().required("You must enter a date").min("2000-01-01", "You must enter a date greater than 1 January 2000"),
                   })}
-                  onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                      alert(JSON.stringify(values, null, 2));
-                      setSubmitting(false);
-                    }, 400);
-                  }}
+                  onSubmit={submit}
                   submitTitle="View report"
+                  onClear={onClear}
                 >
                   {/* <FormikForm> */}
 
@@ -71,7 +191,6 @@ const JuniorLeagueMembers = () => {
                         min="0"
                         max="120"
                         step="1"
-                        placeholder="8"
                       />
                     </div>
 
@@ -83,7 +202,6 @@ const JuniorLeagueMembers = () => {
                         min="0"
                         max="120"
                         step="1"
-                        placeholder="12"
                       />
                     </div>
                   </div>
@@ -98,6 +216,57 @@ const JuniorLeagueMembers = () => {
                 </Form>
               </Card.Body>
             </Card>
+
+            {data &&
+
+              <>
+
+                {
+                  data.length == 0 &&
+                  <Alert variant="warning">
+                    <p className="mb-0">
+                      <strong>No members in range</strong>
+                    </p>
+                    <p className="mb-0">
+                      <strong>Please try a new selection</strong>
+                    </p>
+                  </Alert>
+                }
+
+                {
+                  data.length > 0 &&
+                  <Card>
+                    <ListGroup variant="flush">
+                      {
+                        data.map((age) => (
+                          <ListGroup.Item key={age.age}>
+                            <h2>{age.age}</h2>
+
+                            <div className="row">
+                              <div className="col-md">
+                                <h3>Male</h3>
+
+                                {
+                                  renderMembers(age.male)
+                                }
+
+                              </div>
+                              <div className="col-md">
+                                <h3>Female</h3>
+
+                                {
+                                  renderMembers(age.female)
+                                }
+                              </div>
+                            </div>
+                          </ListGroup.Item>
+                        ))
+                      }
+                    </ListGroup>
+                  </Card>
+                }
+              </>
+            }
 
           </div>
         </div>

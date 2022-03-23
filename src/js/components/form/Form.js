@@ -8,9 +8,14 @@ import Button from "react-bootstrap/Button";
 
 const SubmissionButtons = (props) => {
 
-  const { isSubmitting, dirty, isValid, errors } = useFormikContext();
+  const { isSubmitting, dirty, isValid, errors, handleReset } = useFormikContext();
 
-  console.log(errors);
+  const clearForm = () => {
+    if (props.onClear) {
+      props.onClear();
+    }
+    handleReset();
+  };
 
   return (
     <>
@@ -24,7 +29,7 @@ const SubmissionButtons = (props) => {
         <div className="col-auto ms-auto">
           {!props.hideClear &&
             <>
-              <Button variant="secondary" type="reset" disabled={isSubmitting || !dirty}>
+              <Button variant="secondary" type="button" onClick={clearForm} disabled={isSubmitting || !dirty}>
                 {props.clearTitle || "Clear"}
               </Button>{" "}
             </>
@@ -48,6 +53,7 @@ const Form = (props) => {
     submitTitle,
     hideClear,
     clearTitle,
+    onClear,
     ...otherProps
   } = props;
 
@@ -65,6 +71,7 @@ const Form = (props) => {
             submitTitle={submitTitle}
             hideClear={hideClear}
             clearTitle={clearTitle}
+            onClear={onClear}
           />
         </FormikForm>
       </Formik>

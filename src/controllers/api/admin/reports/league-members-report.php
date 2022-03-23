@@ -44,7 +44,7 @@ try {
   $startDate->sub(new DateInterval("P" . $maxAge . "Y"));
   $endDate->sub(new DateInterval("P" . $minAge . "Y"));
 
-  $getMembers = $db->prepare("SELECT MForename, MSurname, DateOfBirth, Gender FROM members WHERE Tenant = ? AND DateOfBirth >= ? AND DateOfBirth <= ? ORDER BY MForename ASC, MSurname ASC");
+  $getMembers = $db->prepare("SELECT MForename, MSurname, DateOfBirth, Gender, ASANumber, clubMembershipClasses.Name NGBCat, GenderIdentity, GenderPronouns, GenderDisplay FROM members INNER JOIN clubMembershipClasses ON members.NGBCategory = clubMembershipClasses.ID WHERE members.Tenant = ? AND DateOfBirth >= ? AND DateOfBirth <= ? ORDER BY MForename ASC, MSurname ASC");
   $getMembers->execute([
     app()->tenant->getId(),
     $startDate->format("Y-m-d"),
@@ -60,17 +60,42 @@ try {
     $diff = $dob->diff($today);
     $memberAgeToday = $diff->format("%y");
 
-    $members[$memberAgeOnDay][$member['Gender']][] = [
+    $memberObj = [
       "first_name" => $member['MForename'],
       "last_name" => $member['MSurname'],
       "date_of_birth" => $member['DateOfBirth'],
       "competition_sex" => $member['Gender'],
       "age_on_day" => $memberAgeOnDay,
       "age_today" => $memberAgeToday,
+      "ngb_id" => $member['ASANumber'],
+      "ngb_category_name" => $member['NGBCat'],
+    ];
+
+    $genderId = ($member['GenderIdentity'] && $member['GenderDisplay']) ? $member['GenderIdentity'] : null;
+
+    $memberObj["gender_identity"] = $genderId;
+
+    $members[$memberAgeOnDay][$member['Gender']][] = $memberObj;
+  }
+
+  $memberOutput = [];
+  foreach ($members as $age => $data) {
+    $male = isset($data['Male']) ? $data['Male'] : null;
+    $female = isset($data['Female']) ? $data['Female'] : null;
+
+    $memberOutput[] = [
+      'age' => $age,
+      'male' => $male,
+      'female' => $female,
     ];
   }
 
-  $output['members'] = $members;
+  usort($memberOutput, function ($a, $b) {
+    return $a['age'] - $b['age'];
+  });
+
+
+  $output['members'] = $memberOutput;
   $output['start_date'] = $startDate->format("Y-m-d");
   $output['end_date'] = $endDate->format("Y-m-d");
   $output['min_age'] = $minAge;
