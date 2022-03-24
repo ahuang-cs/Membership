@@ -40,6 +40,14 @@ $this->group('/utilities', function() {
   });
 });
 
+$this->group('/admin', function() {
+  $this->group('/reports', function() {
+    $this->get('/league-members-report', function() {
+      include 'admin/reports/league-members-report.php';
+    });
+  });
+});
+
 $this->get('/test', function() {
   echo json_encode('Yo');
 });

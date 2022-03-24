@@ -88,7 +88,7 @@ const TwoFactor = (props) => {
   let helpString = "We've sent a confirmation code to your registered email address";
   let helpResendString = "Resend email";
   if (props.two_factor_method === "totp") {
-    helpString = "We've sent a confirmation code to your registered email address";
+    helpString = "Use the code from your Two Factor Authentication app to confirm your sign in";
     helpResendString = "Resend email";
   }
 
