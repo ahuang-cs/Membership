@@ -7,7 +7,7 @@ import ScrollToTop from "./components/global/ScrollToTop";
 import store from "./reducers/store";
 import PublicAppWrapper from "./views/PublicAppWrapper";
 import { PublicNotFound } from "./views/PublicNotFound";
-import { NotFound } from "./views/NotFound";
+import NotFound from "./views/NotFound";
 import PublicAppFooter from "./views/PublicAppFooter";
 import { GlobalErrorBoundary } from "./views/GlobalErrorBoundary";
 
