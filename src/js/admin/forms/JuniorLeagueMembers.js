@@ -157,7 +157,7 @@ const JuniorLeagueMembers = () => {
                   }}
                   validationSchema={yup.object({
                     minAge: yup.number("You must enter a minimum age").required("You must enter a minimum age").integer("You must enter a whole number").min(0, "You must enter a value greater than zero").max(120, "You must enter a value less than 120"),
-                    maxAge: yup.number("You must enter a minimum age").required("You must enter a minimum age").integer("You must enter a whole number").min(0, "You must enter a value greater than zero").max(120, "You must enter a value less than 120").test({
+                    maxAge: yup.number("You must enter a maximum age").required("You must enter a maximum age").integer("You must enter a whole number").min(0, "You must enter a value greater than zero").max(120, "You must enter a value less than 120").test({
                       name: "max-greater-than-min",
                       exclusive: false,
                       params: {},
@@ -188,6 +188,7 @@ const JuniorLeagueMembers = () => {
                         label="Minimum age"
                         name="minAge"
                         type="number"
+                        inputType="numeric"
                         min="0"
                         max="120"
                         step="1"
@@ -199,6 +200,7 @@ const JuniorLeagueMembers = () => {
                         label="Maximum age"
                         name="maxAge"
                         type="number"
+                        inputType="numeric"
                         min="0"
                         max="120"
                         step="1"
@@ -228,7 +230,7 @@ const JuniorLeagueMembers = () => {
                       <strong>No members in range</strong>
                     </p>
                     <p className="mb-0">
-                      <strong>Please try a new selection</strong>
+                      Please try a new selection
                     </p>
                   </Alert>
                 }
