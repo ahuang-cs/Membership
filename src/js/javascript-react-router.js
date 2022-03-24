@@ -7,6 +7,7 @@ import ScrollToTop from "./components/global/ScrollToTop";
 import store from "./reducers/store";
 import AppWrapper from "./views/AppWrapper";
 import { NotFound } from "./views/NotFound";
+import IsAuthorised from "./components/IsAuthorised";
 
 const NotifyHome = React.lazy(() => import("./notify/pages/Home"));
 const NotifyComposer = React.lazy(() => import("./notify/forms/Composer"));
@@ -29,7 +30,7 @@ render(
             <Route path="notify/new" element={<NotifyComposer />} />
             <Route path="notify/new/success" element={<NotifySuccess />} />
             <Route path="about" element={<AboutReactApp />} />
-            <Route path="admin/reports/junior-league-report" element={<JuniorLeagueMembers />} />
+            <Route path="admin/reports/junior-league-report" element={<IsAuthorised permissions={["Admin"]}><JuniorLeagueMembers /></IsAuthorised>} />
             <Route
               path="*"
               element={<NotFound />}
