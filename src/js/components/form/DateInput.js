@@ -1,10 +1,11 @@
 import React from "react";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { Form } from "react-bootstrap";
 
-const DateInput = ({ label, helpText, mb, ...props }) => {
+const DateInput = ({ label, helpText, mb, disabled, ...props }) => {
 
   const [field, meta] = useField(props);
+  const { isSubmitting } = useFormikContext();
   const marginBotton = mb || "mb-3";
 
   return (
@@ -15,6 +16,7 @@ const DateInput = ({ label, helpText, mb, ...props }) => {
           type="date"
           isValid={meta.touched && !meta.error}
           isInvalid={meta.touched && meta.error}
+          disabled={isSubmitting || disabled}
           {...field}
           {...props}
         />
