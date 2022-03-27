@@ -6,7 +6,7 @@ import SuspenseFallback from "./views/SuspenseFallback";
 import ScrollToTop from "./components/global/ScrollToTop";
 import store from "./reducers/store";
 import AppWrapper from "./views/AppWrapper";
-import { NotFound } from "./views/NotFound";
+import NotFound from "./views/NotFound";
 import IsAuthorised from "./components/IsAuthorised";
 
 const NotifyHome = React.lazy(() => import("./notify/pages/Home"));

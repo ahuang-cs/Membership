@@ -7,6 +7,7 @@ import * as tenantFunctions from "../../classes/Tenant";
 import DateInput from "../../components/form/DateInput";
 import TextInput from "../../components/form/TextInput";
 import Header from "../../components/Header";
+import Breadcrumb from "../../components/Breadcrumb";
 import { Alert, Card, ListGroup } from "react-bootstrap";
 import axios from "axios";
 import moment from "moment";
@@ -132,9 +133,27 @@ const JuniorLeagueMembers = () => {
     }
   };
 
+  const crumbs = [
+    {
+      to: "/admin",
+      title: "Admin",
+      name: "Admin",
+    },
+    {
+      to: "/admin/reports",
+      title: "Reports",
+      name: "Reports",
+    },
+    {
+      to: "/admin/reports/junior-league-report",
+      title: "Eligible League Members Report",
+      name: "League Members",
+    },
+  ];
+
   return (
     <>
-      <Header title="Junior League Members" subtitle="Get a list of members valid for Junior or Arena League" />
+      <Header breadcrumbs={<Breadcrumb crumbs={crumbs} />} title="Junior League Members" subtitle="Get a list of members valid for Junior or Arena League" />
 
       <div className="container-xl">
         <div className="row">
@@ -188,7 +207,7 @@ const JuniorLeagueMembers = () => {
                         label="Minimum age"
                         name="minAge"
                         type="number"
-                        inputType="numeric"
+                        inputMode="numeric"
                         min="0"
                         max="120"
                         step="1"
@@ -200,7 +219,7 @@ const JuniorLeagueMembers = () => {
                         label="Maximum age"
                         name="maxAge"
                         type="number"
-                        inputType="numeric"
+                        inputMode="numeric"
                         min="0"
                         max="120"
                         step="1"

@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../../components/Header.js";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import ToRow from "../components/ToRow";
 import DropdownRow from "../components/DropdownRow";
 import TextRow from "../components/TextRow";
@@ -19,6 +18,7 @@ import { Navigate } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import * as tenantFunctions from "../../classes/Tenant";
 import Loader from "../../components/Loader.js";
+import Breadcrumb from "../../components/Breadcrumb.js";
 // import exports from "enhanced-resolve";
 
 export class Composer extends React.Component {
@@ -426,12 +426,6 @@ export class Composer extends React.Component {
   };
 
   render() {
-    const breadcrumbs = (
-      <Breadcrumb>
-        <Breadcrumb.Item href="/notify">Notify</Breadcrumb.Item>
-        <Breadcrumb.Item active>Composer</Breadcrumb.Item>
-      </Breadcrumb>
-    );
 
     let squads, targetedLists, galaEntrants;
     if (this.state.loaded) {
@@ -481,6 +475,19 @@ export class Composer extends React.Component {
       });
     }
 
+    const crumbs = [
+      {
+        to: "/notify",
+        title: "Notify",
+        name: "Notify",
+      },
+      {
+        to: "/notify/new",
+        title: "Composer",
+        name: "Composer",
+      },
+    ];
+
     return (
 
       <div>
@@ -490,7 +497,7 @@ export class Composer extends React.Component {
           <Navigate to="/notify/new/success" />
         }
 
-        <Header title="Send a new email" subtitle="Send emails to targeted groups" breadcrumbs={breadcrumbs} />
+        <Header breadcrumbs={<Breadcrumb crumbs={crumbs} />} title="Send a new email" subtitle="Send emails to targeted groups"/>
 
         <Loader loaded={this.state.loaded}>
 
