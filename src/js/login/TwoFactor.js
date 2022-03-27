@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import * as tenantFunctions from "../classes/Tenant";
-import { Formik } from "formik";
+import { Formik, useFormikContext } from "formik";
 import * as yup from "yup";
 import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -13,6 +13,18 @@ const schema = yup.object().shape({
   authCode: yup.string().length(6, "Authentication codes are 6 digits").required("You must enter an authentication code").matches(/[0-9]{6,6}/, "Authentication codes are 6 digits"),
   setUpTwoFactor: yup.bool(),
 });
+
+const AutoSubmitToken = () => {
+  // Grab values and submitForm from context
+  const { values, submitForm } = useFormikContext();
+  React.useEffect(() => {
+    // Submit the form imperatively as an effect as soon as form values.authCode are 6 digits long
+    if (values.authCode.length === 6) {
+      submitForm();
+    }
+  }, [values, submitForm]);
+  return null;
+};
 
 const TwoFactor = (props) => {
 
@@ -187,6 +199,8 @@ const TwoFactor = (props) => {
                 }
               </span>
             </div>
+
+            <AutoSubmitToken />
           </Form>
         )}
       </Formik>
