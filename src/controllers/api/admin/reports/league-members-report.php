@@ -44,7 +44,7 @@ try {
   $startDate->sub(new DateInterval("P" . $maxAge . "Y"));
   $endDate->sub(new DateInterval("P" . $minAge . "Y"));
 
-  $getMembers = $db->prepare("SELECT MForename, MSurname, DateOfBirth, Gender, ASANumber, clubMembershipClasses.Name NGBCat, GenderIdentity, GenderPronouns, GenderDisplay FROM members INNER JOIN clubMembershipClasses ON members.NGBCategory = clubMembershipClasses.ID WHERE members.Tenant = ? AND DateOfBirth >= ? AND DateOfBirth <= ? ORDER BY MForename ASC, MSurname ASC");
+  $getMembers = $db->prepare("SELECT MForename, MSurname, DateOfBirth, Gender, ASANumber, clubMembershipClasses.Name NGBCat, GenderIdentity, GenderPronouns, GenderDisplay FROM members INNER JOIN clubMembershipClasses ON members.NGBCategory = clubMembershipClasses.ID WHERE members.Active AND members.Tenant = ? AND DateOfBirth >= ? AND DateOfBirth <= ? ORDER BY MForename ASC, MSurname ASC");
   $getMembers->execute([
     app()->tenant->getId(),
     $startDate->format("Y-m-d"),
