@@ -31,15 +31,15 @@ $credentialSources = $credentialSourceRepository->findAllForUserEntity($userEnti
 
 // Convert the Credential Sources into Public Key Credential Descriptors
 $excludeCredentials = array_map(function (PublicKeyCredentialSource $credential) {
-    return $credential->getPublicKeyCredentialDescriptor();
+  return $credential->getPublicKeyCredentialDescriptor();
 }, $credentialSources);
 /** End of optional part**/
 
 $publicKeyCredentialCreationOptions = $server->generatePublicKeyCredentialCreationOptions(
-    $userEntity,                                                                // The user entity
-    PublicKeyCredentialCreationOptions::ATTESTATION_CONVEYANCE_PREFERENCE_NONE, // We will see this option later
-    $excludeCredentials                                                         // Excluded authenticators
-                                                                                //   Set [] if new user
+  $userEntity,                                                                // The user entity
+  PublicKeyCredentialCreationOptions::ATTESTATION_CONVEYANCE_PREFERENCE_NONE, // We will see this option later
+  $excludeCredentials,                                                         // Excluded authenticators
+  //   Set [] if new user
 );
 
 $creationJson = json_encode($publicKeyCredentialCreationOptions);

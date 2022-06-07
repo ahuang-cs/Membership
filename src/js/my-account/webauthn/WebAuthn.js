@@ -93,7 +93,7 @@ const WebAuthn = () => {
             <p className="mb-0">Created at {item.created_at}</p>
           </div>
           <div className="col-auto">
-            <Button onClick={() => deleteAuthenticator(item.id)}>Delete</Button>
+            <Button variant="secondary" onClick={() => deleteAuthenticator(item.id)}>Delete</Button>
           </div>
         </div>
       </ListGroupItem>
@@ -161,9 +161,14 @@ const WebAuthn = () => {
 
                 {
                   authenticators.length > 0 &&
-                  (<ListGroup className="mb-3">
-                    {renderAuthenticators}
-                  </ListGroup>)
+                  (<Card className="mb-3">
+                    <Card.Header>
+                      Current passkeys
+                    </Card.Header>
+                    <ListGroup variant="flush">
+                      {renderAuthenticators}
+                    </ListGroup>
+                  </Card>)
                 }
 
                 {/* {(username && authenticators.length > 0) &&
