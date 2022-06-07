@@ -16,6 +16,7 @@ const NotifySuccess = React.lazy(() => import("./notify/forms/Composer"));
 // const GalaHomePage = React.lazy(() => import("./galas/forms/GalaHome"));
 const AboutReactApp = React.lazy(() => import("./pages/AboutReactApp"));
 const JuniorLeagueMembers = React.lazy(() => import("./admin/forms/JuniorLeagueMembers"));
+const WebAuthn = React.lazy(() => import("./my-account/webauthn/WebAuthn"));
 
 const rootElement = document.getElementById("root");
 render(
@@ -31,6 +32,9 @@ render(
             <Route path="notify/new/success" element={<NotifySuccess />} />
             <Route path="about" element={<AboutReactApp />} />
             <Route path="admin/reports/junior-league-report" element={<IsAuthorised permissions={["Admin"]}><JuniorLeagueMembers /></IsAuthorised>} />
+            <Route path="my-account">
+              <Route path="webauthn" element={<WebAuthn />} />
+            </Route>
             <Route
               path="*"
               element={<NotFound />}

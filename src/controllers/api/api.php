@@ -48,6 +48,18 @@ $this->group('/admin', function() {
   });
 });
 
+$this->group('/my-account', function() {
+  $this->group('/webauthn', function() {
+    $this->post('/challenge', function() {
+      include 'my-account/webauthn/challenge.php';
+    });
+
+    $this->post('/register', function() {
+      include 'my-account/webauthn/register.php';
+    });
+  });
+});
+
 $this->get('/test', function() {
   echo json_encode('Yo');
 });
