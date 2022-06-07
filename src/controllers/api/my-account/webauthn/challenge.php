@@ -15,6 +15,8 @@ $user = app()->user;
 
 $server = WebAuthnImplementation\Server::get();
 
+$post = json_decode(file_get_contents('php://input'));
+
 $userEntity = new PublicKeyCredentialUserEntity(
   $user->getEmail(),                              // Username
   $user->getId(),                        // ID
@@ -43,6 +45,7 @@ $publicKeyCredentialCreationOptions = $server->generatePublicKeyCredentialCreati
 $creationJson = json_encode($publicKeyCredentialCreationOptions);
 
 $_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialCreationOptions'] = $creationJson;
+$_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialName'] = $post->passkey_name;
 
 header("content-type: application/json");
 echo $creationJson;

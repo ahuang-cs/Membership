@@ -32,9 +32,7 @@ render(
             <Route path="notify/new/success" element={<NotifySuccess />} />
             <Route path="about" element={<AboutReactApp />} />
             <Route path="admin/reports/junior-league-report" element={<IsAuthorised permissions={["Admin"]}><JuniorLeagueMembers /></IsAuthorised>} />
-            <Route path="my-account">
-              <Route path="webauthn" element={<WebAuthn />} />
-            </Route>
+            <Route path="my-account/passkeys" element={<WebAuthn />} />
             <Route
               path="*"
               element={<NotFound />}

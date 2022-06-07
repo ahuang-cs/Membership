@@ -40,9 +40,31 @@ try {
     // The Public Key Credential Source repository must implement Webauthn\PublicKeyCredentialSourceRepository
     $publicKeyCredentialSourceRepository->saveCredentialSource($publicKeyCredentialSource);
 
+    // Set the name in db
+    $credentialId = $publicKeyCredentialSource->getPublicKeyCredentialId();
+
+    if (isset($_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialName']) && mb_strlen(trim($_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialName'])) > 0) {
+        $db = app()->db;
+        $update = $db->prepare("UPDATE `userCredentials` SET `credential_name` = ? WHERE `credential_id` = ?");
+        $update->execute([
+            $_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialName'],
+            base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
+        ]);
+    }
+
     // If you create a new user account, you should also save the user entity
     // $userEntityRepository->save($userEntity);
-} catch(\Throwable $exception) {
+    echo json_encode([
+        "success" => true,
+    ]);
+} catch (\Throwable $exception) {
     // Something went wrong!
     reportError($exception);
+    echo json_encode([
+        "success" => false,
+        "message" => $exception->getMessage(),
+    ]);
 }
+
+unset($_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialName']);
+unset($_SESSION['TENANT-' . app()->tenant->getId()]['WebAuthnCredentialCreationOptions']);

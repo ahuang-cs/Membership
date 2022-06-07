@@ -57,6 +57,22 @@ $this->group('/my-account', function() {
     $this->post('/register', function() {
       include 'my-account/webauthn/register.php';
     });
+
+    $this->post('/delete', function() {
+      include 'my-account/webauthn/delete.php';
+    });
+
+    $this->post('/auth-challenge', function() {
+      include 'my-account/webauthn/auth-challenge.php';
+    });
+
+    $this->post('/auth-verify', function() {
+      include 'my-account/webauthn/auth-verify.php';
+    });
+
+    $this->get('/authenticators', function() {
+      include 'my-account/webauthn/authenticators.php';
+    });
   });
 });
 

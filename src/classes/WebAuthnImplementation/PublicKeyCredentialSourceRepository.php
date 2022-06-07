@@ -8,19 +8,24 @@ use Webauthn\PublicKeyCredentialUserEntity;
 
 class PublicKeyCredentialSourceRepository implements PublicKeyCredentialSourceRepositoryInterface
 {
-  public function __construct() {
-
+  public function __construct()
+  {
   }
-
-  private $path = '/tmp/pubkey-repo.json';
 
   public function findOneByCredentialId(string $publicKeyCredentialId): ?PublicKeyCredentialSource
   {
-    $data = $this->read();
-    if (isset($data[base64_encode($publicKeyCredentialId)])) {
-      return PublicKeyCredentialSource::createFromArray($data[base64_encode($publicKeyCredentialId)]);
-    }
-    return null;
+    $db = app()->db;
+
+    $find = $db->prepare("SELECT `credential` FROM `userCredentials` WHERE `credential_id` = ?");
+    $find->execute([
+      base64_encode($publicKeyCredentialId),
+    ]);
+
+    $credential = $find->fetchColumn();
+
+    if (!$credential) return null;
+
+    return PublicKeyCredentialSource::createFromArray(json_decode($credential, true));
   }
 
   /**
@@ -28,38 +33,52 @@ class PublicKeyCredentialSourceRepository implements PublicKeyCredentialSourceRe
    */
   public function findAllForUserEntity(PublicKeyCredentialUserEntity $publicKeyCredentialUserEntity): array
   {
+    $db = app()->db;
+
     $sources = [];
-    foreach ($this->read() as $data) {
-      $source = PublicKeyCredentialSource::createFromArray($data);
-      if ($source->getUserHandle() === $publicKeyCredentialUserEntity->getId()) {
-        $sources[] = $source;
-      }
+
+    $find = $db->prepare("SELECT `credential` FROM `userCredentials` WHERE `user_id` = ?");
+    $find->execute([
+      $publicKeyCredentialUserEntity->getId(),
+    ]);
+
+    while ($data = $find->fetchColumn()) {
+      $source = PublicKeyCredentialSource::createFromArray(json_decode($data, true));
+      $sources[] = $source;
     }
     return $sources;
   }
 
   public function saveCredentialSource(PublicKeyCredentialSource $publicKeyCredentialSource): void
   {
-    $data = $this->read();
-    $data[base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId())] = $publicKeyCredentialSource;
-    $this->write($data);
-  }
+    $db = app()->db;
 
-  private function read(): array
-  {
-    if (file_exists($this->path)) {
-      return json_decode(file_get_contents($this->path), true);
-    }
-    return [];
-  }
+    // Check for existing!
 
-  private function write(array $data): void
-  {
-    if (!file_exists($this->path)) {
-      if (!mkdir($concurrentDirectory = dirname($this->path), 0700, true) && !is_dir($concurrentDirectory)) {
-        throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
-      }
+    $getCount = $db->prepare("SELECT COUNT(*) FROM `userCredentials` WHERE `credential_id` = ?");
+    $getCount->execute([
+      base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
+    ]);
+
+    $existing = $getCount->fetchColumn() > 0;
+
+    if ($existing) {
+      $update = $db->prepare("UPDATE `userCredentials` SET `credential` = ? WHERE `credential_id` = ?");
+      $update->execute([
+        json_encode($publicKeyCredentialSource->jsonSerialize()),
+        base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
+      ]);
+    } else {
+      $user = app()->user;
+      $userId = $user->getId();
+
+      $insert = $db->prepare("INSERT INTO `userCredentials` (`id`, `credential_id`, `user_id`, `credential`) VALUES (?, ?, ?, ?)");
+      $insert->execute([
+        \Ramsey\Uuid\Uuid::uuid4(),
+        base64_encode($publicKeyCredentialSource->getPublicKeyCredentialId()),
+        $userId,
+        json_encode($publicKeyCredentialSource->jsonSerialize()),
+      ]);
     }
-    file_put_contents($this->path, json_encode($data), LOCK_EX);
   }
 }
