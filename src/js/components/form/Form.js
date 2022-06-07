@@ -6,7 +6,7 @@ import React from "react";
 import { Formik, Form as FormikForm, useFormikContext } from "formik";
 import Button from "react-bootstrap/Button";
 
-const SubmissionButtons = (props) => {
+export const SubmissionButtons = (props) => {
 
   const { isSubmitting, dirty, isValid, errors, handleReset } = useFormikContext();
 
@@ -54,6 +54,7 @@ const Form = (props) => {
     hideClear,
     clearTitle,
     onClear,
+    hideButtons,
     ...otherProps
   } = props;
 
@@ -67,12 +68,14 @@ const Form = (props) => {
         <FormikForm {...otherProps}>
           {props.children}
 
-          <SubmissionButtons
-            submitTitle={submitTitle}
-            hideClear={hideClear}
-            clearTitle={clearTitle}
-            onClear={onClear}
-          />
+          {!hideButtons &&
+            <SubmissionButtons
+              submitTitle={submitTitle}
+              hideClear={hideClear}
+              clearTitle={clearTitle}
+              onClear={onClear}
+            />
+          }
         </FormikForm>
       </Formik>
     </>

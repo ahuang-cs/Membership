@@ -474,6 +474,9 @@ if (!function_exists('chesterStandardMenu')) {
                 <a class="dropdown-item" href="<?= htmlspecialchars(autoUrl("emergency-contacts")) ?>">
                   Your Emergency Contacts
                 </a>
+                <a class="dropdown-item" href="<?= htmlspecialchars(autoUrl("my-account/passkeys")) ?>">
+                  Your Passkeys
+                </a>
                 <a class="dropdown-item" href="<?= htmlspecialchars(autoUrl("my-account/password")) ?>">
                   Your Password
                 </a>

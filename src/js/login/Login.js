@@ -10,6 +10,7 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
+import { useLogin } from "@web-auth/webauthn-helper";
 
 const schema = yup.object().shape({
   emailAddress: yup.string().email("Your email address must be valid").required("You must provide an email address"),
@@ -32,6 +33,27 @@ const Login = (props) => {
   }, []);
 
   const [error, setError] = useState(null);
+
+  const login = useLogin({
+    actionUrl: "/api/auth/login/webauthn-verify",
+    optionsUrl: "/api/auth/login/webauthn-challenge",
+  });
+
+  const handleLogin = async () => {
+    try {
+      const response = await login({
+        target: location?.state?.location?.pathname,
+      });
+      if (response.success) {
+        window.location.replace(response.redirect_url);
+        setError(null);
+      } else {
+        setError({message: response.message});
+      }
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   const onSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
@@ -85,6 +107,18 @@ const Login = (props) => {
         </Alert>
       }
 
+      {typeof (PublicKeyCredential) !== "undefined" &&
+        <>
+          <div className="d-grid mb-3">
+            <Button size="lg" type="button" onClick={handleLogin} disabled={false}>Login with passkey</Button>
+          </div>
+
+          <p className="text-center">
+            Or sign in traditionally
+          </p>
+        </>
+      }
+
       <Formik
         validationSchema={schema}
         onSubmit={onSubmit}
@@ -117,7 +151,7 @@ const Login = (props) => {
                   isValid={touched.emailAddress && !errors.emailAddress}
                   isInvalid={touched.emailAddress && errors.emailAddress}
                   size="lg"
-                  autoComplete="email"
+                  autoComplete="email webauthn"
                 />
                 {errors.emailAddress &&
                   <Form.Control.Feedback type="invalid">{errors.emailAddress}</Form.Control.Feedback>
@@ -157,9 +191,11 @@ const Login = (props) => {
               />
             </Form.Group>
 
-            <p className="mb-5">
-              <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
-            </p>
+            <div className="mb-5">
+              <p className="mb-0">
+                <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
+              </p>
+            </div>
 
             <div className="mb-5">
               <p>
