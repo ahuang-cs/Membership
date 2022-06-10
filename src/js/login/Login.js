@@ -10,7 +10,8 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
-import { useLogin } from "@web-auth/webauthn-helper";
+// import { useLogin } from "@web-auth/webauthn-helper";
+import useLogin from "./useLogin";
 
 const schema = yup.object().shape({
   emailAddress: yup.string().email("Your email address must be valid").required("You must provide an email address"),
@@ -19,6 +20,8 @@ const schema = yup.object().shape({
 });
 
 const Login = (props) => {
+
+  const supportsWebauthn = typeof (PublicKeyCredential) !== "undefined";
 
   const location = useLocation();
   const [searchParams] = useSearchParams();
@@ -33,27 +36,84 @@ const Login = (props) => {
   }, []);
 
   const [error, setError] = useState(null);
+  const [username, setUsername] = useState("");
+  const [hasWebauthn, setHasWebauthn] = useState(false);
+  const [selectedTraditional, setSelectedTraditional] = useState(false);
+
+  const webAuthnError = {
+    type: "danger",
+    message: "Passkey authentication failed.",
+  };
+
+  const checkWebauthn = async (value = null) => {
+    // Check for tokens first!
+    const { data } = await axios.get("/api/auth/login/has-webauthn", {
+      params: {
+        email: value || username,
+      }
+    });
+
+    setHasWebauthn(data.has_webauthn);
+
+    return data.has_webauthn;
+  };
 
   const login = useLogin({
     actionUrl: "/api/auth/login/webauthn-verify",
     optionsUrl: "/api/auth/login/webauthn-challenge",
   });
 
-  const handleLogin = async () => {
+  const handleLogin = async (autoFill = false) => {
     try {
-      const response = await login({
+      const requestObject = {
         target: location?.state?.location?.pathname,
-      });
+      };
+
+      if (username) {
+        requestObject.username = username;
+        const hasTokens = await checkWebauthn();
+        if (!hasTokens) {
+          setError({ variant: "warning", message: "There are no passkeys registered for this account." });
+          return;
+        }
+      }
+
+      if (autoFill) {
+        requestObject.credentialsGetProps = {
+          mediation: "conditional"
+        };
+      }
+
+      const response = await login(requestObject);
       if (response.success) {
         window.location.replace(response.redirect_url);
         setError(null);
       } else {
-        setError({message: response.message});
+        setError(webAuthnError);
+        console.error(error);
       }
     } catch (error) {
-      setError(error);
+      setError(webAuthnError);
+      console.error(error);
     }
   };
+
+  // eslint-disable-next-line no-unused-vars
+  const handleAutofillLogin = async () => {
+    // eslint-disable-next-line no-undef
+    if (!PublicKeyCredential.isConditionalMediationAvailable || !PublicKeyCredential.isConditionalMediationAvailable()) {
+      // Browser does not support autofill style
+      return;
+    }
+
+    await handleLogin(true);
+  };
+
+  useEffect(() => {
+    (async () => {
+      // await handleAutofillLogin();
+    })();
+  }, []);
 
   const onSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
@@ -107,18 +167,6 @@ const Login = (props) => {
         </Alert>
       }
 
-      {typeof (PublicKeyCredential) !== "undefined" &&
-        <>
-          <div className="d-grid mb-3">
-            <Button size="lg" type="button" onClick={handleLogin} disabled={false}>Login with passkey</Button>
-          </div>
-
-          <p className="text-center">
-            Or sign in traditionally
-          </p>
-        </>
-      }
-
       <Formik
         validationSchema={schema}
         onSubmit={onSubmit}
@@ -138,77 +186,107 @@ const Login = (props) => {
           errors,
           isSubmitting,
           dirty,
-        }) => (
-          <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
-            <div className="mb-3">
-              <Form.Group controlId="emailAddress">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="emailAddress"
-                  value={values.emailAddress}
-                  onChange={handleChange}
-                  isValid={touched.emailAddress && !errors.emailAddress}
-                  isInvalid={touched.emailAddress && errors.emailAddress}
-                  size="lg"
-                  autoComplete="email webauthn"
-                />
-                {errors.emailAddress &&
-                  <Form.Control.Feedback type="invalid">{errors.emailAddress}</Form.Control.Feedback>
-                }
-              </Form.Group>
-            </div>
+        }) => {
+          const showTraditional = (!hasWebauthn && touched.emailAddress && !errors.emailAddress) || selectedTraditional;
+          return (
+            <Form noValidate onSubmit={handleSubmit} onBlur={handleBlur}>
+              <div className="mb-3">
+                <Form.Group controlId="emailAddress">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="emailAddress"
+                    value={values.emailAddress}
+                    onChange={async (e) => { handleChange(e); setUsername(e.target.value); await checkWebauthn(e.target.value); }}
+                    isValid={touched.emailAddress && !errors.emailAddress}
+                    isInvalid={touched.emailAddress && errors.emailAddress}
+                    size="lg"
+                    autoComplete="username webauthn"
+                  />
+                  {errors.emailAddress &&
+                    <Form.Control.Feedback type="invalid">{errors.emailAddress}</Form.Control.Feedback>
+                  }
+                </Form.Group>
+              </div>
 
-            <div className="mb-3">
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  isValid={touched.password && !errors.password}
-                  isInvalid={touched.password && errors.password}
-                  size="lg"
-                  autoComplete="current-password"
-                />
-                {errors.password &&
-                  <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-                }
-              </Form.Group>
-            </div>
+              {showTraditional && <>
+                <div className="mb-3">
+                  <Form.Group controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      isValid={touched.password && !errors.password}
+                      isInvalid={touched.password && errors.password}
+                      size="lg"
+                      autoComplete="current-password"
+                    />
+                    {errors.password &&
+                      <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
+                    }
+                  </Form.Group>
+                </div>
 
-            <Form.Group className="mb-3">
-              <Form.Check
-                name="rememberMe"
-                label="Keep me logged in"
-                onChange={handleChange}
-                checked={values.rememberMe}
-                isInvalid={!!errors.rememberMe}
-                feedback={errors.rememberMe}
-                feedbackType="invalid"
-                id="rememberMe"
-              />
-            </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Check
+                    name="rememberMe"
+                    label="Keep me logged in"
+                    onChange={handleChange}
+                    checked={values.rememberMe}
+                    isInvalid={!!errors.rememberMe}
+                    feedback={errors.rememberMe}
+                    feedbackType="invalid"
+                    id="rememberMe"
+                  />
+                </Form.Group>
+              </>
+              }
 
-            <div className="mb-5">
-              <p className="mb-0">
-                <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
-              </p>
-            </div>
+              {(supportsWebauthn && !showTraditional && hasWebauthn) &&
+                <div className="mb-5">
 
-            <div className="mb-5">
-              <p>
-                New member? Your club will create an account for you and send you a link to get started.
-              </p>
-              <span>
-                <Link to="/login/forgot-password" className="btn btn-dark">
-                  Forgot password?
-                </Link>
-              </span>
-            </div>
-          </Form>
-        )}
+                  <div className="row justify-content-between align-items-center">
+                    <div className="col-sm-auto">
+                      <Button size="lg" type="button" onClick={handleLogin} disabled={false}>Login with passkey</Button>
+                      <div className="mb-2 d-sm-none"></div>
+                    </div>
+
+                    <div className="col-sm-auto">
+                      <Button variant="secondary" type="button" onClick={() => setSelectedTraditional(!selectedTraditional)} disabled={false}>
+                        {selectedTraditional ? "Use a passkey to login" : "Use a password to login"}
+                      </Button>
+                    </div>
+                  </div>
+
+                </div>
+              }
+
+
+              {showTraditional && <>
+                <div className="mb-5">
+                  <p className="mb-0">
+                    <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
+                  </p>
+                </div>
+              </>
+              }
+
+              <div className="mb-5">
+                <p>
+                  New member? Your club will create an account for you and send you a link to get started.
+                </p>
+                <span>
+                  <Link to="/login/forgot-password" className="btn btn-dark">
+                    Forgot password?
+                  </Link>
+                </span>
+              </div>
+            </Form>
+          );
+        }
+        }
       </Formik>
 
     </>
