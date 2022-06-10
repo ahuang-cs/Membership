@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as tenantFunctions from "../classes/Tenant";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -12,6 +12,7 @@ import { mapStateToProps, mapDispatchToProps } from "../reducers/Login";
 import axios from "axios";
 // import { useLogin } from "@web-auth/webauthn-helper";
 import useLogin from "./useLogin";
+import { Collapse } from "bootstrap";
 
 const schema = yup.object().shape({
   emailAddress: yup.string().email("Your email address must be valid").required("You must provide an email address"),
@@ -38,14 +39,48 @@ const Login = (props) => {
   const [error, setError] = useState(null);
   const [username, setUsername] = useState("");
   const [hasWebauthn, setHasWebauthn] = useState(false);
-  const [selectedTraditional, setSelectedTraditional] = useState(false);
+  const [selectedTraditional, setSelectedTraditional] = useState(null);
+  const collapsePasskeyRef = useRef();
+  const [collapsePasskey, setCollapsePasskey] = useState(null);
+  const collapsePasswordRef = useRef();
+  const [collapsePassword, setCollapsePassword] = useState(null);
 
   const webAuthnError = {
     type: "danger",
     message: "Passkey authentication failed.",
   };
 
+  const show = (field) => {
+    if (field === "passkey") {
+      collapsePasskey.show();
+    } else {
+      collapsePasskey.hide();
+    }
+
+    if (field === "password") {
+      collapsePassword.show();
+    } else {
+      collapsePassword.hide();
+    }
+  };
+
+  useEffect(() => {
+    setCollapsePasskey(new Collapse(collapsePasskeyRef.current, { toggle: false }));
+    setCollapsePassword(new Collapse(collapsePasswordRef.current, { toggle: false }));
+  }, []);
+
+  useEffect(() => {
+    if (selectedTraditional !== null) {
+      show(selectedTraditional ? "password" : "passkey");
+    }
+  }, [selectedTraditional]);
+
   const checkWebauthn = async (value = null) => {
+    if (!supportsWebauthn) {
+      // Not supported in browser so do not show
+      return false;
+    }
+
     // Check for tokens first!
     const { data } = await axios.get("/api/auth/login/has-webauthn", {
       params: {
@@ -54,6 +89,7 @@ const Login = (props) => {
     });
 
     setHasWebauthn(data.has_webauthn);
+    show(data.has_webauthn ? "passkey" : "password");
 
     return data.has_webauthn;
   };
@@ -149,6 +185,14 @@ const Login = (props) => {
     setSubmitting(false);
   };
 
+  const renderSwitchModeButton = () => {
+    return (
+      <Button variant="secondary" type="button" onClick={() => setSelectedTraditional(!selectedTraditional)} disabled={false}>
+        {selectedTraditional ? "Use a passkey to login" : "Use a password to login"}
+      </Button>
+    );
+  };
+
   return (
 
     <>
@@ -209,7 +253,27 @@ const Login = (props) => {
                 </Form.Group>
               </div>
 
-              {showTraditional && <>
+              <div className="collapse" ref={collapsePasskeyRef}>
+                {
+                  // (supportsWebauthn && !showTraditional && hasWebauthn) &&
+                  <div className="mb-5">
+
+                    <div className="row justify-content-between align-items-center">
+                      <div className="col-sm-auto">
+                        <Button size="lg" type="button" onClick={handleLogin} disabled={false}>Login with passkey</Button>
+                        <div className="mb-2 d-sm-none"></div>
+                      </div>
+
+                      <div className="col-sm-auto">
+                        {renderSwitchModeButton()}
+                      </div>
+                    </div>
+
+                  </div>
+                }
+              </div>
+
+              <div className="collapse" ref={collapsePasswordRef}>
                 <div className="mb-3">
                   <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
@@ -241,37 +305,23 @@ const Login = (props) => {
                     id="rememberMe"
                   />
                 </Form.Group>
-              </>
-              }
 
-              {(supportsWebauthn && !showTraditional && hasWebauthn) &&
-                <div className="mb-5">
+                {
+                  showTraditional &&
+                  <div className="mb-5">
+                    <div className="row justify-content-between align-items-center">
+                      <div className="col-sm-auto">
+                        <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
+                        <div className="mb-2 d-sm-none"></div>
+                      </div>
 
-                  <div className="row justify-content-between align-items-center">
-                    <div className="col-sm-auto">
-                      <Button size="lg" type="button" onClick={handleLogin} disabled={false}>Login with passkey</Button>
-                      <div className="mb-2 d-sm-none"></div>
-                    </div>
-
-                    <div className="col-sm-auto">
-                      <Button variant="secondary" type="button" onClick={() => setSelectedTraditional(!selectedTraditional)} disabled={false}>
-                        {selectedTraditional ? "Use a passkey to login" : "Use a password to login"}
-                      </Button>
+                      <div className="col-sm-auto">
+                        {renderSwitchModeButton()}
+                      </div>
                     </div>
                   </div>
-
-                </div>
-              }
-
-
-              {showTraditional && <>
-                <div className="mb-5">
-                  <p className="mb-0">
-                    <Button size="lg" type="submit" disabled={!dirty || !isValid || isSubmitting}>Login</Button>
-                  </p>
-                </div>
-              </>
-              }
+                }
+              </div>
 
               <div className="mb-5">
                 <p>
