@@ -6,7 +6,7 @@ import {
 
 const useLogin = ({ actionUrl = "/login", actionHeader = {}, optionsUrl = "/login/options" }, optionsHeader = {}) => {
   // eslint-disable-next-line no-unused-vars
-  return async ({data, credentialsGetProps = {}}) => {
+  return async ({credentialsGetProps = {}, ...data}) => {
     const optionsResponse = await fetchEndpoint(data, optionsUrl, optionsHeader);
     const json = await optionsResponse.json();
     const publicKey = preparePublicKeyOptions(json);
