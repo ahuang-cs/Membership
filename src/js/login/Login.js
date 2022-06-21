@@ -99,7 +99,7 @@ const Login = (props) => {
     optionsUrl: "/api/auth/login/webauthn-challenge",
   });
 
-  const handleLogin = async (autoFill = false) => {
+  const handleLogin = async (event, autoFill = false) => {
     try {
       const requestObject = {
         target: location?.state?.location?.pathname,
@@ -137,17 +137,19 @@ const Login = (props) => {
   // eslint-disable-next-line no-unused-vars
   const handleAutofillLogin = async () => {
     // eslint-disable-next-line no-undef
-    if (!PublicKeyCredential.isConditionalMediationAvailable || !PublicKeyCredential.isConditionalMediationAvailable()) {
-      // Browser does not support autofill style
+    if (!PublicKeyCredential.isConditionalMediationAvailable ||
+      // eslint-disable-next-line no-undef
+      !PublicKeyCredential.isConditionalMediationAvailable()) {
+      // Browser doesn't support AutoFill-assisted requests.
       return;
     }
 
-    await handleLogin(true);
+    await handleLogin(null, true);
   };
 
   useEffect(() => {
     (async () => {
-      // await handleAutofillLogin();
+      await handleAutofillLogin();
     })();
   }, []);
 
@@ -238,7 +240,7 @@ const Login = (props) => {
                 <Form.Group controlId="emailAddress">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
-                    type="email"
+                    type="text"
                     name="emailAddress"
                     value={values.emailAddress}
                     onChange={async (e) => { handleChange(e); setUsername(e.target.value); await checkWebauthn(e.target.value); }}

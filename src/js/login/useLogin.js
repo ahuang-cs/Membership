@@ -6,13 +6,13 @@ import {
 
 const useLogin = ({ actionUrl = "/login", actionHeader = {}, optionsUrl = "/login/options" }, optionsHeader = {}) => {
   // eslint-disable-next-line no-unused-vars
-  return async ({credentialsGetProps = {}, ...data}) => {
+  return async ({credentialsGetProps, ...data}) => {
     const optionsResponse = await fetchEndpoint(data, optionsUrl, optionsHeader);
     const json = await optionsResponse.json();
     const publicKey = preparePublicKeyOptions(json);
     const credentials = await navigator.credentials.get({
       publicKey,
-      // ...credentialsGetProps // Commented out due to Safari Technical Preview Bug
+      ...credentialsGetProps
     });
     const publicKeyCredential = preparePublicKeyCredentials(credentials);
     const actionResponse = await fetchEndpoint(publicKeyCredential, actionUrl, actionHeader);
